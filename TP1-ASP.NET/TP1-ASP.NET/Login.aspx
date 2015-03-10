@@ -25,6 +25,8 @@
 
             // la rangée 2 est volontairement sautée
             AddSubmitButton(3, "Connexion...");
+            AddSubmitButton(4, "Inscription...");
+            AddSubmitButton(5, "Mot de passe oublié...");
             // installation des "delegates" pour les inputs de classe "ident"
             var inputObjects = document.getElementsByClassName("ident");
             for (i = 0; i < inputObjects.length; i++) {
@@ -33,6 +35,30 @@
             }
         }
     </script>
+
+    <style> 
+        #form1{
+            position: absolute;
+            left:50%;
+            right:50%;
+            width: 300px;
+            height: 150px;
+            margin-left:-200px;
+            margin-right:-100px;
+            background-color: lightgray;
+            border:solid;
+            border-width: 1px;
+            padding-left:10px;
+            padding-top:10px;
+        }
+
+        .submitBTN{
+            display:block;
+            width:150px;
+            text-align:center;
+        }
+
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
