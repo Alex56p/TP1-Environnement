@@ -12,6 +12,13 @@
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <link rel="stylesheet" href="/resources/demos/style.css" />
 </head>
+    <style>
+        .submitBTN {
+            display: block;
+            width: 173px;
+            text-align: center;
+        }
+    </style>
 <body>
     <h2>Accueil...</h2>
     <hr />
@@ -20,22 +27,22 @@
             <table>
                 <tr>
                     <td>
-                        <asp:Button ID="BTN_Profil" runat="server" Text="Gérer votre profil..." cOnClick="BTN_Profil_Click" />
+                        <asp:Button ID="BTN_Profil" runat="server" Text="Gérer votre profil..." class="submitBTN" cOnClick="BTN_Profil_Click" />
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <asp:Button ID="BTN_Online" runat="server" Text="Usagers en ligne..." OnClick="BTN_Online_Click" />
+                        <asp:Button ID="BTN_Online" runat="server" Text="Usagers en ligne..." class="submitBTN" OnClick="BTN_Online_Click" />
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <asp:Button ID="BTN_Journal" runat="server" Text="Journal des visites..." OnClick="BTN_Journal_Click" />
+                        <asp:Button ID="BTN_Journal" runat="server" Text="Journal des visites..." class="submitBTN" OnClick="BTN_Journal_Click" />
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <asp:Button ID="BTN_Deconnexion" runat="server" Text="Déconnexion..." OnClick="BTN_Deconnexion_Click" />
+                        <asp:Button ID="BTN_Deconnexion" runat="server" Text="Déconnexion..." class="submitBTN" OnClick="BTN_Deconnexion_Click" />
                     </td>
                 </tr>
             </table>

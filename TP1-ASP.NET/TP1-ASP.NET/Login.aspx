@@ -69,13 +69,13 @@
                 <tr>
                     <td></td>
                     <td>
-                        <asp:Button ID="Button2" class="submitBTN" runat="server" Text="Inscription..." />
+                        <asp:Button ID="BTN_Inscription" class="submitBTN" runat="server" Text="Inscription..." OnClick="BTN_Inscription_Click"/>
                     </td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>
-                        <asp:Button ID="Button3" class="submitBTN" runat="server" Text="Mot de passe oublié..." />
+                        <asp:Button ID="BTN_PasswordLost" class="submitBTN" runat="server" Text="Mot de passe oublié..." OnClick="BTN_PasswordLost_Click"/>
                     </td>
                 </tr>
                 <tr>

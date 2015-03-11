@@ -19,5 +19,15 @@ namespace TP1_ASP.NET
             Response.Redirect("Index.aspx");
         }
 
+        protected void BTN_Inscription_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Inscription.aspx");
+        }
+
+        protected void BTN_PasswordLost_Click(object sender, EventArgs e)
+        {
+            
+        }
+
     }
 }
