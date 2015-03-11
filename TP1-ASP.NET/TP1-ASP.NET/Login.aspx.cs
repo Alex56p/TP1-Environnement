@@ -13,5 +13,11 @@ namespace TP1_ASP.NET
         {
 
         }
+
+        protected void BTN_Login_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Index.aspx");
+        }
+
     }
 }
