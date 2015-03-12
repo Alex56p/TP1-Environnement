@@ -42,6 +42,15 @@
                             ControlToValidate="TB_UserName"
                             ValidationGroup="VG_Login"> 
                         </asp:RequiredFieldValidator>
+
+                        <asp:CustomValidator
+                            ID="CV_Username"
+                            runat="server"
+                            ErrorMessage="Ce nom d'usager n'existe pas!"
+                            Display="None"
+                            ValidationGroup="VG_Login"
+                            OnServerValidate="CV_TB_UserName_ServerValidate"> 
+                        </asp:CustomValidator>
                     </td>
                 </tr>
                 <tr>
@@ -58,6 +67,15 @@
                             ControlToValidate="TB_Password"
                             ValidationGroup="VG_Login"> 
                         </asp:RequiredFieldValidator>
+
+                        <asp:CustomValidator
+                            ID="CV_Password"
+                            runat="server"
+                            ErrorMessage="Le mot de passe n'est pas valide."
+                            Display="None"
+                            ValidationGroup="VG_Login"
+                            OnServerValidate="CV_Password_ServerValidate"> 
+                        </asp:CustomValidator>
                     </td>
                 </tr>
                 <tr>
@@ -87,13 +105,9 @@
                             HeaderText="Résumé des erreurs: &lt;hr/&gt;" />
                     </td>
                 </tr>
-                <asp:CustomValidator
-                    ID="CV_TB_UserName"
-                    runat="server"
-                    ErrorMessage="Ce nom d'usager n'existe pas!"
-                    Display="None"
-                    ValidationGroup="VG_Login"> 
-                </asp:CustomValidator>
+
+
+
             </table>
         </div>
     </form>

@@ -5,18 +5,76 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls; 
+using System.Web.UI.WebControls;
 
 namespace TP1_ASP.NET
 {
     public partial class Inscription : System.Web.UI.Page
     {
+        PersonnesTable Personnes;
+        bool valid = true;
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (!Page.IsPostBack)
+                Session["captcha"] = BuildCaptcha();
+
+            if (TB_Username.Text != null)
+                Session["Username"] = TB_Username.Text;
+
         }
 
+        protected void CV_TB_UserName_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            PersonnesTable personne = new PersonnesTable((string)Application["MainDB"], this);
+            args.IsValid = !personne.Exist(TB_Username.Text);
+            if (valid)
+                valid = args.IsValid;
+        }
 
+        protected void AddUser()
+        {
+            if ((Session["Username"] != null) && Session["Username"].ToString() != "")
+            {
+
+                Personnes = new PersonnesTable((String)Application["MainDB"], this);
+                Personnes.FullName = TB_Nom.Text;
+                Personnes.UserName = TB_Username.Text;
+                Personnes.Password = TB_Password.Text;
+                Personnes.Email = TB_Password.Text;
+                Personnes.Avatar = FU_Avatar.FileName;
+                Personnes.Insert();
+            }
+        }
+
+        protected void BTN_Inscrire_Click(object sender, EventArgs e)
+        {
+            if (valid)
+                AddUser();
+        }
+
+        protected void BTN_Annuler_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Login.aspx");
+        }
+
+        protected void CV_Email_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (TB_Email.Text != TB_Email_Confirm.Text)
+            { 
+                valid = false;
+                args.IsValid = false;
+            }               
+
+        }
+
+        protected void CV_Password_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (TB_Password.Text != TB_Password_Confirm.Text)
+            {
+                valid = false;
+                args.IsValid = false;
+            }
+        }
 
         /// <summary>
         /// CAPTCHA
@@ -80,7 +138,13 @@ namespace TP1_ASP.NET
         protected void CV_Captcha_ServerValidate(object source, ServerValidateEventArgs args)
         {
             args.IsValid = (TB_Captcha.Text == (string)Session["captcha"]);
-        } 
+            if (valid)
+                valid = args.IsValid;
+        }
         #endregion
+
+        
+
+
     }
 }

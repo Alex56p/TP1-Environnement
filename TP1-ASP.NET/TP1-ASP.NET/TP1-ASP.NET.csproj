@@ -69,6 +69,7 @@
     <Content Include="App_Data\MainDB_log.ldf">
       <DependentUpon>MainDB.mdf</DependentUpon>
     </Content>
+    <Content Include="ClientFormUtilities.js" />
     <Content Include="Global.asax" />
     <Content Include="Index.aspx" />
     <Content Include="Inscription.aspx" />
@@ -111,6 +112,7 @@
     <Compile Include="LoginsJournal.aspx.designer.cs">
       <DependentUpon>LoginsJournal.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PersonnesTable.cs" />
     <Compile Include="Profil.aspx.cs">
       <DependentUpon>Profil.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -126,6 +128,7 @@
     <Compile Include="Room.aspx.designer.cs">
       <DependentUpon>Room.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SqlExpressUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
