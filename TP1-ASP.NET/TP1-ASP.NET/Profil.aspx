@@ -6,6 +6,7 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
+    <script src="ClientFormUtilities.js"></script>
     <style>
          #Avatar {
             padding-left: 45px;
@@ -64,12 +65,6 @@
 
                 </tr>
                 <tr>
-                    <td class="label">Confirmation du mot de passe </td>
-                    <td>
-                        <asp:TextBox ID="TB_Password_Confirm" runat="server" Text=""></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
                     <td class="label">Adresse courriel</td>
                     <td>
                         <asp:TextBox ID="TB_Email" runat="server"></asp:TextBox>
@@ -78,13 +73,13 @@
                 <tr>
                     <td></td>
                     <td>
-                        <asp:Button ID="BTN_Update" runat="server" Text="Mettre à jour..." />
+                        <asp:Button ID="BTN_Update" runat="server" onClick="BTN_Update_Click" Text="Mettre à jour..." />
                     </td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>
-                        <asp:Button ID="BTN_Annuler" runat="server" Text="Annuler..." />
+                        <asp:Button ID="BTN_Annuler" runat="server" Text="Annuler..." OnClick="BTN_Annuler_Click" />
                     </td>
                 </tr>
             </table>

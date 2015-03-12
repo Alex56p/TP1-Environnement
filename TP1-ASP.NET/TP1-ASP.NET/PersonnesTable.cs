@@ -70,6 +70,22 @@ namespace TP1_ASP.NET
             else
                 return false;
         }
+
+        public List<string> LoadFields(string ID)
+        {
+            List<string> Fields = new List<string>();
+            QuerySQL("SELECT * FROM " + SQLTableName + " WHERE ID =" + ID);
+            if (reader.Read())
+            {
+                Fields.Add(reader.GetString(1));
+                Fields.Add(reader.GetString(2));
+                Fields.Add(reader.GetString(3));
+                Fields.Add(reader.GetString(4));
+                Fields.Add(reader.GetString(5));
+            }
+
+            return Fields;
+        }
     }
 
 }

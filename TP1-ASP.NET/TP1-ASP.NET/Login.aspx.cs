@@ -9,8 +9,6 @@ namespace TP1_ASP.NET
 {
     public partial class Login : System.Web.UI.Page
     {
-        string ID;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -22,8 +20,11 @@ namespace TP1_ASP.NET
 
         protected void BTN_Login_Click(object sender, EventArgs e)
         {
+
             if(Page.IsValid)
             {
+                PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"], this);
+                Session["Selected_ID"] = personnes.getID(TB_UserName.Text);
                 Session["UserValid"] = true;
                 Response.Redirect("Index.aspx");
             }
@@ -43,8 +44,6 @@ namespace TP1_ASP.NET
         {
             PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"], this);
             args.IsValid = personnes.Exist(TB_UserName.Text);
-
-            ID = personnes.QuerySQL("SELECT ID FROM PERSONNES WHERE USERNAME = '" + TB_UserName.Text + "'").ToString();
         }
 
         protected void CV_Password_ServerValidate(object source, ServerValidateEventArgs args)
