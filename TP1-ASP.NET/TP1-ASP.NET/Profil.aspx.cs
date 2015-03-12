@@ -18,9 +18,8 @@ namespace TP1_ASP.NET
         {
             PersonnesTable user = new PersonnesTable((String)Application["MainDB"], this);
             Session["Users"] = user;
-           
 
-            if(user.Equals((String)Session["CurrentUser"]))
+            if(user.SelectByID((String)Session["CurrentUser"]))
                  InsertSetValueScript(user);
         }
 

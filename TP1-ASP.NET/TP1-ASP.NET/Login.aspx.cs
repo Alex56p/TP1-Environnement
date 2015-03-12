@@ -9,7 +9,7 @@ namespace TP1_ASP.NET
 {
     public partial class Login : System.Web.UI.Page
     {
-        public static string UserName = "Admin";
+        string ID;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -43,7 +43,8 @@ namespace TP1_ASP.NET
         {
             PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"], this);
             args.IsValid = personnes.Exist(TB_UserName.Text);
-            UserName = TB_UserName.Text;
+
+            ID = personnes.QuerySQL("SELECT ID FROM PERSONNES WHERE USERNAME = '" + TB_UserName.Text + "'").ToString();
         }
 
         protected void CV_Password_ServerValidate(object source, ServerValidateEventArgs args)
