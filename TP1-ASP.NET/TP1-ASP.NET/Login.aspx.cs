@@ -9,6 +9,8 @@ namespace TP1_ASP.NET
 {
     public partial class Login : System.Web.UI.Page
     {
+        public static string UserName = "Admin";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -41,6 +43,7 @@ namespace TP1_ASP.NET
         {
             PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"], this);
             args.IsValid = personnes.Exist(TB_UserName.Text);
+            UserName = TB_UserName.Text;
         }
 
         protected void CV_Password_ServerValidate(object source, ServerValidateEventArgs args)

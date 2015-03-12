@@ -27,7 +27,7 @@
             <table>
                 <tr>
                     <td>
-                        <asp:Button ID="BTN_Profil" runat="server" Text="Gérer votre profil..." class="submitBTN" cOnClick="BTN_Profil_Click" />
+                        <asp:Button ID="BTN_Profil" runat="server" Text="Gérer votre profil..." class="submitBTN" OnClick="BTN_Profil_Click" />
                     </td>
                 </tr>
                 <tr>
