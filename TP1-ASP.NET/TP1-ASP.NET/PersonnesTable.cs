@@ -83,8 +83,15 @@ namespace TP1_ASP.NET
                 Fields.Add(reader.GetString(4));
                 Fields.Add(reader.GetString(5));
             }
-
             return Fields;
+        }
+
+        public string GetAvatar(string ID)
+        {
+            QuerySQL("Select Avatar FROM " + SQLTableName + "Where ID = " + ID);
+            if (reader.Read())
+                return reader.GetString(0);
+            return "";
         }
     }
 

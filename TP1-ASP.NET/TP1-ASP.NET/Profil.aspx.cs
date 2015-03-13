@@ -41,7 +41,7 @@ namespace TP1_ASP.NET
                 }
                 else
                 {
-                    personnes.Avatar = path;
+                    personnes.Avatar = personnes.GetAvatar(Session["Selected_ID"].ToString());
                 }
 
                 personnes.Update();
@@ -51,7 +51,8 @@ namespace TP1_ASP.NET
 
         private void DeleteImage(String ID)
         {
-            File.Delete(Server.MapPath(@"~\Avatars\") + ID + ".png");
+            if (File.Exists(Server.MapPath(@"~\Avatars\") + ID + ".png"))
+                File.Delete(Server.MapPath(@"~\Avatars\") + ID + ".png");
         }
 
         private void LoadForm()

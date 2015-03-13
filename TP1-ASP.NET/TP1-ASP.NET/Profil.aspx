@@ -49,18 +49,43 @@
                     <td class="label">Nom au complet </td>
                     <td>
                         <asp:TextBox ID="TB_Nom" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator
+                            ID="RFV_Nom"
+                            runat="server"
+                            Text="Vide!"
+                            ErrorMessage="Le nom complet est vide!"
+                            ControlToValidate="TB_Nom"
+                            ValidationGroup="VG_Login"> 
+                        </asp:RequiredFieldValidator>
+
                     </td>
                 </tr>
                 <tr>
                     <td class="label">Nom d'usager </td>
                     <td>
                         <asp:TextBox ID="TB_Username" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator
+                            ID="RFV_TB_UserName"
+                            runat="server"
+                            Text="Vide!"
+                            ErrorMessage="Le nom d'usager est vide!"
+                            ControlToValidate="TB_Username"
+                            ValidationGroup="VG_Login"> 
+                        </asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>
                     <td class="label">Mot de passe </td>
                     <td>
                         <asp:TextBox ID="TB_Password" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator
+                            ID="RFV_Password"
+                            runat="server"
+                            Text="Vide!"
+                            ErrorMessage="Le mot de passe est vide!"
+                            ControlToValidate="TB_Password"
+                            ValidationGroup="VG_Login"> 
+                        </asp:RequiredFieldValidator>
                     </td>
 
                 </tr>
@@ -68,6 +93,14 @@
                     <td class="label">Adresse courriel</td>
                     <td>
                         <asp:TextBox ID="TB_Email" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator
+                            ID="RFV_Email"
+                            runat="server"
+                            Text="Vide!"
+                            ErrorMessage="L'adresse courriel est vide!"
+                            ControlToValidate="TB_Email"
+                            ValidationGroup="VG_Login"> 
+                        </asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>
