@@ -91,9 +91,9 @@ namespace TP1_ASP.NET
             QuerySQL("Select Avatar FROM " + SQLTableName + " Where ID = " + ID);
             if (reader.Read())
             {
-                string yeah = reader.GetString(0);
+                string read = reader.GetString(0);
                 QuerySQL("SELECT * FROM " + SQLTableName + " WHERE ID = " + ID);
-                return yeah;
+                return read;
             }
                 
             return "";
