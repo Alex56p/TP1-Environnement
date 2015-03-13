@@ -25,6 +25,7 @@ namespace TP1_ASP.NET
             {
                 PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"], this);
                 Session["Selected_ID"] = personnes.getID(TB_UserName.Text);
+                Session["Selected_UserName"] = TB_UserName.Text;
                 Session["UserValid"] = true;
                 Response.Redirect("Index.aspx");
             }

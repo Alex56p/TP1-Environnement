@@ -13,7 +13,12 @@ namespace TP1_ASP.NET
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            LoadConnexionHeader();
+        }
 
+        private void LoadConnexionHeader()
+        {
+            LB_HdrUserName.Text = Session["Selected_UserName"].ToString();
         }
 
         protected void BTN_Profil_Click(object sender, EventArgs e)

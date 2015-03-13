@@ -11,16 +11,26 @@
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <link rel="stylesheet" href="/resources/demos/style.css" />
-</head>
     <style>
+
+        .Connexion{
+            float:right;
+        }
+
         .submitBTN {
             display: block;
             width: 173px;
             text-align: center;
         }
     </style>
+</head>
+    
 <body>
-    <h2>Accueil...</h2>
+    <div>
+        <h2>Accueil...</h2>
+        <asp:Label ID="LB_HdrUserName" CssClass="Connexion" runat="server" Text="Anonymous"></asp:Label>
+        <asp:Image ID="Img_Username" CssClass="Connexion" runat="server" />
+    </div>
     <hr />
     <form id="form1" runat="server">
         <div>
