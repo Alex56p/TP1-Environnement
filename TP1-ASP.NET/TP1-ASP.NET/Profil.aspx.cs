@@ -79,7 +79,8 @@ namespace TP1_ASP.NET
 
         protected void BTN_Update_Click(object sender, EventArgs e)
         {
-            UpdateCurrent();
+            if(Page.IsValid)
+                UpdateCurrent();
         }
 
         protected void BTN_Annuler_Click(object sender, EventArgs e)

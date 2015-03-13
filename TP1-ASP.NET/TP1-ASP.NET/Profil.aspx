@@ -106,7 +106,7 @@
                 <tr>
                     <td></td>
                     <td>
-                        <asp:Button ID="BTN_Update" runat="server" onClick="BTN_Update_Click" Text="Mettre à jour..." />
+                        <asp:Button ID="BTN_Update" runat="server" onClick="BTN_Update_Click" Text="Mettre à jour..." ValidationGroup="VG_Login" />
                     </td>
                 </tr>
                 <tr>
