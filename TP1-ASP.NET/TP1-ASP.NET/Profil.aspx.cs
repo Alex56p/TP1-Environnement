@@ -14,7 +14,17 @@ namespace TP1_ASP.NET
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!Page.IsPostBack)
-                LoadForm(); 
+                LoadForm();
+            LoadConnexionHeader();
+        }
+        private void LoadConnexionHeader()
+        {
+            PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"], this);
+            LB_HdrUserName.Text = Session["Selected_UserName"].ToString();
+            if (Session["Selected_ID"] != null && personnes.GetAvatar(Session["Selected_ID"].ToString()) != "")
+                Img_Username.ImageUrl = "Avatars/" + personnes.GetAvatar(Session["Selected_ID"].ToString()) + ".png";
+            else
+                Img_Username.ImageUrl = "Images/Anonymous.png";
         }
 
         private void UpdateCurrent()
@@ -24,6 +34,7 @@ namespace TP1_ASP.NET
 
                 PersonnesTable personnes = (PersonnesTable)Session["Users"];
                 personnes.FullName = TB_Nom.Text;
+                Session["Selected_UserName"] = TB_Username.Text;
                 personnes.UserName = TB_Username.Text;
                 personnes.Password = TB_Password.Text;
                 personnes.Email = TB_Email.Text;

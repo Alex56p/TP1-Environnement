@@ -15,12 +15,23 @@ namespace TP1_ASP.NET
             {
                 Session["CurrentUser"] = new PersonnesTable((string)Application["MainDB"], this);
                 Session["UserValid"] = false;
+                Session["Selected_UserName"] = "Anonymous";
             }
+            LoadConnexionHeader();
+        }
+
+        private void LoadConnexionHeader()
+        {
+            PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"], this);
+            LB_HdrUserName.Text = Session["Selected_UserName"].ToString();
+            if (Session["Selected_ID"] != null && personnes.GetAvatar(Session["Selected_ID"].ToString()) != "")
+                Img_Username.ImageUrl = "Avatars/" + personnes.GetAvatar(Session["Selected_ID"].ToString()) + ".png";
+            else
+                Img_Username.ImageUrl = "Images/Anonymous.png";
         }
 
         protected void BTN_Login_Click(object sender, EventArgs e)
         {
-
             if(Page.IsValid)
             {
                 PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"], this);

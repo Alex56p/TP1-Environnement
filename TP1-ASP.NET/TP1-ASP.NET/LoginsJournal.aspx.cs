@@ -11,7 +11,16 @@ namespace TP1_ASP.NET
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            LoadConnexionHeader();
+        }
+        private void LoadConnexionHeader()
+        {
+            PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"], this);
+            LB_HdrUserName.Text = Session["Selected_UserName"].ToString();
+            if (Session["Selected_ID"] != null && personnes.GetAvatar(Session["Selected_ID"].ToString()) != "")
+                Img_Username.ImageUrl = "Avatars/" + personnes.GetAvatar(Session["Selected_ID"].ToString()) + ".png";
+            else
+                Img_Username.ImageUrl = "Images/Anonymous.png";
         }
     }
 }

@@ -20,7 +20,16 @@ namespace TP1_ASP.NET
 
             if (TB_Username.Text != null)
                 Session["Username"] = TB_Username.Text;
-
+            LoadConnexionHeader();
+        }
+        private void LoadConnexionHeader()
+        {
+            PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"], this);
+            LB_HdrUserName.Text = Session["Selected_UserName"].ToString();
+            if (Session["Selected_ID"] != null && personnes.GetAvatar(Session["Selected_ID"].ToString()) != "")
+                Img_Username.ImageUrl = "Avatars/" + personnes.GetAvatar(Session["Selected_ID"].ToString()) + ".png";
+            else
+                Img_Username.ImageUrl = "Images/Anonymous.png";
         }
 
         protected void CV_TB_UserName_ServerValidate(object source, ServerValidateEventArgs args)
@@ -49,7 +58,14 @@ namespace TP1_ASP.NET
         protected void BTN_Inscrire_Click(object sender, EventArgs e)
         {
             if (valid)
+            {
+                Personnes = new PersonnesTable((String)Application["MainDB"], this);
+
                 AddUser();
+                Session["Selected_ID"] = Personnes.getID(TB_Username.Text);
+                Session["Selected_UserName"] = TB_Username.Text;
+                Response.Redirect("Index.aspx");
+            }
         }
 
         protected void BTN_Annuler_Click(object sender, EventArgs e)
