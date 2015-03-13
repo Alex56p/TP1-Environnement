@@ -9,7 +9,6 @@ namespace TP1_ASP.NET
     {
         public long ID { get; set; }
         public long UserID { get; set; }
-        public String UserName { get; set; }
         public DateTime LoginDate { get; set; }
         public DateTime LogoutDate { get; set; }
         public String IPAdress { get; set; }
@@ -29,20 +28,19 @@ namespace TP1_ASP.NET
         {
             ID = long.Parse(FieldsValues[0]);
             UserID = long.Parse(FieldsValues[1]);
-            UserName = FieldsValues[2];
-            LoginDate = DateTime.Parse(FieldsValues[3]);
-            LogoutDate = DateTime.Parse(FieldsValues[4]);
-            IPAdress = FieldsValues[5];
+            LoginDate = DateTime.Parse(FieldsValues[2]);
+            LogoutDate = DateTime.Parse(FieldsValues[3]);
+            IPAdress = FieldsValues[4];
         }
 
         public override void Insert()
         {
-            InsertRecord(ID, UserID, UserName, LoginDate, LogoutDate, IPAdress);
+              InsertRecord(UserID, LoginDate, LogoutDate, IPAdress);
         }
 
         public override void Update()
         {
-            UpdateRecord(ID, UserID, UserName, LoginDate, LogoutDate, IPAdress);
+            UpdateRecord(UserID, LoginDate, LogoutDate, IPAdress);
         }
     }
 }

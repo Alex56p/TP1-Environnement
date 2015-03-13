@@ -11,9 +11,18 @@ namespace TP1_ASP.NET
 {
     public partial class Index : System.Web.UI.Page
     {
+        Logins login;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadConnexionHeader();
+            if(!Page.IsPostBack)
+            {
+                LoadConnexionHeader();
+                login = new Logins((string)Application["MainDB"], this);
+                login.LoginDate = DateTime.Now;
+                login.UserID = long.Parse(Session["Selected_ID"].ToString());
+                login.IPAdress = GetUserIP();
+            }
         }
 
         private void LoadConnexionHeader()
@@ -38,10 +47,29 @@ namespace TP1_ASP.NET
 
         protected void BTN_Deconnexion_Click(object sender, EventArgs e)
         {
-
+            login.LogoutDate = DateTime.Now;
+            login.Insert();
         }
-        
 
-       
+        public string GetUserIP()
+        {
+            string ipList = Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+            if (!string.IsNullOrEmpty(ipList))
+                return ipList.Split(',')[0];
+            string ipAddress = Request.ServerVariables["REMOTE_ADDR"];
+            if (ipAddress == "::1") // local host
+                ipAddress = "127.0.0.1";
+            return ipAddress;
+        }
+
+        protected void Page_UnLoad(Object sender, EventArgs e)
+        {
+            if(Page.IsPostBack)
+            {
+                login.LogoutDate = DateTime.Now;
+                login.Insert();
+            }
+            
+        }
     }
 }
