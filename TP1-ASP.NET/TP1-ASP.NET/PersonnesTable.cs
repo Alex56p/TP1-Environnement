@@ -88,9 +88,14 @@ namespace TP1_ASP.NET
 
         public string GetAvatar(string ID)
         {
-            QuerySQL("Select Avatar FROM " + SQLTableName + "Where ID = " + ID);
+            QuerySQL("Select Avatar FROM " + SQLTableName + " Where ID = " + ID);
             if (reader.Read())
-                return reader.GetString(0);
+            {
+                string yeah = reader.GetString(0);
+                QuerySQL("SELECT * FROM " + SQLTableName + " WHERE ID = " + ID);
+                return yeah;
+            }
+                
             return "";
         }
     }
