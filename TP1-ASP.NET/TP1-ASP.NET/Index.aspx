@@ -12,24 +12,53 @@
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <link rel="stylesheet" href="/resources/demos/style.css" />
     <style>
-
-        .Connexion{
-            float:right;
+        div{
+            display:block;
         }
 
+        tbody {
+          display: table-row-group;
+          vertical-align: middle;
+          border-color: inherit;
+        }
+
+        .header{
+            width:99%;
+        }
+        .mainHeader{
+                  width: 100%;
+                  padding: 0px;
+                }
         .submitBTN {
             display: block;
             width: 173px;
             text-align: center;
         }
+        .thumbnail{
+            width:64px;
+            height:64px;
+        }
     </style>
 </head>
     
 <body>
-    <div>
-        <h2>Accueil...</h2>
-        <asp:Label ID="LB_HdrUserName" CssClass="Connexion" runat="server" Text="Anonymous"></asp:Label>
-        <asp:Image ID="Img_Username" CssClass="Connexion" runat="server" />
+    <div class="mainHeader">
+        <table>
+            <tbody>
+                 <tr>
+                    <td class="header">
+                        <h2>Accueil...</h2>
+                    </td>
+                    <td >
+                        <asp:Label ID="LB_HdrUserName" runat="server" Text="Anonymous"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Image ID="Img_Username"  CssClass="thumbnail" runat="server" />
+                    </td>
+                </tr>
+            </tbody>
+            
+        </table>
     </div>
     <hr />
     <form id="form1" runat="server">

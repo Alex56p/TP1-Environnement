@@ -11,14 +11,14 @@ namespace TP1_ASP.NET
 {
     public partial class Index : System.Web.UI.Page
     {
-        Logins login;
+        static Logins login;
 
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {                
             if(!Page.IsPostBack)
             {
-                LoadConnexionHeader();
                 login = new Logins((string)Application["MainDB"], this);
+                LoadConnexionHeader();
                 login.LoginDate = DateTime.Now;
                 login.UserID = long.Parse(Session["Selected_ID"].ToString());
                 login.IPAdress = GetUserIP();
@@ -27,7 +27,12 @@ namespace TP1_ASP.NET
 
         private void LoadConnexionHeader()
         {
+            PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"], this);
             LB_HdrUserName.Text = Session["Selected_UserName"].ToString();
+            if (Session["Selected_ID"] != null && personnes.GetAvatar(Session["Selected_ID"].ToString()) != "")
+                Img_Username.ImageUrl = "Avatars/" + personnes.GetAvatar(Session["Selected_ID"].ToString()) + ".png";
+            else
+                Img_Username.ImageUrl = "Images/Anonymous.png";
         }
 
         protected void BTN_Profil_Click(object sender, EventArgs e)

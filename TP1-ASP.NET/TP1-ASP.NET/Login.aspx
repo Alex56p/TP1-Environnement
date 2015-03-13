@@ -19,10 +19,48 @@
             width: 173px;
             text-align: center;
         }
+        div{
+            display:block;
+        }
+
+        tbody {
+          display: table-row-group;
+          vertical-align: middle;
+          border-color: inherit;
+        }
+
+        .header{
+            width:99%;
+        }
+        .mainHeader{
+                  width: 100%;
+                  padding: 0px;
+                }
+        .thumbnail{
+            width:64px;
+            height:64px;
+        }
     </style>
 </head>
 <body>
-    <h2>Login...</h2>
+   <div class="mainHeader">
+        <table>
+            <tbody>
+                 <tr>
+                    <td class="header">
+                        <h2>Login...</h2>
+                    </td>
+                    <td >
+                        <asp:Label ID="LB_HdrUserName" runat="server" Text="Anonymous"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Image ID="Img_Username"  CssClass="thumbnail" runat="server" />
+                    </td>
+                </tr>
+            </tbody>
+            
+        </table>
+    </div>
     <hr />
     <form id="form1" runat="server">
         <div style="margin: auto; width: 350px; background-color: lightgray; padding-left: 10px; padding-top: 10px; border: 1px solid black;">

@@ -19,6 +19,11 @@
             margin-right:auto;
         }
 
+        .thumbnail{
+            width:64px;
+            height:64px;
+        }
+
         #Profil {
             background-color: lightgrey;
             border: solid 1px;
@@ -29,13 +34,43 @@
         .label {
             text-align: right;
         }
+        div{
+            display:block;
+        }
+
+        tbody {
+          display: table-row-group;
+          vertical-align: middle;
+          border-color: inherit;
+        }
+
+        .header{
+            width:99%;
+        }
+        .mainHeader{
+                  width: 100%;
+                  padding: 0px;
+                }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-    <div id="MainHeader">
-            <h2>Votre profil...</h2>
-            <hr />
+        <div class="mainHeader">
+            <table>
+                <tbody>
+                     <tr>
+                        <td class="header">
+                            <h2>Votre profil...</h2>
+                        </td>
+                        <td >
+                            <asp:Label ID="LB_HdrUserName" runat="server" Text="Anonymous"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:Image ID="Img_Username" CssClass="thumbnail" runat="server" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <asp:ScriptManager ID="ScriptManager1" runat="server" />
         <div id="Profil">
