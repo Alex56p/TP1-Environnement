@@ -143,7 +143,8 @@ namespace SqlExpressUtilities
             // d'avoir accès à la base de données concernée par la requête en cours
             Page.Application.Lock();
             // ouvrir la connection avec la bd
-            connection.Open();
+            if(connection.State != System.Data.ConnectionState.Open)
+                connection.Open();
             // éxécuter la requête SQL et récupérer les enregistrements qui en découlent dans l'objet Reader
             reader = sqlcmd.ExecuteReader();
             // Saisir les noms et types des champs de la table impliquée dans la requête
