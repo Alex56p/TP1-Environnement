@@ -50,7 +50,20 @@ namespace TP1_ASP.NET
                 Personnes.UserName = TB_Username.Text;
                 Personnes.Password = TB_Password.Text;
                 Personnes.Email = TB_Password.Text;
-                Personnes.Avatar = FU_Avatar.FileName;
+
+                string Avatar_Path;
+                string avatar_ID;
+                if (FU_Avatar.FileName != "")
+                {
+                    avatar_ID = FU_Avatar.FileName;
+                    Avatar_Path = Server.MapPath(@"~\Avatars\") + avatar_ID;
+                    FU_Avatar.SaveAs(Avatar_Path);
+                    Personnes.Avatar = avatar_ID;
+                }
+                else
+                {
+                    Personnes.Avatar = Personnes.GetAvatar(Session["Selected_ID"].ToString());
+                }
                 Personnes.Insert();
             }
         }

@@ -45,8 +45,8 @@ namespace TP1_ASP.NET
                 if (FU_Avatar.FileName != "")
                 {
                     DeleteImage(personnes.Avatar);
-                    avatar_ID = Guid.NewGuid().ToString();
-                    Avatar_Path = Server.MapPath(@"~\Avatars\") + avatar_ID + ".png";
+                    avatar_ID = FU_Avatar.FileName;
+                    Avatar_Path = Server.MapPath(@"~\Avatars\") + avatar_ID;
                     FU_Avatar.SaveAs(Avatar_Path);
                     personnes.Avatar = avatar_ID;
                 }
@@ -81,7 +81,7 @@ namespace TP1_ASP.NET
                 if (Fields.ElementAt(4) != "")
                 {
                     path = Fields.ElementAt(4);
-                    IMG_Avatar.ImageUrl = "Avatars/" + Fields.ElementAt(4) + ".png";
+                    IMG_Avatar.ImageUrl = "Avatars/" + Fields.ElementAt(4);
                 }
                 else
                     IMG_Avatar.ImageUrl = "Images/Anonymous.png";
