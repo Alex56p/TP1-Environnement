@@ -54,6 +54,11 @@ namespace TP1_ASP.NET
         {
             login.LogoutDate = DateTime.Now;
             login.Insert();
+
+            Session["Selected_ID"] = null;
+            Session["SelectedUserName"] = null;
+
+            Response.Redirect("Login.aspx");
         }
 
         public string GetUserIP()
@@ -65,16 +70,6 @@ namespace TP1_ASP.NET
             if (ipAddress == "::1") // local host
                 ipAddress = "127.0.0.1";
             return ipAddress;
-        }
-
-        protected void Page_UnLoad(Object sender, EventArgs e)
-        {
-            if(Page.IsPostBack)
-            {
-                login.LogoutDate = DateTime.Now;
-                login.Insert();
-            }
-            
         }
     }
 }

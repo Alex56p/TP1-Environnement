@@ -12,6 +12,7 @@ namespace TP1_ASP.NET
         protected void Page_Load(object sender, EventArgs e)
         {
             LoadConnexionHeader();
+            ListUsers();
         }
         private void LoadConnexionHeader()
         {
@@ -21,6 +22,19 @@ namespace TP1_ASP.NET
                 Img_Username.ImageUrl = "Avatars/" + personnes.GetAvatar(Session["Selected_ID"].ToString());
             else
                 Img_Username.ImageUrl = "Images/Anonymous.png";
+        }
+
+        public void ListUsers()
+        {
+            // Création d'une nouvelle instance de Users (reliée à la table MainDB.Users)
+            Logins users = new Logins((String)Application["MainDB"], this);
+            //users.SelectByUserID(Session["Selected_ID"].ToString());
+            users.MakeGridView(PN_ListUsers, "LoginsJournal.aspx", Session["Selected_ID"].ToString());
+        }
+
+        protected void BTN_Retour_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Index.aspx");
         }
     }
 }

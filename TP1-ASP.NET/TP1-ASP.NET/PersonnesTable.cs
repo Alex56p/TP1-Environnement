@@ -98,6 +98,32 @@ namespace TP1_ASP.NET
                 
             return "";
         }
+
+        public string GetEmail(string ID)
+        {
+            QuerySQL("Select Email FROM " + SQLTableName + " Where ID = " + ID);
+            if (reader.Read())
+            {
+                string read = reader.GetString(0);
+                QuerySQL("SELECT * FROM " + SQLTableName + " WHERE ID = " + ID);
+                return read;
+            }
+
+            return "";
+        }
+
+        public string GetPassword(string ID)
+        {
+            QuerySQL("Select Password FROM " + SQLTableName + " Where ID = " + ID);
+            if (reader.Read())
+            {
+                string read = reader.GetString(0);
+                QuerySQL("SELECT * FROM " + SQLTableName + " WHERE ID = " + ID);
+                return read;
+            }
+
+            return "";
+        }
     }
 
 }

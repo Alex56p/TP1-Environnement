@@ -28,6 +28,31 @@
             width:64px;
             height:64px;
         }
+
+        
+        .grid table {
+            border-collapse: collapse;
+        }
+
+        .grid table, .grid th, .grid td {
+            border: 1px solid black;
+            font-family: Arial;
+            font-size: 12px;
+            padding: 5px;
+        }
+
+        .grid table tr:first-child td {
+            color: black;
+            background-color: lightgray;
+        }
+
+        .grid tr:nth-child(even) td {
+            background:#ddc;
+        }
+        .grid tr:nth-child(odd) td {
+            background:#cdd;
+        }
+    
     </style>
 </head>
 <body>
@@ -45,13 +70,14 @@
                     <td>
                         <asp:Image ID="Img_Username" CssClass="thumbnail"  runat="server" />
                     </td>
-                </tr>
+                </tr>              
             </tbody>
             
         </table>
     </div>
     <div>
-    
+        <asp:Panel ID="PN_ListUsers" runat="server"></asp:Panel>
+        <asp:Button ID="BTN_Retour" runat="server" Text="Retour..." OnClick="BTN_Retour_Click" />
     </div>
     </form>
 </body>

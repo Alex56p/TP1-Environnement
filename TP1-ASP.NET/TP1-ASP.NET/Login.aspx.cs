@@ -49,7 +49,35 @@ namespace TP1_ASP.NET
 
         protected void BTN_PasswordLost_Click(object sender, EventArgs e)
         {
-            
+            PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"], this);
+            if (TB_UserName.Text == "")
+                Response.Write("Le nom d'usager est vide.");
+            else if (!personnes.Exist(TB_UserName.Text))
+                Response.Write("Le nom d'usager n'existe pas.");
+            else
+            {
+                EMail eMail = new EMail();
+
+                // Vous devez avoir un compte gmail
+                eMail.From = "devoirasp@gmail.com";
+                eMail.Password = "Sunshine_1234";
+                eMail.SenderName = "Administrateur";
+
+                eMail.Host = "smtp.gmail.com";
+                eMail.HostPort = 587;
+                eMail.SSLSecurity = true;
+
+                eMail.To = personnes.GetEmail(personnes.getID(TB_UserName.Text));
+                eMail.Subject = "Mot de passe oublié";
+                eMail.Body = "Votre mot de passe est : " + personnes.GetPassword(personnes.getID(TB_UserName.Text));
+
+                if (eMail.Send())
+                {
+                    Response.Write("This eMail has been sent with success.");
+                }
+                else
+                    Response.Write("An error occured while sendind this eMail.");
+            }
         }
 
         protected void CV_TB_UserName_ServerValidate(object source, ServerValidateEventArgs args)
