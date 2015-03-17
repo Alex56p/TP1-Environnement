@@ -9,6 +9,8 @@ namespace TP1_ASP.NET
 {
     public partial class Login : System.Web.UI.Page
     {
+        private static int Times { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -32,6 +34,7 @@ namespace TP1_ASP.NET
 
         protected void BTN_Login_Click(object sender, EventArgs e)
         {
+            Times++;
             if(Page.IsValid)
             {
                 PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"], this);
@@ -39,6 +42,10 @@ namespace TP1_ASP.NET
                 Session["Selected_UserName"] = TB_UserName.Text;
                 Session["UserValid"] = true;
                 Response.Redirect("Index.aspx");
+            }
+            else if(Times >= 3)
+            {
+                Session.Timeout = 5;
             }
         }
 

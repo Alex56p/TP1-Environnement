@@ -15,7 +15,7 @@ namespace TP1_ASP.NET
         public DateTime LoginDate { get; set; }
         public DateTime LogoutDate { get; set; }
         public String IPAdress { get; set; }
-
+       
         /// <summary>
         /// Constructeur
         /// </summary>
