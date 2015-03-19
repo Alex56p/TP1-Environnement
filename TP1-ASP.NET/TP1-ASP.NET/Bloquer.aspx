@@ -9,7 +9,10 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
+
+    <div>    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
+        <asp:Timer ID="Timer1" runat="server" Interval="1000" OnTick="OnTick"></asp:Timer>
     <h1>
         Session expirée!
     </h1>

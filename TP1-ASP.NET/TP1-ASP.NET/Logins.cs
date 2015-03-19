@@ -89,16 +89,7 @@ namespace TP1_ASP.NET
             tr.Cells.Add(td);
             Label LBL_Header = new Label();
             LBL_Header.Text = "<b>" + Titre + "</b>";
-            ImageButton BTN_Sort = new ImageButton();
-            // assignation du delegate du clic (voir sa définition plus bas dans le code)
-            BTN_Sort.Click += new ImageClickEventHandler(SortField_Click);
-            // IMPORTANT!!!
-            // il faut placer dans le répertoire Images du projet l'icône qui représente un tri
-            BTN_Sort.ImageUrl = @"~/Images/Sort.png";
-            // afin de bien reconnaitre quel champ il faudra trier on construit ici un ID
-            // pour le bouton
-            BTN_Sort.ID = "Sort_" + Titre;
-            td.Controls.Add(BTN_Sort);
+            
             td.Controls.Add(LBL_Header);
         }
 

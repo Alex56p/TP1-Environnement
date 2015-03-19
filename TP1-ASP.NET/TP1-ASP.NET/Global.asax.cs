@@ -25,12 +25,5 @@ namespace TP1_ASP.NET
         CdnDebugPath = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.4.1.js"
     });
         }
-
-        void Session_End(Object sender, EventArgs e)
-        {
-           Server.ClearError();
-           HttpContext.Current.Response.Clear();
-           HttpContext.Current.Response.Redirect("Login.aspx");
-        }
     }
 }

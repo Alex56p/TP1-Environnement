@@ -16,6 +16,7 @@ namespace TP1_ASP.NET
            
             if (!Page.IsPostBack)
             {
+                Times = 0;
                 Session["Bloquer"] = false;
                 Session["CurrentUser"] = new PersonnesTable((string)Application["MainDB"], this);
                 Session["UserValid"] = false;
@@ -51,6 +52,7 @@ namespace TP1_ASP.NET
                 Session["Selected_ID"] = personnes.getID(TB_UserName.Text);
                 Session["Selected_UserName"] = TB_UserName.Text;
                 Session["UserValid"] = true;
+                Session["Bloquer"] = false;
                 Response.Redirect("Index.aspx");
             }
             else if(Times >= 3)
