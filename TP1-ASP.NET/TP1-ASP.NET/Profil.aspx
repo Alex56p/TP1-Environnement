@@ -107,6 +107,17 @@
                             ControlToValidate="TB_Username"
                             ValidationGroup="VG_Login"> 
                         </asp:RequiredFieldValidator>
+                        <asp:CustomValidator
+                            ID="CustomValidator1"
+                            Display="None"
+                            runat="server"
+                            CssClass="label"
+                            ErrorMessage="Ce nom d'usager existe déjà!"
+                            ValidationGroup="VG_Login"
+                            ControlToValidate="TB_UserName"
+                            OnServerValidate="CV_TB_UserName_ServerValidate"
+                            ForeColor="Red"> 
+                        </asp:CustomValidator>
                     </td>
                 </tr>
                 <tr>
@@ -125,6 +136,36 @@
 
                 </tr>
                 <tr>
+                    <td class="label">Confirmation du mot de passe 
+
+                        
+                    </td>
+                    <td>
+                        <asp:TextBox ID="TB_Password_Confirm" runat="server" Text=""></asp:TextBox>
+                        <asp:RequiredFieldValidator
+                            ID="RFV_Password_Confirm"
+                            runat="server"
+                            Text="Vide!"
+                            ErrorMessage="Le champ est vide!"
+                            ControlToValidate="TB_Password_Confirm"
+                            ValidationGroup="VG_Login"> 
+                        </asp:RequiredFieldValidator>
+
+                        <asp:CustomValidator
+                            ID="CV_Password"
+                            Display="None"
+                            runat="server"
+                            CssClass="label"
+                            ErrorMessage="Les mots de passe doivent être identiques!"
+                            ValidationGroup="VG_Login"
+                            OnServerValidate="CV_Password_ServerValidate"
+                            ForeColor="Red"
+                            > 
+                        </asp:CustomValidator>
+
+                    </td>
+                </tr>
+                <tr>
                     <td class="label">Adresse courriel</td>
                     <td>
                         <asp:TextBox ID="TB_Email" runat="server"></asp:TextBox>
@@ -136,6 +177,33 @@
                             ControlToValidate="TB_Email"
                             ValidationGroup="VG_Login"> 
                         </asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">Confirmation de l'adresse courriel </td>
+                    <td>
+                        <asp:TextBox ID="TB_Email_Confirm" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator
+                            ID="RFV_Email_Confirm"
+                            runat="server"
+                            Text="Vide!"
+                            ErrorMessage="Le champ est vide!"
+                            ControlToValidate="TB_Email_Confirm"
+                            ValidationGroup="VG_Login"> 
+                        </asp:RequiredFieldValidator>
+
+                        <asp:CustomValidator
+                            ID="CV_Email"
+                            runat="server"
+                            Display="None"
+                            CssClass="label"
+                            ErrorMessage="Les adresses courriels doivent être identique!"
+                            ValidationGroup="VG_Login"
+                            ControlToValidate="TB_UserName"
+                            OnServerValidate="CV_Email_ServerValidate"
+                            ForeColor="Red"
+                            > 
+                        </asp:CustomValidator>
                     </td>
                 </tr>
                 <tr>

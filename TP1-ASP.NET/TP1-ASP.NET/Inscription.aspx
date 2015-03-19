@@ -130,16 +130,16 @@
                         </asp:RequiredFieldValidator>
                         
                         <asp:CustomValidator
-                    ID="CustomValidator1"
-                    Display="None"
-                    runat="server"
-                    CssClass="label"
-                    ErrorMessage="Ce nom d'usager existe déjà!"
-                    ValidationGroup="VG_Create"
-                    ControlToValidate="TB_UserName"
-                    OnServerValidate="CV_TB_UserName_ServerValidate"
-                    ForeColor="Red"> 
-                </asp:CustomValidator>
+                            ID="CustomValidator1"
+                            Display="None"
+                            runat="server"
+                            CssClass="label"
+                            ErrorMessage="Ce nom d'usager existe déjà!"
+                            ValidationGroup="VG_Create"
+                            ControlToValidate="TB_UserName"
+                            OnServerValidate="CV_TB_UserName_ServerValidate"
+                            ForeColor="Red"> 
+                        </asp:CustomValidator>
                         
                     </td>
                 </tr>
@@ -176,16 +176,16 @@
                         </asp:RequiredFieldValidator>
 
                         <asp:CustomValidator
-                    ID="CV_Password"
-                    Display="None"
-                    runat="server"
-                    CssClass="label"
-                    ErrorMessage="Les mots de passe doivent être identiques!"
-                    ValidationGroup="VG_Create"
-                    OnServerValidate="CV_Password_ServerValidate"
-                    ForeColor="Red"
-                    > 
-                </asp:CustomValidator>
+                            ID="CV_Password"
+                            Display="None"
+                            runat="server"
+                            CssClass="label"
+                            ErrorMessage="Les mots de passe doivent être identiques!"
+                            ValidationGroup="VG_Create"
+                            OnServerValidate="CV_Password_ServerValidate"
+                            ForeColor="Red"
+                            > 
+                        </asp:CustomValidator>
 
                     </td>
                 </tr>
@@ -217,17 +217,17 @@
                         </asp:RequiredFieldValidator>
 
                         <asp:CustomValidator
-                    ID="CV_Email"
-                    runat="server"
-                    Display="None"
-                    CssClass="label"
-                    ErrorMessage="Les adresses courriels doivent être identique!"
-                    ValidationGroup="VG_Create"
-                    ControlToValidate="TB_UserName"
-                    OnServerValidate="CV_Email_ServerValidate"
-                    ForeColor="Red"
-                    > 
-                </asp:CustomValidator>
+                            ID="CV_Email"
+                            runat="server"
+                            Display="None"
+                            CssClass="label"
+                            ErrorMessage="Les adresses courriels doivent être identique!"
+                            ValidationGroup="VG_Create"
+                            ControlToValidate="TB_UserName"
+                            OnServerValidate="CV_Email_ServerValidate"
+                            ForeColor="Red"
+                            > 
+                        </asp:CustomValidator>
                     </td>
                 </tr>
                 <tr>

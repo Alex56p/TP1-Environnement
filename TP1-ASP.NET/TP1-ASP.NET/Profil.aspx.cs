@@ -11,6 +11,7 @@ namespace TP1_ASP.NET
     public partial class Profil : System.Web.UI.Page
     {
         public string path;
+        bool valid = true;
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!Page.IsPostBack)
@@ -25,6 +26,18 @@ namespace TP1_ASP.NET
                 Img_Username.ImageUrl = "Avatars/" + personnes.GetAvatar(Session["Selected_ID"].ToString());
             else
                 Img_Username.ImageUrl = "Images/Anonymous.png";
+        }
+
+        protected void CV_TB_UserName_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            PersonnesTable personne = new PersonnesTable((string)Application["MainDB"], this);
+            if(TB_Username.Text != Session["Selected_UserName"].ToString())
+            {
+                args.IsValid = !personne.Exist(TB_Username.Text);
+                if (valid)
+                  valid = args.IsValid;
+            }
+            
         }
 
         private void UpdateCurrent()
@@ -90,13 +103,32 @@ namespace TP1_ASP.NET
 
         protected void BTN_Update_Click(object sender, EventArgs e)
         {
-            if(Page.IsValid)
+            if(Page.IsValid && valid)
                 UpdateCurrent();
         }
 
         protected void BTN_Annuler_Click(object sender, EventArgs e)
         {
             Response.Redirect("Index.aspx");
+        }
+
+        protected void CV_Email_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (TB_Email.Text != TB_Email_Confirm.Text)
+            {
+                valid = false;
+                args.IsValid = false;
+            }
+
+        }
+
+        protected void CV_Password_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (TB_Password.Text != TB_Password_Confirm.Text)
+            {
+                valid = false;
+                args.IsValid = false;
+            }
         }
     }
 }
