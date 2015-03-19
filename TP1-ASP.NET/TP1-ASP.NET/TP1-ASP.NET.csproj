@@ -69,6 +69,7 @@
     <Content Include="App_Data\MainDB_log.ldf">
       <DependentUpon>MainDB.mdf</DependentUpon>
     </Content>
+    <Content Include="Bloquer.aspx" />
     <Content Include="ClientFormUtilities.js" />
     <Content Include="Global.asax" />
     <Content Include="Index.aspx" />
@@ -80,6 +81,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bloquer.aspx.cs">
+      <DependentUpon>Bloquer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bloquer.aspx.designer.cs">
+      <DependentUpon>Bloquer.aspx</DependentUpon>
+    </Compile>
     <Compile Include="EMail.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

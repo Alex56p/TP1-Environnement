@@ -13,12 +13,22 @@ namespace TP1_ASP.NET
 
         protected void Page_Load(object sender, EventArgs e)
         {
+           
             if (!Page.IsPostBack)
             {
+                Session["Bloquer"] = false;
                 Session["CurrentUser"] = new PersonnesTable((string)Application["MainDB"], this);
                 Session["UserValid"] = false;
                 Session["Selected_UserName"] = "Anonymous";
             }
+            else
+            {
+               if(bool.Parse(Session["Bloquer"].ToString()))
+               {
+                  Response.Redirect("Bloquer.aspx");
+               }
+            }
+           
             LoadConnexionHeader();
         }
 
@@ -45,7 +55,7 @@ namespace TP1_ASP.NET
             }
             else if(Times >= 3)
             {
-                Session.Timeout = 5;
+               Session["Bloquer"] = true;
             }
         }
 
