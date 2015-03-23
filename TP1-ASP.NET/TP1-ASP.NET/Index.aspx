@@ -12,32 +12,7 @@
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <link rel="stylesheet" href="/resources/demos/style.css" />
     <style>
-        div{
-            display:block;
-        }
 
-        tbody {
-          display: table-row-group;
-          vertical-align: middle;
-          border-color: inherit;
-        }
-
-        .header{
-            width:99%;
-        }
-        .mainHeader{
-                  width: 100%;
-                  padding: 0px;
-                }
-        .submitBTN {
-            display: block;
-            width: 173px;
-            text-align: center;
-        }
-        .thumbnail{
-            width:64px;
-            height:64px;
-        }
     </style>
 </head>
     

@@ -7,21 +7,12 @@ using System.Web.UI.WebControls;
 
 namespace TP1_ASP.NET
 {
-    public partial class LoginsJournal : System.Web.UI.Page
+    public partial class LoginsJournal1 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadConnexionHeader();
             ListUsers();
-        }
-        private void LoadConnexionHeader()
-        {
-            PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"], this);
-            LB_HdrUserName.Text = Session["Selected_UserName"].ToString();
-            if (Session["Selected_ID"] != null && personnes.GetAvatar(Session["Selected_ID"].ToString()) != "")
-                Img_Username.ImageUrl = "Avatars/" + personnes.GetAvatar(Session["Selected_ID"].ToString());
-            else
-                Img_Username.ImageUrl = "Images/Anonymous.png";
+            Session["Header"] = "Journal de connexion...";
         }
 
         public void ListUsers()

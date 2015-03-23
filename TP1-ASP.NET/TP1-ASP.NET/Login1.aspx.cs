@@ -7,13 +7,13 @@ using System.Web.UI.WebControls;
 
 namespace TP1_ASP.NET
 {
-    public partial class Login : System.Web.UI.Page
+    public partial class Login1 : System.Web.UI.Page
     {
         private static int Times { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+
             if (!Page.IsPostBack)
             {
                 Times = 0;
@@ -21,49 +21,39 @@ namespace TP1_ASP.NET
                 Session["CurrentUser"] = new PersonnesTable((string)Application["MainDB"], this);
                 Session["UserValid"] = false;
                 Session["Selected_UserName"] = "Anonymous";
+                Session["Header"] = "Login...";
             }
             else
             {
-               if(bool.Parse(Session["Bloquer"].ToString()))
-               {
-                  Response.Redirect("Bloquer.aspx");
-               }
+                if (Session["Bloquer"] != null && bool.Parse(Session["Bloquer"].ToString()))
+                {
+                    Response.Redirect("Bloquer1.aspx");
+                }
             }
-           
-            LoadConnexionHeader();
-        }
 
-        private void LoadConnexionHeader()
-        {
-            PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"], this);
-            LB_HdrUserName.Text = Session["Selected_UserName"].ToString();
-            if (Session["Selected_ID"] != null && personnes.GetAvatar(Session["Selected_ID"].ToString()) != "")
-                Img_Username.ImageUrl = "Avatars/" + personnes.GetAvatar(Session["Selected_ID"].ToString());
-            else
-                Img_Username.ImageUrl = "Images/Anonymous.png";
         }
 
         protected void BTN_Login_Click(object sender, EventArgs e)
         {
             Times++;
-            if(Page.IsValid)
+            if (Page.IsValid)
             {
                 PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"], this);
                 Session["Selected_ID"] = personnes.getID(TB_UserName.Text);
                 Session["Selected_UserName"] = TB_UserName.Text;
                 Session["UserValid"] = true;
                 Session["Bloquer"] = false;
-                Response.Redirect("Index.aspx");
+                Response.Redirect("Index1.aspx");
             }
-            else if(Times >= 3)
+            else if (Times >= 3)
             {
-               Session["Bloquer"] = true;
+                Session["Bloquer"] = true;
             }
         }
 
         protected void BTN_Inscription_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Inscription.aspx");
+            Response.Redirect("Inscription1.aspx");
         }
 
         protected void BTN_PasswordLost_Click(object sender, EventArgs e)
@@ -111,7 +101,5 @@ namespace TP1_ASP.NET
             args.IsValid = personnes.Valid(TB_UserName.Text, TB_Password.Text);
 
         }
-
-
     }
 }

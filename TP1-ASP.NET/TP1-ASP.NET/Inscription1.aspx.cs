@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace TP1_ASP.NET
 {
-    public partial class Inscription : System.Web.UI.Page
+    public partial class Inscription1 : System.Web.UI.Page
     {
         PersonnesTable Personnes;
         bool valid = true;
@@ -20,16 +20,7 @@ namespace TP1_ASP.NET
 
             if (TB_Username.Text != null)
                 Session["Username"] = TB_Username.Text;
-            LoadConnexionHeader();
-        }
-        private void LoadConnexionHeader()
-        {
-            PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"], this);
-            LB_HdrUserName.Text = Session["Selected_UserName"].ToString();
-            if (Session["Selected_ID"] != null && personnes.GetAvatar(Session["Selected_ID"].ToString()) != "")
-                Img_Username.ImageUrl = "Avatars/" + personnes.GetAvatar(Session["Selected_ID"].ToString());
-            else
-                Img_Username.ImageUrl = "Images/Anonymous.png";
+            Session["Header"] = "Inscription...";
         }
 
         protected void CV_TB_UserName_ServerValidate(object source, ServerValidateEventArgs args)
@@ -89,10 +80,10 @@ namespace TP1_ASP.NET
         protected void CV_Email_ServerValidate(object source, ServerValidateEventArgs args)
         {
             if (TB_Email.Text != TB_Email_Confirm.Text)
-            { 
+            {
                 valid = false;
                 args.IsValid = false;
-            }               
+            }
 
         }
 
@@ -171,9 +162,5 @@ namespace TP1_ASP.NET
                 valid = args.IsValid;
         }
         #endregion
-
-        
-
-
     }
 }

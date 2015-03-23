@@ -1,0 +1,65 @@
+﻿div {
+    display: block;
+}
+
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.header {
+    width: 99%;
+}
+
+.mainHeader {
+    width: 100%;
+    padding: 0px;
+}
+
+.thumbnail {
+    width: 64px;
+    height: 64px;
+}
+
+#Avatar {
+    margin: auto;
+    padding-left: 100px;
+}
+
+.Avatar {
+    width: 140px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#Inscription {
+    background-color: lightgrey;
+    border: solid 1px;
+    width: 500px;
+    margin: auto;
+}
+
+.label {
+    text-align: right;
+}
+
+#RegenarateCaptcha {
+    width: 25px;
+    height: 25px;
+}
+
+#IMGCaptcha {
+    height: 40px;
+    width: 100px;
+}
+
+.padding {
+    width: 100px;
+    padding-left: 30px;
+}
+
+#TB_Captcha {
+    width: 100px;
+}

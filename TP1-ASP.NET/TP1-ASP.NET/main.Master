@@ -1,0 +1,40 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="main.master.cs" Inherits="TP1_ASP.NET.main" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <asp:ContentPlaceHolder ID="Stylesheets" runat="server">
+        <link rel="stylesheet" href="/MasterPageCSS.css" type="text/css" />
+    </asp:ContentPlaceHolder>
+
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="mainHeader">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="header">
+                            <asp:Label ID="LB_Header" runat="server" Text="..."></asp:Label>
+                        </td>
+                        <td>
+                            <asp:Label ID="LB_HdrUserName" runat="server" Text="Anonymous"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:Image ID="Img_Username" CssClass="thumbnail" runat="server" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr />
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
