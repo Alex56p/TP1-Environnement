@@ -9,7 +9,7 @@
     <asp:ContentPlaceHolder ID="Stylesheets" runat="server">
         <link rel="stylesheet" href="/MasterPageCSS.css" type="text/css" />
     </asp:ContentPlaceHolder>
-
+    <script src="ClientFormUtilities.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -33,6 +33,7 @@
         <hr />
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                
             </asp:ContentPlaceHolder>
         </div>
     </form>

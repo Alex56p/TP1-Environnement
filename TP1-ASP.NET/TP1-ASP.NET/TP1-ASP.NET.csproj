@@ -63,6 +63,8 @@
     <Content Include="Login1.aspx" />
     <Content Include="LoginsJournal1.aspx" />
     <Content Include="main.Master" />
+    <None Include="Properties\PublishProfiles\local.pubxml" />
+    <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -77,13 +79,8 @@
     </Content>
     <Content Include="ClientFormUtilities.js" />
     <Content Include="Global.asax" />
-    <Content Include="Index.aspx" />
-    <Content Include="Inscription.aspx" />
-    <Content Include="LoginsJournal.aspx" />
     <Content Include="MasterPageCSS.css" />
-    <Content Include="Profil.aspx" />
     <Content Include="Profil1.aspx" />
-    <Content Include="Room.aspx" />
     <Content Include="Room1.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -99,26 +96,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Index.aspx.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Index.aspx.designer.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Index1.aspx.cs">
       <DependentUpon>Index1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Index1.aspx.designer.cs">
       <DependentUpon>Index1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Inscription.aspx.cs">
-      <DependentUpon>Inscription.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Inscription.aspx.designer.cs">
-      <DependentUpon>Inscription.aspx</DependentUpon>
     </Compile>
     <Compile Include="Inscription1.aspx.cs">
       <DependentUpon>Inscription1.aspx</DependentUpon>
@@ -135,13 +118,6 @@
       <DependentUpon>Login1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Logins.cs" />
-    <Compile Include="LoginsJournal.aspx.cs">
-      <DependentUpon>LoginsJournal.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="LoginsJournal.aspx.designer.cs">
-      <DependentUpon>LoginsJournal.aspx</DependentUpon>
-    </Compile>
     <Compile Include="LoginsJournal1.aspx.cs">
       <DependentUpon>LoginsJournal1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -157,13 +133,6 @@
       <DependentUpon>main.Master</DependentUpon>
     </Compile>
     <Compile Include="PersonnesTable.cs" />
-    <Compile Include="Profil.aspx.cs">
-      <DependentUpon>Profil.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Profil.aspx.designer.cs">
-      <DependentUpon>Profil.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Profil1.aspx.cs">
       <DependentUpon>Profil1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -172,13 +141,6 @@
       <DependentUpon>Profil1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Room.aspx.cs">
-      <DependentUpon>Room.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Room.aspx.designer.cs">
-      <DependentUpon>Room.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Room1.aspx.cs">
       <DependentUpon>Room1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
