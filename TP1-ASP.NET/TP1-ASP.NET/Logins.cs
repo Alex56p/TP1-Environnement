@@ -71,7 +71,7 @@ namespace TP1_ASP.NET
                     // Insertion des données
                     tr = new TableRow();
                     tr.CssClass = "grid";
-                    InsertionUserName(tr, UserSelected);
+                    InsertionUserName(tr, reader.GetString(1).ToString());
                     InsertionDateLogin(tr, reader.GetDateTime(2));
                     InsertionDuree(tr, reader.GetDateTime(2), reader.GetDateTime(3));
                     Grid.Rows.Add(tr);

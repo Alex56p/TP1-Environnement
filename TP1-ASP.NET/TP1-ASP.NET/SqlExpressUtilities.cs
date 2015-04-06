@@ -184,7 +184,7 @@ namespace SqlExpressUtilities
         public SqlDataReader FillReader(string UserID)
         {
             string sqlCommand = "";
-            if (UserID != "36")
+            if (SelectByUserID(UserID) != "Admin")
             {
                 sqlCommand = "SELECT * FROM " + SQLTableName + " WHERE UserID = " + UserID;
             }
