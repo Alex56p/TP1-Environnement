@@ -183,22 +183,29 @@ namespace SqlExpressUtilities
 
         public SqlDataReader FillReader(string UserID)
         {
-            string sqlCommand = "SELECT * FROM " + SQLTableName + " WHERE UserID = " + UserID;
-
+            string sqlCommand = "";
+            if (UserID != "36")
+            {
+                sqlCommand = "SELECT * FROM " + SQLTableName + " WHERE UserID = " + UserID;
+            }
+            else
+            {
+                sqlCommand = "SELECT * FROM " + SQLTableName;
+            }
             // instancier l'objet de collection
-            connection = new SqlConnection(connexionString);
-            // bâtir l'objet de requête
-            SqlCommand sqlcmd = new SqlCommand(sqlCommand);
-            // affecter l'objet de connection à l'objet de requête
-            sqlcmd.Connection = connection;
-            // bloquer l'objet Page.Application afin d'empêcher d'autres sessions concurentes
-            // d'avoir accès à la base de données concernée par la requête en cours
-            Page.Application.Lock();
-            // ouvrir la connection avec la bd
-            if (connection.State != System.Data.ConnectionState.Open)
-                connection.Open();
-            // éxécuter la requête SQL et récupérer les enregistrements qui en découlent dans l'objet Reader
-            reader = sqlcmd.ExecuteReader();
+                connection = new SqlConnection(connexionString);
+                // bâtir l'objet de requête
+                SqlCommand sqlcmd = new SqlCommand(sqlCommand);
+                // affecter l'objet de connection à l'objet de requête
+                sqlcmd.Connection = connection;
+                // bloquer l'objet Page.Application afin d'empêcher d'autres sessions concurentes
+                // d'avoir accès à la base de données concernée par la requête en cours
+                Page.Application.Lock();
+                // ouvrir la connection avec la bd
+                if (connection.State != System.Data.ConnectionState.Open)
+                    connection.Open();
+                // éxécuter la requête SQL et récupérer les enregistrements qui en découlent dans l'objet Reader
+                reader = sqlcmd.ExecuteReader();
 
             return reader;
         }
