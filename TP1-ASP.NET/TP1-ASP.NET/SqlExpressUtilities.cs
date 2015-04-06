@@ -243,7 +243,7 @@ namespace SqlExpressUtilities
 
         public string SelectByUserID(String ID)
         {
-            string sqlCommand = "SELECT UserName FROM PERSONNES WHERE ID = '" + ID + "'";
+            string sqlCommand = "SELECT UserName FROM PERSONNES WHERE ID = " + ID;
 
             // instancier l'objet de collection
             connection = new SqlConnection(connexionString);
@@ -563,7 +563,120 @@ namespace SqlExpressUtilities
                 Page.Response.Redirect((String)Page.Session["EditPage"]);
         }
 
-        
+        public void MakeDGVOnline(Panel PN_GridView, String EditPage)
+        {
+            SqlDataReader reader = FillReaderOnline();
+            // Conserver le panneau parent (utilisé dans certaines méthodes de cette classe
+            this.PN_GridView = PN_GridView;
+            Table Grid = null;
+
+            if (reader.HasRows)
+            {
+                // Création de l'entête
+                Grid = new Table();
+                Grid.CssClass = "grid";
+                TableRow tr = new TableRow();
+                tr.CssClass = "grid";
+                AjouterElementHeader(tr, "Statut");
+                AjouterElementHeader(tr, "Nom d'usager");
+                AjouterElementHeader(tr, "Nom complet");
+                AjouterElementHeader(tr, "Adresse courriel");
+                AjouterElementHeader(tr, "Avatar");
+                Grid.Rows.Add(tr);
+
+                while (reader.Read())
+                {
+                    // Insertion des données
+                    tr = new TableRow();
+                    tr.CssClass = "grid";
+                    InsertionStatut(tr, "En Ligne");
+                    InsertionUserName(tr, reader.GetString(2));
+                    InsertionFullName(tr, reader.GetString(1));
+                    InsertionCourriel(tr, reader.GetString(4));
+                    InsertionAvatar(tr, reader.GetString(5));
+                    Grid.Rows.Add(tr);
+                }
+            }
+            PN_GridView.Controls.Clear();
+            if (Grid != null)
+                PN_GridView.Controls.Add(Grid);
+        }
+
+        private void InsertionStatut(TableRow tr, string p)
+        {
+            TableCell td = new TableCell();
+            td.CssClass = "grid";
+            td.Text = p;
+
+            tr.Cells.Add(td);
+        }
+
+        private void InsertionUserName(TableRow tr, string p)
+        {
+            TableCell td = new TableCell();
+            td.CssClass = "grid";
+            td.Text = p;
+
+            tr.Cells.Add(td);
+        }
+
+        private void InsertionFullName(TableRow tr, string p)
+        {
+            TableCell td = new TableCell();
+            td.CssClass = "grid";
+            td.Text = p;
+
+            tr.Cells.Add(td);
+        }
+
+        private void InsertionCourriel(TableRow tr, string p)
+        {
+            TableCell td = new TableCell();
+            td.CssClass = "grid";
+            td.Text = p;
+
+            tr.Cells.Add(td);
+        }
+
+        private void InsertionAvatar(TableRow tr, string p)
+        {
+            TableCell td = new TableCell();
+            td.CssClass = "grid";
+            td.Text = p;
+
+            tr.Cells.Add(td);
+        }
+
+        private SqlDataReader FillReaderOnline()
+        {
+            string sqlCommand = "SELECT * FROM " + SQLTableName;
+            // instancier l'objet de collection
+            connection = new SqlConnection(connexionString);
+            // bâtir l'objet de requête
+            SqlCommand sqlcmd = new SqlCommand(sqlCommand);
+            // affecter l'objet de connection à l'objet de requête
+            sqlcmd.Connection = connection;
+            // bloquer l'objet Page.Application afin d'empêcher d'autres sessions concurentes
+            // d'avoir accès à la base de données concernée par la requête en cours
+            Page.Application.Lock();
+            // ouvrir la connection avec la bd
+            if (connection.State != System.Data.ConnectionState.Open)
+                connection.Open();
+            // éxécuter la requête SQL et récupérer les enregistrements qui en découlent dans l'objet Reader
+            reader = sqlcmd.ExecuteReader();
+
+            return reader;
+        }
+        private void AjouterElementHeader(TableRow tr, String Titre)
+        {
+            TableCell td = new TableCell();
+            td.CssClass = "grid";
+            tr.Cells.Add(td);
+            Label LBL_Header = new Label();
+            LBL_Header.Text = "<b>" + Titre + "</b>";
+
+            td.Controls.Add(LBL_Header);
+        }
     }
 
     public class SQLHelper

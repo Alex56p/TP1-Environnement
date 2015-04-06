@@ -63,3 +63,8 @@ tbody {
 #TB_Captcha {
     width: 100px;
 }
+
+.grid{
+    border:solid 2px black;
+    padding:3px;
+}
