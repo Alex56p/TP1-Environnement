@@ -10,51 +10,33 @@
 namespace TP1_ASP.NET {
     
     
-    public partial class Index1 {
+    public partial class ChatRoom {
         
         /// <summary>
-        /// Contrôle BTN_Profil.
+        /// Contrôle Panel_Chat.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BTN_Profil;
+        protected global::System.Web.UI.WebControls.Panel Panel_Chat;
         
         /// <summary>
-        /// Contrôle BTN_Online.
+        /// Contrôle TB_Text.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BTN_Online;
+        protected global::System.Web.UI.WebControls.TextBox TB_Text;
         
         /// <summary>
-        /// Contrôle BTN_Journal.
+        /// Contrôle BTN_Envoyer.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BTN_Journal;
-        
-        /// <summary>
-        /// Contrôle BTN_Deconnexion.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BTN_Deconnexion;
-        
-        /// <summary>
-        /// Contrôle BTN_ChatRoom.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BTN_ChatRoom;
+        protected global::System.Web.UI.WebControls.Button BTN_Envoyer;
     }
 }

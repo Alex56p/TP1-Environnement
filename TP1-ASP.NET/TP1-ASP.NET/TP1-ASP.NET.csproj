@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Bloquer1.aspx" />
+    <Content Include="ChatRoom.aspx" />
     <Content Include="Index1.aspx" />
     <Content Include="Inscription1.aspx" />
     <Content Include="Login1.aspx" />
@@ -92,6 +93,13 @@
     </Compile>
     <Compile Include="Bloquer1.aspx.designer.cs">
       <DependentUpon>Bloquer1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ChatRoom.aspx.cs">
+      <DependentUpon>ChatRoom.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChatRoom.aspx.designer.cs">
+      <DependentUpon>ChatRoom.aspx</DependentUpon>
     </Compile>
     <Compile Include="EMail.cs" />
     <Compile Include="Global.asax.cs">

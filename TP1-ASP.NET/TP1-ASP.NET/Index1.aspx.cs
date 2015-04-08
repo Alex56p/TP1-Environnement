@@ -60,5 +60,11 @@ namespace TP1_ASP.NET
                 ipAddress = "127.0.0.1";
             return ipAddress;
         }
+
+        protected void BTN_ChatRoom_Click(object sender, EventArgs e)
+        {
+            Session["Header"] = "Chat Room...";
+            Response.Redirect("ChatRoom.aspx");
+        }
     }
 }

@@ -25,6 +25,11 @@
                         <asp:Button ID="BTN_Deconnexion" runat="server" Text="Déconnexion..." OnClick="BTN_Deconnexion_Click" />
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <asp:Button ID="BTN_ChatRoom" runat="server" Text="Salle de discussions..." OnClick="BTN_ChatRoom_Click" />
+                    </td>
+                </tr>
             </table>
         </div>
 </asp:Content>
