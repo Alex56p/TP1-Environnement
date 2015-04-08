@@ -18,7 +18,8 @@ namespace TP1_ASP.NET
         {
             Label lbl = new Label();
             lbl.Text = TB_Text.Text;
-            Panel_Chat.Controls.Add(lbl);
+            Panel_Chat.ContentTemplateContainer.Controls.Add(lbl);
+            Panel_Chat.ContentTemplateContainer.Controls.Add(new LiteralControl("<br/>"));
         }
     }
 }

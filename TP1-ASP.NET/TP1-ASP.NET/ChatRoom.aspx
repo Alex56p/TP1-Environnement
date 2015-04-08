@@ -3,10 +3,16 @@
     <link rel="stylesheet" href="/MasterPageCSS.css" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:ScriptManager runat="server"></asp:ScriptManager>
     <div>
         <table>
             <tr>
-                <asp:Panel ID="Panel_Chat" runat="server"></asp:Panel>
+               
+                <asp:UpdatePanel ID="Panel_Chat" runat="server"> 
+                    <ContentTemplate>
+                        
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </tr>
             <tr>
                 <td>
