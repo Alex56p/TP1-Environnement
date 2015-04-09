@@ -16,11 +16,6 @@ namespace TP1_ASP.NET
         public DateTime LogoutDate { get; set; }
         public String IPAdress { get; set; }
        
-        /// <summary>
-        /// Constructeur
-        /// </summary>
-        /// <param name="connexionString"></param>
-        /// <param name="Page"></param>
         public Logins (String connexionString, System.Web.UI.Page Page)
             : base(connexionString, Page)
         {

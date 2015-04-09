@@ -1,7 +1,5 @@
 ﻿<%@ Page Title="Chat Room..." Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="ChatRoom.aspx.cs" Inherits="TP1_ASP.NET.ChatRoom" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="Stylesheets" runat="server">
-    <link rel="stylesheet" href="/MasterPageCSS.css" type="text/css" />
-</asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager runat="server"></asp:ScriptManager>
     <div>
@@ -12,6 +10,9 @@
                     <ContentTemplate>
                         
                     </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="BTN_Envoyer" EventName="Click" />
+                    </Triggers>
                 </asp:UpdatePanel>
             </tr>
             <tr>

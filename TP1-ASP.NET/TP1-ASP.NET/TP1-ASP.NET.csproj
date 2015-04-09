@@ -64,6 +64,7 @@
     <Content Include="Login1.aspx" />
     <Content Include="LoginsJournal1.aspx" />
     <Content Include="main.Master" />
+    <None Include="Properties\PublishProfiles\coquin.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Properties\PublishProfiles\test12.pubxml" />
@@ -84,6 +85,7 @@
     <Content Include="MasterPageCSS.css" />
     <Content Include="Profil1.aspx" />
     <Content Include="Room1.aspx" />
+    <Content Include="Threads.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +160,15 @@
       <DependentUpon>Room1.aspx</DependentUpon>
     </Compile>
     <Compile Include="SqlExpressUtilities.cs" />
+    <Compile Include="Threads.aspx.cs">
+      <DependentUpon>Threads.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Threads.aspx.designer.cs">
+      <DependentUpon>Threads.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ThreadsTable.cs" />
+    <Compile Include="Threads_Messages.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

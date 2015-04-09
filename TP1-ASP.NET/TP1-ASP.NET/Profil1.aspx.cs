@@ -46,20 +46,19 @@ namespace TP1_ASP.NET
                 personnes.Password = TB_Password.Text;
                 personnes.Email = TB_Email.Text;
 
-
                 String Avatar_Path = "";
                 String avatar_ID = "";
                 if (FU_Avatar.FileName != "")
                 {
                     DeleteImage(personnes.Avatar);
-                    avatar_ID = FU_Avatar.FileName;
-                    Avatar_Path = Server.MapPath(@"~\Avatars\") + avatar_ID;
+                    avatar_ID = Guid.NewGuid().ToString();
+                    Avatar_Path = Server.MapPath(@"~\Avatars\") + avatar_ID + ".png";
                     FU_Avatar.SaveAs(Avatar_Path);
                     personnes.Avatar = avatar_ID;
                 }
                 else
                 {
-                    personnes.Avatar = personnes.GetAvatar(Session["Selected_ID"].ToString());
+                    personnes.Avatar = path;
                 }
 
                 personnes.Update();
@@ -88,7 +87,7 @@ namespace TP1_ASP.NET
                 if (Fields.ElementAt(4) != "")
                 {
                     path = Fields.ElementAt(4);
-                    IMG_Avatar.ImageUrl = "Avatars/" + Fields.ElementAt(4);
+                    IMG_Avatar.ImageUrl = "Avatars/" + Fields.ElementAt(4) + ".png";
                 }
                 else
                     IMG_Avatar.ImageUrl = "Images/Anonymous.png";

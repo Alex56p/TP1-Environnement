@@ -1,15 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="Inscription1.aspx.cs" Inherits="TP1_ASP.NET.Inscription1" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="Stylesheets" runat="server">
-        <link rel="stylesheet" href="/MasterPageCSS.css" type="text/css" />
-    </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div id="Inscription">
         <div id="Avatar">
             <asp:Image ID="IMG_Avatar" runat="server" CssClass="Avatar" ImageUrl="~/Images/Anonymous.png" />
-            <asp:FileUpload ID="FU_Avatar" runat="server" CssClass="Avatar" onchange="PreLoadImage()" ClientIDMode="Static" />
+            <asp:FileUpload ID="FU_Avatar" runat="server" CssClass="Avatar" onchange="loadFile(event)" ClientIDMode="Static" />
+            <script>
+                 var loadFile = function (event) {
+                     var output = document.getElementById('<%= IMG_Avatar.ClientID %>');
+                     output.src = URL.createObjectURL(event.target.files[0]);
+                 };
+            </script>
         </div>
 
         <table>

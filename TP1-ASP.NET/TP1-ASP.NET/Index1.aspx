@@ -1,7 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="Index1.aspx.cs" Inherits="TP1_ASP.NET.Index1" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="Stylesheets" runat="server">
-        <link rel="stylesheet" href="/MasterPageCSS.css" type="text/css" />
-    </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div>
             <table>
@@ -28,6 +26,11 @@
                 <tr>
                     <td>
                         <asp:Button ID="BTN_ChatRoom" runat="server" Text="Salle de discussions..." OnClick="BTN_ChatRoom_Click" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Button ID="BTN_Gerer" runat="server" Text="Gérer mes discussions..." OnClick="BTN_Gerer_Click"/>
                     </td>
                 </tr>
             </table>

@@ -66,5 +66,11 @@ namespace TP1_ASP.NET
             Session["Header"] = "Chat Room...";
             Response.Redirect("ChatRoom.aspx");
         }
+
+        protected void BTN_Gerer_Click(object sender, EventArgs e)
+        {
+            Session["Header"] = "Gérer mes discussions...";
+            Response.Redirect("Threads.aspx");
+        }
     }
 }
