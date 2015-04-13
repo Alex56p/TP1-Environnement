@@ -130,10 +130,14 @@ namespace TP1_ASP.NET
 
         public void Connecter()
         {
+            Connecte = 1;
+            Update();
         }
 
         public void Deconnecter()
         {
+            Connecte = 0;
+            Update();
         }
     }
 
