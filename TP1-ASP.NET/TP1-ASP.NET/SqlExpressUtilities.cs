@@ -151,7 +151,6 @@ namespace SqlExpressUtilities
             GetFieldsNameAndType();
             // retourner le nombre d'enregistrements générés
             return reader.RecordsAffected;
-           
         }
 
         public string getID(string UserName)
@@ -233,6 +232,28 @@ namespace SqlExpressUtilities
                     connection.Open();
                 // éxécuter la requête SQL et récupérer les enregistrements qui en découlent dans l'objet Reader
                 reader = sqlcmd.ExecuteReader();
+
+            return reader;
+        }
+
+        public SqlDataReader FillReaderChat(string UserID)
+        {
+            string sqlCommand = "SELECT * FROM " + SQLTableName + " WHERE ID = " + UserID;
+
+            // instancier l'objet de collection
+            connection = new SqlConnection(connexionString);
+            // bâtir l'objet de requête
+            SqlCommand sqlcmd = new SqlCommand(sqlCommand);
+            // affecter l'objet de connection à l'objet de requête
+            sqlcmd.Connection = connection;
+            // bloquer l'objet Page.Application afin d'empêcher d'autres sessions concurentes
+            // d'avoir accès à la base de données concernée par la requête en cours
+            Page.Application.Lock();
+            // ouvrir la connection avec la bd
+            if (connection.State != System.Data.ConnectionState.Open)
+                connection.Open();
+            // éxécuter la requête SQL et récupérer les enregistrements qui en découlent dans l'objet Reader
+            reader = sqlcmd.ExecuteReader();
 
             return reader;
         }

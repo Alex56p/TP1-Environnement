@@ -11,18 +11,29 @@ namespace TP1_ASP.NET
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //TEMPORAIRE
 
+            Session["Selected_Thread"] = 1;
         }
 
         protected void BTN_Envoyer_Click(object sender, EventArgs e)
         {
-           Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
-           tm.User_ID = long.Parse(Session["Selected_ID"].ToString());
-           tm.Thread_ID = long.Parse(Session["Selected_Thread"].ToString());
-           tm.Date_of_Creation = DateTime.Now;
-           tm.Message = TB_Text.Text;
+            
+            Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
+            tm.User_ID = long.Parse(Session["Selected_ID"].ToString());
+            tm.Thread_ID = long.Parse(Session["Selected_Thread"].ToString());
+            tm.Date_of_Creation = DateTime.Now.ToShortDateString();
+            tm.Message = TB_Text.Text;
 
-           tm.Insert();
+            tm.Insert();
+
+            AfficherMessages();
+        }
+
+        private void AfficherMessages()
+        {
+            Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
+            tm.ShowMessages();
         }
     }
 }

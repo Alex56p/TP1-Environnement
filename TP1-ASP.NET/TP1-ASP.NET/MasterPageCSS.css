@@ -68,3 +68,8 @@ tbody {
     border:solid 2px black;
     padding:3px;
 }
+
+.ChatImage{
+     width: 48px;
+    height: 48px;
+}
