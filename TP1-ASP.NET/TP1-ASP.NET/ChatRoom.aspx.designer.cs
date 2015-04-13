@@ -22,6 +22,15 @@ namespace TP1_ASP.NET {
         protected global::System.Web.UI.UpdatePanel Panel_Chat;
         
         /// <summary>
+        /// Contrôle Table1.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table Table1;
+        
+        /// <summary>
         /// Contrôle TB_Text.
         /// </summary>
         /// <remarks>
