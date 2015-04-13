@@ -16,10 +16,13 @@ namespace TP1_ASP.NET
 
         protected void BTN_Envoyer_Click(object sender, EventArgs e)
         {
-            Label lbl = new Label();
-            lbl.Text = TB_Text.Text;
-            Panel_Chat.ContentTemplateContainer.Controls.Add(lbl);
-            Panel_Chat.ContentTemplateContainer.Controls.Add(new LiteralControl("<br/>"));
+           Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
+           tm.User_ID = long.Parse(Session["Selected_ID"].ToString());
+           tm.Thread_ID = long.Parse(Session["Selected_Thread"].ToString());
+           tm.Date_of_Creation = DateTime.Now;
+           tm.Message = TB_Text.Text;
+
+           tm.Insert();
         }
     }
 }
