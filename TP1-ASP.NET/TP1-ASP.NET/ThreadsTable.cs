@@ -41,5 +41,8 @@ namespace TP1_ASP.NET
             id = int.Parse(getIDByCreator(creator));
             UpdateRecord(id, creator, Title, Date_of_Creation);
         }
+
+
+
     }
 }

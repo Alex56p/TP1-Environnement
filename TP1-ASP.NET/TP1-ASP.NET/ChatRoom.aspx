@@ -8,9 +8,7 @@
                
                 <asp:UpdatePanel ID="Panel_Chat" runat="server"> 
                     <ContentTemplate>
-                        <asp:Table ID="Table1" runat="server">
-
-                        </asp:Table>
+                        
                     </ContentTemplate>
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="BTN_Envoyer" EventName="Click" />

@@ -16,7 +16,10 @@ namespace TP1_ASP.NET
 
         protected void BTN_Envoyer_Click(object sender, EventArgs e)
         {
-             
+            Label lbl = new Label();
+            lbl.Text = TB_Text.Text;
+            Panel_Chat.ContentTemplateContainer.Controls.Add(lbl);
+            Panel_Chat.ContentTemplateContainer.Controls.Add(new LiteralControl("<br/>"));
         }
     }
 }
