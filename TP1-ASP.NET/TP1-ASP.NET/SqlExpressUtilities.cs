@@ -637,7 +637,11 @@ namespace SqlExpressUtilities
                     // Insertion des données
                     tr = new TableRow();
                     tr.CssClass = "grid";
-                    InsertionStatut(tr, "En Ligne");
+                    if (reader.GetInt32(6) == 1)
+                        InsertionStatut(tr, "/Images/OnLine.png");
+                    else
+                        InsertionStatut(tr, "/Images/Busy.png");
+
                     InsertionUserName(tr, reader.GetString(2));
                     InsertionFullName(tr, reader.GetString(1));
                     InsertionCourriel(tr, reader.GetString(4));
@@ -653,8 +657,10 @@ namespace SqlExpressUtilities
         private void InsertionStatut(TableRow tr, string p)
         {
             TableCell td = new TableCell();
+            Image img = new Image();
+            img.ImageUrl = p;
             td.CssClass = "grid";
-            td.Text = p;
+            td.Controls.Add(img);
 
             tr.Cells.Add(td);
         }
@@ -689,8 +695,11 @@ namespace SqlExpressUtilities
         private void InsertionAvatar(TableRow tr, string p)
         {
             TableCell td = new TableCell();
-            td.CssClass = "grid";
-            td.Text = p;
+            Image img = new Image();
+            img.CssClass = "Avatar";
+            img.ImageUrl = "/Avatars/" + p;
+            td.CssClass = "Grid";
+            td.Controls.Add(img);
 
             tr.Cells.Add(td);
         }

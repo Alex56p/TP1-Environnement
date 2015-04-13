@@ -14,6 +14,7 @@ namespace TP1_ASP.NET
         public String Password { get; set; }
         public String Email { get; set; }
         public String Avatar { get; set; }
+        public int Connecte { get; set; }
 
         public PersonnesTable(String connexionString, System.Web.UI.Page Page)
             : base(connexionString, Page)
@@ -28,6 +29,7 @@ namespace TP1_ASP.NET
             Password = FieldsValues[3];
             Email = FieldsValues[4];
             Avatar = FieldsValues[5];
+            Connecte = int.Parse(FieldsValues[6]);
         }
 
         public override void InitVisibility()
@@ -42,7 +44,7 @@ namespace TP1_ASP.NET
         }
         public override void Update()
         {
-            UpdateRecord(ID, FullName, UserName, Password, Email, Avatar);
+            UpdateRecord(ID, FullName, UserName, Password, Email, Avatar, Connecte);
         }
 
         public bool Exist(String userName)
@@ -82,6 +84,7 @@ namespace TP1_ASP.NET
                 Fields.Add(reader.GetString(3));
                 Fields.Add(reader.GetString(4));
                 Fields.Add(reader.GetString(5));
+                Fields.Add(reader.GetInt32(6).ToString());
             }
             return Fields;
         }
@@ -123,6 +126,14 @@ namespace TP1_ASP.NET
             }
 
             return "";
+        }
+
+        public void Connecter()
+        {
+        }
+
+        public void Deconnecter()
+        {
         }
     }
 

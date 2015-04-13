@@ -20,6 +20,18 @@ namespace TP1_ASP.NET
                 login.UserID = long.Parse(Session["Selected_ID"].ToString());
                 login.IPAdress = GetUserIP();
                 Session["Header"] = "Index...";
+
+                // Mettre connecter a true
+                PersonnesTable user = new PersonnesTable((String)Application["MainDB"], this);
+
+                if (user.SelectByID((String)Session["Selected_ID"]))
+                {
+                    List<string> Fields = user.LoadFields((String)Session["Selected_ID"]);
+
+                    user.GetValues();
+
+                    user.Connecter();
+                }
             }
         }
 
@@ -41,6 +53,19 @@ namespace TP1_ASP.NET
 
         protected void BTN_Deconnexion_Click(object sender, EventArgs e)
         {
+            // Mettre connecter a true
+            PersonnesTable user = new PersonnesTable((String)Application["MainDB"], this);
+            Session["Users"] = user;
+
+            if (user.SelectByID((String)Session["Selected_ID"]))
+            {
+                List<string> Fields = user.LoadFields((String)Session["Selected_ID"]);
+
+                user.GetValues();
+
+                user.Deconnecter();
+            }
+
             login.LogoutDate = DateTime.Now;
             login.Insert();
 
@@ -48,6 +73,7 @@ namespace TP1_ASP.NET
             Session["SelectedUserName"] = null;
 
             Response.Redirect("Login1.aspx");
+
         }
 
         public string GetUserIP()
