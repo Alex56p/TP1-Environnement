@@ -616,7 +616,10 @@ namespace SqlExpressUtilities
                     // Insertion des données
                     tr = new TableRow();
                     tr.CssClass = "grid";
-                    InsertionStatut(tr, "En Ligne");
+                    if (reader.GetInt32(6) == 1)
+                        InsertionStatut(tr, "En ligne");
+                    else
+                        InsertionStatut(tr, "Hors ligne");
                     InsertionUserName(tr, reader.GetString(2));
                     InsertionFullName(tr, reader.GetString(1));
                     InsertionCourriel(tr, reader.GetString(4));
