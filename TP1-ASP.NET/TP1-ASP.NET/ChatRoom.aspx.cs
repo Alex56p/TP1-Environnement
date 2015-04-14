@@ -20,9 +20,9 @@ namespace TP1_ASP.NET
         {
             
             Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
-            tm.User_ID = long.Parse(Session["Selected_ID"].ToString());
-            tm.Thread_ID = long.Parse(Session["Selected_Thread"].ToString());
-            tm.Date_of_Creation = DateTime.Now.ToShortDateString();
+            //tm.User_ID = long.Parse(Session["Selected_ID"].ToString());
+            //tm.Thread_ID = long.Parse(Session["Selected_Thread"].ToString());
+            //tm.Date_of_Creation = DateTime.Now.ToShortDateString();
             tm.Message = TB_Text.Text;
 
             tm.Insert();

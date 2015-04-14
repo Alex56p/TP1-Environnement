@@ -25,16 +25,16 @@ namespace TP1_ASP.NET
 
         public override void GetValues()
         {
-           ID = long.Parse(FieldsValues[0]);
-           Thread_ID = long.Parse(FieldsValues[1]);
-           User_ID = long.Parse(FieldsValues[2]);
-           Date_of_Creation = FieldsValues[3];
+           //ID = long.Parse(FieldsValues[0]);
+           //Thread_ID = long.Parse(FieldsValues[1]);
+           //User_ID = long.Parse(FieldsValues[2]);
+           //Date_of_Creation = FieldsValues[3];
            Message = FieldsValues[4];
         }
 
         public override void Insert()
         {
-            InsertRecord(Thread_ID, User_ID, Date_of_Creation, Message);
+            InsertRecord(Message);
         }
 
         public override void Update()

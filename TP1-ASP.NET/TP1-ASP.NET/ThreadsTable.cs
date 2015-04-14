@@ -32,14 +32,12 @@ namespace TP1_ASP.NET
 
         public override void Insert()
         {
-            id = int.Parse(getIDByCreator(creator));
-            InsertRecord(id, creator, Title, Date_of_Creation);
+            InsertRecord(creator, Title, Date_of_Creation);
         }
 
         public override void Update()
         {
-            id = int.Parse(getIDByCreator(creator));
-            UpdateRecord(id, creator, Title, Date_of_Creation);
+            UpdateRecord(creator, Title, Date_of_Creation);
         }
 
 

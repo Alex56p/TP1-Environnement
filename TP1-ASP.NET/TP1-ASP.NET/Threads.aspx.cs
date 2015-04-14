@@ -45,7 +45,7 @@ namespace TP1_ASP.NET
 
         protected void BTN_Retour_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Profil1.aspx");
+            Response.Redirect("Index1.aspx");
         }
     }
 }
