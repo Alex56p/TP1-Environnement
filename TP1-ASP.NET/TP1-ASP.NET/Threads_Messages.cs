@@ -42,39 +42,39 @@ namespace TP1_ASP.NET
            UpdateRecord(Thread_ID, User_ID, Date_of_Creation, Message);
         }
 
-        public Table ShowMessages(String Thread)
+        public void ShowMessages(String Thread, Table t)
         {
             SqlDataReader reader = FillReaderChat(Thread.ToString());
 
             if(reader.HasRows)
             {
-                Table t = new Table();
                 while(reader.Read())
                 {
-                    TableRow tr = new TableRow();
-                    tr.CssClass = "grid";
-
-                    //Image
-                    TableCell picture = new TableCell();
-                    picture.CssClass = "ChatImage";
-                    Image img = new Image();
-                    img.ImageUrl = "Avatars/" + GetAvatar(User_ID.ToString()) + ".png";
-                    picture.Controls.Add(img);
-
-                    //Text
-                    TableCell TextMessage = new TableCell();
-                    TextMessage.Text = reader.GetString(4);
-
-                    tr.Controls.Add(picture);
-                    tr.Controls.Add(TextMessage);
-                    t.Controls.Add(tr);
+                    AddMessage(t, reader.GetString(4), reader.GetInt64(2));
                 }
-
-                EndQuerySQL();
-                return t;
             }
             EndQuerySQL();
-            return null;
+        }
+
+        public void AddMessage(Table t, string Message, long user)
+        {
+            TableRow tr = new TableRow();
+            tr.CssClass = "grid";
+
+            //Image
+            TableCell picture = new TableCell();
+            picture.CssClass = "ChatImage";
+            Image img = new Image();
+            img.ImageUrl = "Avatars/" + GetAvatar(user.ToString()) + ".png";
+            picture.Controls.Add(img);
+
+            //Text
+            TableCell TextMessage = new TableCell();
+            TextMessage.Text = Message;
+
+            tr.Controls.Add(picture);
+            tr.Controls.Add(TextMessage);
+            t.Controls.Add(tr);
         }
         public string GetAvatar(string ID)
         {

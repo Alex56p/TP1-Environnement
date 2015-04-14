@@ -6,8 +6,9 @@
         <table>
             <tr>
                
-                <asp:UpdatePanel ID="Panel_Chat" runat="server"> 
+                <asp:UpdatePanel ID="Panel_Chat"  UpdateMode="Conditional" runat="server"> 
                     <ContentTemplate>
+                        <asp:Table ID="Chat" runat="server"></asp:Table>
                     </ContentTemplate>
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="BTN_Envoyer" EventName="Click" />
