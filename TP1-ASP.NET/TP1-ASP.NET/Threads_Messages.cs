@@ -25,16 +25,16 @@ namespace TP1_ASP.NET
 
         public override void GetValues()
         {
-           //ID = long.Parse(FieldsValues[0]);
-           //Thread_ID = long.Parse(FieldsValues[1]);
-           //User_ID = long.Parse(FieldsValues[2]);
-           //Date_of_Creation = FieldsValues[3];
+           ID = long.Parse(FieldsValues[0]);
+           Thread_ID = long.Parse(FieldsValues[1]);
+           User_ID = long.Parse(FieldsValues[2]);
+           Date_of_Creation = FieldsValues[3];
            Message = FieldsValues[4];
         }
 
         public override void Insert()
         {
-            InsertRecord(Message);
+            InsertRecord(Thread_ID, User_ID, Date_of_Creation, Message);
         }
 
         public override void Update()
@@ -42,12 +42,13 @@ namespace TP1_ASP.NET
            UpdateRecord(Thread_ID, User_ID, Date_of_Creation, Message);
         }
 
-        public void ShowMessages()
+        public Table ShowMessages(String Thread)
         {
-            SqlDataReader reader = FillReaderChat(ID.ToString());
+            SqlDataReader reader = FillReaderChat(Thread.ToString());
 
             if(reader.HasRows)
             {
+                Table t = new Table();
                 while(reader.Read())
                 {
                     TableRow tr = new TableRow();
@@ -63,8 +64,17 @@ namespace TP1_ASP.NET
                     //Text
                     TableCell TextMessage = new TableCell();
                     TextMessage.Text = reader.GetString(4);
+
+                    tr.Controls.Add(picture);
+                    tr.Controls.Add(TextMessage);
+                    t.Controls.Add(tr);
                 }
+
+                EndQuerySQL();
+                return t;
             }
+            EndQuerySQL();
+            return null;
         }
         public string GetAvatar(string ID)
         {
@@ -75,7 +85,7 @@ namespace TP1_ASP.NET
                 QuerySQL("SELECT * FROM " + SQLTableName + " WHERE ID = " + ID);
                 return read;
             }
-
+            EndQuerySQL();
             return "";
         }
 

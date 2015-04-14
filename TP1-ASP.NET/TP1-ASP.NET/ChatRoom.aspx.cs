@@ -12,19 +12,19 @@ namespace TP1_ASP.NET
         protected void Page_Load(object sender, EventArgs e)
         {
             //TEMPORAIRE
-
             Session["Selected_Thread"] = 1;
+            if(!this.IsPostBack)
+                AfficherMessages();
         }
 
         protected void BTN_Envoyer_Click(object sender, EventArgs e)
         {
-            
-            Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
-            //tm.User_ID = long.Parse(Session["Selected_ID"].ToString());
-            //tm.Thread_ID = long.Parse(Session["Selected_Thread"].ToString());
-            //tm.Date_of_Creation = DateTime.Now.ToShortDateString();
+            TB_Text.Text = "";
+            Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);  
+            tm.Thread_ID = long.Parse(Session["Selected_Thread"].ToString());
+            tm.User_ID = long.Parse(Session["Selected_ID"].ToString());
+            tm.Date_of_Creation = DateTime.Now.ToShortDateString();
             tm.Message = TB_Text.Text;
-
             tm.Insert();
 
             AfficherMessages();
@@ -32,8 +32,11 @@ namespace TP1_ASP.NET
 
         private void AfficherMessages()
         {
+            Panel_Chat.ContentTemplateContainer.Controls.Clear();
             Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
-            tm.ShowMessages();
+            Table t = tm.ShowMessages(Session["Selected_Thread"].ToString());
+            t.ID = "Chat";
+            Panel_Chat.ContentTemplateContainer.Controls.Add(t);
         }
     }
 }

@@ -177,6 +177,7 @@ namespace SqlExpressUtilities
             {
                 yeah = reader.GetInt64(0);
             }
+            EndQuerySQL();
             return yeah.ToString();
         }
 
@@ -238,7 +239,7 @@ namespace SqlExpressUtilities
 
         public SqlDataReader FillReaderChat(string UserID)
         {
-            string sqlCommand = "SELECT * FROM " + SQLTableName + " WHERE ID = " + UserID;
+            string sqlCommand = "SELECT * FROM " + SQLTableName + " WHERE THREAD_ID = " + UserID;
 
             // instancier l'objet de collection
             connection = new SqlConnection(connexionString);
