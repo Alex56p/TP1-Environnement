@@ -6,14 +6,14 @@
         <table>
             <tr>
                
-                <asp:UpdatePanel ID="Panel_Chat"  UpdateMode="Conditional" runat="server"> 
-                    <ContentTemplate>
+               <%-- <asp:UpdatePanel ID="Panel_Chat"  UpdateMode="Conditional" runat="server"> 
+                    <ContentTemplate>--%>
                         <asp:Table ID="Chat" runat="server"></asp:Table>
-                    </ContentTemplate>
+                    <%--</ContentTemplate>
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="BTN_Envoyer" EventName="Click" />
                     </Triggers>
-                </asp:UpdatePanel>
+                </asp:UpdatePanel>--%>
             </tr>
             <tr>
                 <td>
