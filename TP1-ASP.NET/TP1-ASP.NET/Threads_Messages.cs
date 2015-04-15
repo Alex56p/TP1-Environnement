@@ -89,6 +89,7 @@ namespace TP1_ASP.NET
                 EndQuerySQL();
                 return read;
             }
+            EndQuerySQL();
             return "";
         }
 

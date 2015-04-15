@@ -52,7 +52,6 @@ namespace TP1_ASP.NET
                 String avatar_ID = "";
                 if (FU_Avatar.FileName != "")
                 {
-                    DeleteImage(personnes.Avatar);
                     avatar_ID = Guid.NewGuid().ToString();
                     Avatar_Path = Server.MapPath(@"~\Avatars\") + avatar_ID + ".png";
                     FU_Avatar.SaveAs(Avatar_Path);

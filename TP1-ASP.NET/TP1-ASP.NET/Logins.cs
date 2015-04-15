@@ -71,6 +71,7 @@ namespace TP1_ASP.NET
                     InsertionDuree(tr, reader.GetDateTime(2), reader.GetDateTime(3));
                     Grid.Rows.Add(tr);
                 }
+                EndQuerySQL();
             }            
                 PN_GridView.Controls.Clear();
             if (Grid != null)

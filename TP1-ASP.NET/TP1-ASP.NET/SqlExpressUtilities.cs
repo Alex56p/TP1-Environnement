@@ -264,7 +264,8 @@ namespace SqlExpressUtilities
         public void EndQuerySQL()
         {
             // Fermer la connection
-            connection.Close();
+            if(connection.State != System.Data.ConnectionState.Closed)
+                connection.Close();
             // Débloquer l'objet Page.Application afin que d'autres session puissent
             // accéder à leur tour à la base de données
             Page.Application.UnLock();
@@ -650,6 +651,7 @@ namespace SqlExpressUtilities
                     Grid.Rows.Add(tr);
                 }
             }
+            EndQuerySQL();
             PN_GridView.Controls.Clear();
             if (Grid != null)
                 PN_GridView.Controls.Add(Grid);
