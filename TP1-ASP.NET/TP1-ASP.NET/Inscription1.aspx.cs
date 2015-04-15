@@ -53,7 +53,7 @@ namespace TP1_ASP.NET
                 }
                 else
                 {
-                    Personnes.Avatar = Personnes.GetAvatar(Session["Selected_ID"].ToString());
+                    Personnes.Avatar = "Anonymous.png";
                 }
                 Personnes.Connecte = 1;
                 Personnes.Insert();
