@@ -25,5 +25,25 @@ namespace TP1_ASP.NET
         CdnDebugPath = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.4.1.js"
     });
         }
+
+        void Session_End(Object sender, EventArgs E)
+        {
+            PersonnesTable user = new PersonnesTable((String)Application["MainDB"], HttpContext.Current.CurrentHandler as System.Web.UI.Page);
+            Session["Users"] = user;
+
+            if (user.SelectByID((String)Session["Selected_ID"]))
+            {
+                List<string> Fields = user.LoadFields((String)Session["Selected_ID"]);
+                user.GetValues();
+                user.Deconnecter();
+            }
+            Logins login = new Logins((String)Application["MainDB"], HttpContext.Current.CurrentHandler as System.Web.UI.Page);
+            login.LogoutDate = DateTime.Now;
+            login.Insert();
+            Session["Selected_ID"] = null;
+            Session["SelectedUserName"] = null;
+
+            Response.Redirect("Login1.aspx");
+        }
     }
 }

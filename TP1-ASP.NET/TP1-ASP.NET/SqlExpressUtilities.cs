@@ -661,6 +661,7 @@ namespace SqlExpressUtilities
         {
             TableCell td = new TableCell();
             Image img = new Image();
+            img.CssClass = "ChatImage";
             img.ImageUrl = p;
             td.CssClass = "grid";
             td.Controls.Add(img);
@@ -690,7 +691,12 @@ namespace SqlExpressUtilities
         {
             TableCell td = new TableCell();
             td.CssClass = "grid";
-            td.Text = p;
+            HyperLink hl = new HyperLink();
+            hl.ID = "HyperLink1";
+            hl.Attributes.Add("href", "mailto:" + p);
+            hl.NavigateUrl = "mailto:" + p;
+            hl.Text = p;
+            td.Controls.Add(hl);
 
             tr.Cells.Add(td);
         }
@@ -699,7 +705,7 @@ namespace SqlExpressUtilities
         {
             TableCell td = new TableCell();
             Image img = new Image();
-            img.CssClass = "Avatar";
+            img.CssClass = "ChatImage";
             img.ImageUrl = "/Avatars/" + p;
             td.CssClass = "Grid";
             td.Controls.Add(img);

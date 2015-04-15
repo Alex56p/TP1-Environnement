@@ -15,6 +15,10 @@ namespace TP1_ASP.NET
         bool valid = true;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Selected_ID"] == null)
+            {
+                Response.Redirect("Login1.aspx");
+            }
             if (!Page.IsPostBack)
             {
                 Timer = Index1.SessionTime;
@@ -27,7 +31,7 @@ namespace TP1_ASP.NET
         protected void CV_TB_UserName_ServerValidate(object source, ServerValidateEventArgs args)
         {
             PersonnesTable personne = new PersonnesTable((string)Application["MainDB"], this);
-            if (TB_Username.Text != Session["Selected_UserName"].ToString())
+            if (TB_Username.Text.ToUpper() != Session["Selected_UserName"].ToString().ToUpper())
             {
                 args.IsValid = !personne.Exist(TB_Username.Text);
                 if (valid)
@@ -42,6 +46,7 @@ namespace TP1_ASP.NET
             {
 
                 PersonnesTable personnes = (PersonnesTable)Session["Users"];
+                personnes.GetValues();
                 personnes.FullName = TB_Nom.Text;
                 Session["Selected_UserName"] = TB_Username.Text;
                 personnes.UserName = TB_Username.Text;
@@ -59,7 +64,7 @@ namespace TP1_ASP.NET
                 }
                 else
                 {
-                    personnes.Avatar = path;
+                    personnes.Avatar = personnes.GetAvatar(Session["Selected_ID"].ToString());
                 }
 
                 personnes.Update();

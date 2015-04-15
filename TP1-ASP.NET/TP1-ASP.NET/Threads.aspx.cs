@@ -11,7 +11,10 @@ namespace TP1_ASP.NET
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["Selected_ID"] == null)
+            {
+                Response.Redirect("Login1.aspx");
+            }
         }
 
         protected void BTN_Nouveau_Click(object sender, EventArgs e)

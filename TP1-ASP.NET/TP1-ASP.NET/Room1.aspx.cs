@@ -12,6 +12,10 @@ namespace TP1_ASP.NET
         static int Timer;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Selected_ID"] == null)
+            {
+                Response.Redirect("Login1.aspx");
+            }
             if (!Page.IsPostBack)
                 Timer = Index1.SessionTime;
 

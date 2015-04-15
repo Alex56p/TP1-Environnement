@@ -156,6 +156,15 @@
                     <asp:Button ID="BTN_Annuler" runat="server" Text="Annuler..." OnClick="BTN_Annuler_Click" />
                 </td>
             </tr>
+            <tr>
+                <td colspan="3" style="text-align: left;">
+                    <asp:ValidationSummary
+                        ID="VGS_Logi"
+                        runat="server"
+                        ValidationGroup="VG_Login"
+                        HeaderText="Résumé des erreurs: &lt;hr/&gt;" />
+                </td>
+            </tr>
         </table>
 
     </div>

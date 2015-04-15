@@ -11,6 +11,10 @@ namespace TP1_ASP.NET
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(Session["Selected_ID"] == null)
+            {
+                Response.Redirect("Login1.aspx");
+            }
             //TEMPORAIRE
             Session["Selected_Thread"] = 1;
             AfficherMessages();

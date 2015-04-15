@@ -83,9 +83,6 @@
                         HeaderText="Résumé des erreurs: &lt;hr/&gt;" />
                 </td>
             </tr>
-
-
-
         </table>
     </div>
 </asp:Content>
