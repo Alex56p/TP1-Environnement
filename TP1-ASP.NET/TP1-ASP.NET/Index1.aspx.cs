@@ -11,8 +11,8 @@ namespace TP1_ASP.NET
     {
         static public int SessionTime = 1 * 60;
         static public Logins login;
-        static int Timer;
         static public PersonnesTable userOnline;
+        static public bool Connecte = false;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,9 +20,8 @@ namespace TP1_ASP.NET
             {
                 Response.Redirect("Login1.aspx");
             }
-            if (!Page.IsPostBack)
+            if (!Connecte)
             {
-                Timer = SessionTime;
                 login = new Logins((string)Application["MainDB"], this);
                 login.LoginDate = DateTime.Now;
                 login.UserID = long.Parse(Session["Selected_ID"].ToString());
@@ -40,6 +39,8 @@ namespace TP1_ASP.NET
 
                     userOnline.Connecter();
                 }
+
+                Connecte = true;
             }
         }
 
@@ -61,27 +62,8 @@ namespace TP1_ASP.NET
 
         protected void BTN_Deconnexion_Click(object sender, EventArgs e)
         {
-            // Mettre connecter a true
-            PersonnesTable user = new PersonnesTable((String)Application["MainDB"], this);
-            Session["Users"] = user;
-
-            if (user.SelectByID((String)Session["Selected_ID"]))
-            {
-                List<string> Fields = user.LoadFields((String)Session["Selected_ID"]);
-
-                user.GetValues();
-
-                user.Deconnecter();
-            }
-
-            login.LogoutDate = DateTime.Now;
-            login.Insert();
-
-            Session["Selected_ID"] = null;
-            Session["SelectedUserName"] = null;
-
+            Session.Abandon();
             Response.Redirect("Login1.aspx");
-
         }
 
         public string GetUserIP()
