@@ -33,7 +33,7 @@ namespace TP1_ASP.NET
         private void AfficherUsagers()
         {
             ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
-            Table_Usagers = t.getUsers();
+            t.getUsers(Panel_Usagers);
         }
 
         protected void BTN_Nouveau_Click(object sender, EventArgs e)

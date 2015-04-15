@@ -56,7 +56,7 @@ namespace TP1_ASP.NET
             return threads;
         }
 
-        internal Table getUsers()
+        internal void getUsers(Panel panel)
         {
             Table table = new Table();
 
@@ -75,7 +75,7 @@ namespace TP1_ASP.NET
             }
             EndQuerySQL();
 
-           return table;
+            panel.Controls.Add(table);
         }
 
         private void InsertionPhoto(TableRow tr, String Avatar)
