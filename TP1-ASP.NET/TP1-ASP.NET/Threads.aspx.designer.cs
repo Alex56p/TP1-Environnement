@@ -31,13 +31,13 @@ namespace TP1_ASP.NET {
         protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
-        /// Contrôle ListBox1.
+        /// Contrôle LB_Threads.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox ListBox1;
+        protected global::System.Web.UI.WebControls.ListBox LB_Threads;
         
         /// <summary>
         /// Contrôle TB_Titre.
@@ -76,13 +76,13 @@ namespace TP1_ASP.NET {
         protected global::System.Web.UI.WebControls.Button BTN_Modifier;
         
         /// <summary>
-        /// Contrôle Panel2.
+        /// Contrôle Table_Usagers.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel2;
+        protected global::System.Web.UI.WebControls.Table Table_Usagers;
         
         /// <summary>
         /// Contrôle BTN_Effacer.

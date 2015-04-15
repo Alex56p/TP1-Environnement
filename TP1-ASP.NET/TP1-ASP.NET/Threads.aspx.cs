@@ -15,6 +15,25 @@ namespace TP1_ASP.NET
             {
                 Response.Redirect("Login1.aspx");
             }
+
+            AfficherThreads();
+            AfficherUsagers();
+        }
+
+        private void AfficherThreads()
+        {
+            ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
+            List<String> threads = t.getThreads();
+            for(int i = 0; i < threads.Count;i++)
+            {
+                LB_Threads.Items.Add(threads[i]);
+            }
+        }
+
+        private void AfficherUsagers()
+        {
+            ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
+            Table_Usagers = t.getUsers();
         }
 
         protected void BTN_Nouveau_Click(object sender, EventArgs e)

@@ -12,7 +12,7 @@
         </tr>
         <tr>
             <td>
-                <asp:ListBox ID="ListBox1" runat="server" Height="190px" Width="150px"></asp:ListBox>
+                <asp:ListBox ID="LB_Threads" runat="server" Height="190px" Width="150px"></asp:ListBox>
             </td>
             <td>
                 <asp:TextBox ID="TB_Titre" runat="server"></asp:TextBox>
@@ -32,7 +32,7 @@
                 <asp:Button ID="BTN_Modifier" runat="server" Text="Modifier" OnClick="BTN_Modifier_Click" Width="70px"/>
             </td>
             <td>
-                <asp:Panel ID="Panel2" runat="server" Height="16px"></asp:Panel>
+                <asp:Table ID="Table_Usagers" runat="server"></asp:Table>
             </td>
         </tr>
         <tr>
