@@ -1,7 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="Index1.aspx.cs" Inherits="TP1_ASP.NET.Index1" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <asp:UpdatePanel ID="Panel_Chat"  UpdateMode="Conditional" runat="server"> 
+                    <ContentTemplate>
+                        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+            <asp:Timer ID="SessionTimeOut" runat="server" Interval="1000" OnTick="SessionTimeOut_Tick"></asp:Timer>
+                        </ContentTemplate>
+        </asp:UpdatePanel>
     <div>
+
+            
             <table>
                 <tr>
                     <td>

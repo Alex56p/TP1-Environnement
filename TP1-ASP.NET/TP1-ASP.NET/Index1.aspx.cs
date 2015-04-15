@@ -9,12 +9,15 @@ namespace TP1_ASP.NET
 {
     public partial class Index1 : System.Web.UI.Page
     {
-        static Logins login;
+        static public int SessionTime = 5;
+        static public Logins login;
+        static int Timer; 
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
+                Timer = SessionTime;
                 login = new Logins((string)Application["MainDB"], this);
                 login.LoginDate = DateTime.Now;
                 login.UserID = long.Parse(Session["Selected_ID"].ToString());
@@ -97,6 +100,37 @@ namespace TP1_ASP.NET
         {
             Session["Header"] = "Gérer mes discussions...";
             Response.Redirect("Threads.aspx");
+        }
+
+        protected void SessionTimeOut_Tick(object sender, EventArgs e)
+        {
+            if(Timer == 0)
+            {
+                // Mettre connecter a true
+                PersonnesTable user = new PersonnesTable((String)Application["MainDB"], this);
+                Session["Users"] = user;
+
+                if (user.SelectByID((String)Session["Selected_ID"]))
+                {
+                    List<string> Fields = user.LoadFields((String)Session["Selected_ID"]);
+
+                    user.GetValues();
+
+                    user.Deconnecter();
+                }
+
+                login.LogoutDate = DateTime.Now;
+                login.Insert();
+
+                Session["Selected_ID"] = null;
+                Session["SelectedUserName"] = null;
+
+                Response.Redirect("Login1.aspx");
+            }
+            else
+            {
+                 Timer--;
+            }
         }
     }
 }

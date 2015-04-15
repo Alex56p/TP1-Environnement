@@ -10,12 +10,14 @@ namespace TP1_ASP.NET
 {
     public partial class Profil1 : System.Web.UI.Page
     {
+        static int Timer;
         public string path;
         bool valid = true;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
+                Timer = Index1.SessionTime;
                 LoadForm();
                 Session["Header"] = "Profil...";
             }
@@ -121,6 +123,37 @@ namespace TP1_ASP.NET
             {
                 valid = false;
                 args.IsValid = false;
+            }
+        }
+
+        protected void SessionTimeOut_Tick(object sender, EventArgs e)
+        {
+            if (Timer == 0)
+            {
+                // Mettre connecter a true
+                PersonnesTable user = new PersonnesTable((String)Application["MainDB"], this);
+                Session["Users"] = user;
+
+                if (user.SelectByID((String)Session["Selected_ID"]))
+                {
+                    List<string> Fields = user.LoadFields((String)Session["Selected_ID"]);
+
+                    user.GetValues();
+
+                    user.Deconnecter();
+                }
+
+                Index1.login.LogoutDate = DateTime.Now;
+                Index1.login.Insert();
+
+                Session["Selected_ID"] = null;
+                Session["SelectedUserName"] = null;
+
+                Response.Redirect("Login1.aspx");
+            }
+            else
+            {
+                Timer--;
             }
         }
     }
