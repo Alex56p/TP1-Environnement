@@ -30,6 +30,20 @@ namespace TP1_ASP.NET
             Date_of_Creation = DateTime.Parse(FieldsValues[3]);
         }
 
+        public List<string> LoadFields(string ID)
+        {
+            List<string> Fields = new List<string>();
+            QuerySQL("SELECT * FROM " + SQLTableName + " WHERE ID =" + ID);
+            if (reader.Read())
+            {
+                Fields.Add(reader.GetString(1));
+                Fields.Add(reader.GetString(2));
+                Fields.Add(reader.GetString(3));
+            }
+            EndQuerySQL();
+            return Fields;
+        }
+
         public override void Insert()
         {
             InsertRecord(creator, Title, Date_of_Creation);
@@ -37,7 +51,7 @@ namespace TP1_ASP.NET
 
         public override void Update()
         {
-            UpdateRecord(creator, Title, Date_of_Creation);
+            UpdateRecord(id,creator, Title, Date_of_Creation);
         }
 
         internal List<string> getThreads()

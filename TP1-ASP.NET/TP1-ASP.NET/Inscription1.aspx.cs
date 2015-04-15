@@ -67,7 +67,7 @@ namespace TP1_ASP.NET
                 Personnes = new PersonnesTable((String)Application["MainDB"], this);
 
                 AddUser();
-                Session["Selected_ID"] = Personnes.getID(TB_Username.Text);
+                Session["Selected_ID"] = Personnes.getIDPersonnes(TB_Username.Text);
                 Session["Selected_UserName"] = TB_Username.Text;
                 Response.Redirect("Index1.aspx");
             }

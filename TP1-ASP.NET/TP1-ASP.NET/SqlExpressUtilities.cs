@@ -153,7 +153,7 @@ namespace SqlExpressUtilities
             return reader.RecordsAffected;
         }
 
-        public string getID(string UserName)
+        public string getIDPersonnes(string UserName)
         {
             string sqlCommand = "SELECT ID FROM PERSONNES WHERE USERNAME = '" + UserName + "'";
             
@@ -168,6 +168,34 @@ namespace SqlExpressUtilities
             Page.Application.Lock();
             // ouvrir la connection avec la bd
             if(connection.State != System.Data.ConnectionState.Open)
+                connection.Open();
+            // éxécuter la requête SQL et récupérer les enregistrements qui en découlent dans l'objet Reader
+            reader = sqlcmd.ExecuteReader();
+
+            long yeah = 1;
+            if (reader.Read())
+            {
+                yeah = reader.GetInt64(0);
+            }
+            EndQuerySQL();
+            return yeah.ToString();
+        }
+
+        public string getIDThreads(string Titre)
+        {
+            string sqlCommand = "SELECT ID FROM THREADS WHERE TITLE = '" + Titre + "'";
+
+            // instancier l'objet de collection
+            connection = new SqlConnection(connexionString);
+            // bâtir l'objet de requête
+            SqlCommand sqlcmd = new SqlCommand(sqlCommand);
+            // affecter l'objet de connection à l'objet de requête
+            sqlcmd.Connection = connection;
+            // bloquer l'objet Page.Application afin d'empêcher d'autres sessions concurentes
+            // d'avoir accès à la base de données concernée par la requête en cours
+            Page.Application.Lock();
+            // ouvrir la connection avec la bd
+            if (connection.State != System.Data.ConnectionState.Open)
                 connection.Open();
             // éxécuter la requête SQL et récupérer les enregistrements qui en découlent dans l'objet Reader
             reader = sqlcmd.ExecuteReader();
@@ -328,6 +356,7 @@ namespace SqlExpressUtilities
         // FieldsValues
         public int UpdateRecord()
         {
+
             String SQL = "UPDATE " + SQLTableName + " ";
             SQL += "SET ";
             int nb_fields = FieldsNames.Count();
@@ -349,6 +378,7 @@ namespace SqlExpressUtilities
         // FieldsValues fournie en paramètre
         public int UpdateRecord(params object[] FieldsValues)
         {
+
             String SQL = "UPDATE " + SQLTableName + " ";
             SQL += "SET ";
             int nb_fields = FieldsNames.Count();

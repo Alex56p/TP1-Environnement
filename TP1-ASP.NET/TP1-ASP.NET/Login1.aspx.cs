@@ -42,7 +42,7 @@ namespace TP1_ASP.NET
             if (Page.IsValid)
             {
                 PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"], this);
-                Session["Selected_ID"] = personnes.getID(TB_UserName.Text);
+                Session["Selected_ID"] = personnes.getIDPersonnes(TB_UserName.Text);
                 Session["Selected_UserName"] = TB_UserName.Text;
                 Session["UserValid"] = true;
                 Session["Bloquer"] = false;
@@ -79,9 +79,9 @@ namespace TP1_ASP.NET
                 eMail.HostPort = 587;
                 eMail.SSLSecurity = true;
 
-                eMail.To = personnes.GetEmail(personnes.getID(TB_UserName.Text));
+                eMail.To = personnes.GetEmail(personnes.getIDPersonnes(TB_UserName.Text));
                 eMail.Subject = "Mot de passe oublié";
-                eMail.Body = "Votre mot de passe est : " + personnes.GetPassword(personnes.getID(TB_UserName.Text));
+                eMail.Body = "Votre mot de passe est : " + personnes.GetPassword(personnes.getIDPersonnes(TB_UserName.Text));
 
                 if (eMail.Send())
                 {
