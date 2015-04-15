@@ -21,10 +21,13 @@ namespace TP1_ASP.NET
                 Session["CurrentUser"] = new PersonnesTable((string)Application["MainDB"], this);
                 Session["UserValid"] = false;
                 Session["Selected_UserName"] = "Anonymous";
+                Session["Selected_ID"] = null;
                 Session["Header"] = "Login...";
             }
             else
             {
+                Session["Selected_UserName"] = "Anonymous";
+                Session["Selected_ID"] = null;
                 if (Session["Bloquer"] != null && bool.Parse(Session["Bloquer"].ToString()))
                 {
                     Response.Redirect("Bloquer1.aspx");
