@@ -72,20 +72,22 @@ namespace TP1_ASP.NET
             TableCell TextMessage = new TableCell();
             TextMessage.Text = Message;
 
-            tr.Controls.Add(picture);
-            tr.Controls.Add(TextMessage);
-            t.Controls.Add(tr);
+            tr.Cells.Add(picture);
+            tr.Cells.Add(TextMessage);
+            t.Rows.Add(tr);
         }
         public string GetAvatar(string ID)
         {
             QuerySQL("Select Avatar FROM PERSONNES Where ID = " + ID);
+            
             if (reader.Read())
             {
                 string read = reader.GetString(0);
+                EndQuerySQL();
                 QuerySQL("SELECT * FROM " + SQLTableName + " WHERE ID = " + ID);
+                EndQuerySQL();
                 return read;
             }
-            EndQuerySQL();
             return "";
         }
 

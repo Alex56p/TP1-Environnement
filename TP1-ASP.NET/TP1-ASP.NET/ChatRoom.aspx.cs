@@ -13,8 +13,7 @@ namespace TP1_ASP.NET
         {
             //TEMPORAIRE
             Session["Selected_Thread"] = 1;
-            if(!IsPostBack)
-                AfficherMessages();
+            AfficherMessages();
         }
 
         protected void BTN_Envoyer_Click(object sender, EventArgs e)
@@ -38,10 +37,7 @@ namespace TP1_ASP.NET
 
         private void AjouterMessage()
         {
-            Chat.Controls.Clear();
-            Panel_Chat.Update();
             Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
-            tm.ShowMessages(Session["Selected_Thread"].ToString(), Chat);
             tm.AddMessage(Chat, TB_Text.Text, long.Parse(Session["Selected_ID"].ToString()));
         }
     }
