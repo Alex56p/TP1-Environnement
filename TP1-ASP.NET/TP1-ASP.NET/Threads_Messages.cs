@@ -65,7 +65,8 @@ namespace TP1_ASP.NET
             TableCell picture = new TableCell();
             picture.CssClass = "ChatImage";
             Image img = new Image();
-            img.ImageUrl = "Avatars/" + GetAvatar(user.ToString()) + ".png";
+            img.CssClass = "ChatImage";
+            img.ImageUrl = "Avatars/" + GetAvatar(user.ToString());
             picture.Controls.Add(img);
 
             //Text

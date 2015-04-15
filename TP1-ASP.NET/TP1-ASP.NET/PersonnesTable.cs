@@ -102,6 +102,19 @@ namespace TP1_ASP.NET
             return "";
         }
 
+        internal string GetFullName(string p)
+        {
+            QuerySQL("Select FullName FROM " + SQLTableName + " Where UserName = " + p);
+            if (reader.Read())
+            {
+                string read = reader.GetString(0);
+                QuerySQL("SELECT * FROM " + SQLTableName + " WHERE ID = " + ID);
+                return read;
+            }
+
+            return "";
+        }
+
         public string GetEmail(string ID)
         {
             QuerySQL("Select Email FROM " + SQLTableName + " Where ID = " + ID);
@@ -139,6 +152,8 @@ namespace TP1_ASP.NET
             Connecte = 0;
             Update();
         }
+
+        
     }
 
 }

@@ -89,7 +89,7 @@ namespace TP1_ASP.NET
                 if (Fields.ElementAt(4) != "")
                 {
                     path = Fields.ElementAt(4);
-                    IMG_Avatar.ImageUrl = "Avatars/" + Fields.ElementAt(4) + ".png";
+                    IMG_Avatar.ImageUrl = "Avatars/" + Fields.ElementAt(4);
                 }
                 else
                     IMG_Avatar.ImageUrl = "Images/Anonymous.png";
