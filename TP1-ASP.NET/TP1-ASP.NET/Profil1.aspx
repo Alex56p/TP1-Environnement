@@ -4,11 +4,6 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server" />
     <div id="Inscription">
         <div id="Avatar">
-            <asp:UpdatePanel ID="Panel_Chat"  UpdateMode="Conditional" runat="server"> 
-                    <ContentTemplate>
-            <asp:Timer ID="SessionTimeOut" runat="server" Interval="1000" OnTick="SessionTimeOut_Tick"></asp:Timer>
-                        </ContentTemplate>
-        </asp:UpdatePanel>
             <asp:Image ID="IMG_Avatar" runat="server" CssClass="Avatar" ImageUrl="~/Images/Anonymous.png" />
             <asp:FileUpload ID="FU_Avatar" runat="server" CssClass="Avatar" onchange="loadFile(event)" ClientIDMode="Static" />
             <script>

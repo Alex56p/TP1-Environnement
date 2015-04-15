@@ -5,7 +5,6 @@
         <asp:UpdatePanel ID="Panel_Chat" UpdateMode="Conditional" runat="server">
             <ContentTemplate>
                 <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-                <asp:Timer ID="SessionTimeOut" runat="server" Interval="1000" OnTick="SessionTimeOut_Tick"></asp:Timer>
                 <asp:Panel ID="PN_ListUsers" runat="server"></asp:Panel>
             </ContentTemplate>
         </asp:UpdatePanel>
