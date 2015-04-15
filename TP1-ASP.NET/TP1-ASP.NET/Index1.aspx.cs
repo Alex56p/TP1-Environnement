@@ -11,7 +11,8 @@ namespace TP1_ASP.NET
     {
         static public int SessionTime = 1 * 60;
         static public Logins login;
-        static int Timer; 
+        static int Timer;
+        static public PersonnesTable userOnline;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -29,15 +30,15 @@ namespace TP1_ASP.NET
                 Session["Header"] = "Index...";
 
                 // Mettre connecter a true
-                PersonnesTable user = new PersonnesTable((String)Application["MainDB"], this);
+                userOnline = new PersonnesTable((String)Application["MainDB"], this);
 
-                if (user.SelectByID((String)Session["Selected_ID"]))
+                if (userOnline.SelectByID((String)Session["Selected_ID"]))
                 {
-                    List<string> Fields = user.LoadFields((String)Session["Selected_ID"]);
+                    List<string> Fields = userOnline.LoadFields((String)Session["Selected_ID"]);
 
-                    user.GetValues();
+                    userOnline.GetValues();
 
-                    user.Connecter();
+                    userOnline.Connecter();
                 }
             }
         }
@@ -104,37 +105,6 @@ namespace TP1_ASP.NET
         {
             Session["Header"] = "Gérer mes discussions...";
             Response.Redirect("Threads.aspx");
-        }
-
-        protected void SessionTimeOut_Tick(object sender, EventArgs e)
-        {
-            if(Timer == 0)
-            {
-                // Mettre connecter a true
-                PersonnesTable user = new PersonnesTable((String)Application["MainDB"], this);
-                Session["Users"] = user;
-
-                if (user.SelectByID((String)Session["Selected_ID"]))
-                {
-                    List<string> Fields = user.LoadFields((String)Session["Selected_ID"]);
-
-                    user.GetValues();
-
-                    user.Deconnecter();
-                }
-
-                login.LogoutDate = DateTime.Now;
-                login.Insert();
-
-                Session["Selected_ID"] = null;
-                Session["SelectedUserName"] = null;
-
-                Response.Redirect("Login1.aspx");
-            }
-            else
-            {
-                 Timer--;
-            }
         }
     }
 }

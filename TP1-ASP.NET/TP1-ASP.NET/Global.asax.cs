@@ -25,5 +25,26 @@ namespace TP1_ASP.NET
         CdnDebugPath = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.4.1.js"
     });
         }
+
+        public void Session_End()
+        {
+            Application.Lock();
+            // Mettre connecter a true
+            Session["Users"] = Index1.userOnline;
+
+            if (Index1.userOnline.SelectByID((String)Session["Selected_ID"]))
+            {
+                List<string> Fields = Index1.userOnline.LoadFields((String)Session["Selected_ID"]);
+
+                Index1.userOnline.GetValues();
+
+                Index1.userOnline.Deconnecter();
+            }
+
+            Index1.login.LogoutDate = DateTime.Now;
+            Index1.login.Insert();
+
+            Application.UnLock();
+        }
     }
 }
