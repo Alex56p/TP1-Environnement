@@ -15,7 +15,6 @@ namespace TP1_ASP.NET
             {
                 Response.Redirect("Login1.aspx");
             }
-            LB_Threads.Items.Clear();
             AfficherThreads();
             AfficherUsagers();
         }
@@ -57,9 +56,12 @@ namespace TP1_ASP.NET
                 if (threads.SelectByID(threads.getIDThreads(LB_Threads.SelectedItem.ToString())))
                 {
                     threads.GetValues();
+                    threads.Title = TB_Titre.Text;
                     threads.Update();
                 }
             }
+            LB_Threads.Items.Clear();
+            AfficherThreads();
         }
 
         protected void BTN_Effacer_Click(object sender, EventArgs e)
