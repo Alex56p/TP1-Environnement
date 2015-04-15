@@ -55,6 +55,7 @@ namespace TP1_ASP.NET
                 {
                     Personnes.Avatar = Personnes.GetAvatar(Session["Selected_ID"].ToString());
                 }
+                Personnes.Connecte = 1;
                 Personnes.Insert();
             }
         }

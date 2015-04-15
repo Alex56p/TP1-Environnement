@@ -6,9 +6,9 @@
             <ContentTemplate>
                 <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                 <asp:Timer ID="SessionTimeOut" runat="server" Interval="1000" OnTick="SessionTimeOut_Tick"></asp:Timer>
+                <asp:Panel ID="PN_ListUsers" runat="server"></asp:Panel>
             </ContentTemplate>
         </asp:UpdatePanel>
-        <asp:Panel ID="PN_ListUsers" runat="server"></asp:Panel>
         <asp:Button ID="BTN_Retour" runat="server" Text="Retour..." OnClick="BTN_Retour_Click" />
     </div>
 </asp:Content>

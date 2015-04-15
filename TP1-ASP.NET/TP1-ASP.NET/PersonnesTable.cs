@@ -40,7 +40,7 @@ namespace TP1_ASP.NET
 
         public override void Insert()
         {
-            InsertRecord(FullName, UserName, Password, Email, Avatar);
+            InsertRecord(FullName, UserName, Password, Email, Avatar, Connecte);
         }
         public override void Update()
         {
