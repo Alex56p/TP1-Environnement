@@ -32,7 +32,7 @@
                 <asp:Button ID="BTN_Modifier" runat="server" Text="Modifier" OnClick="BTN_Modifier_Click" Width="70px"/>
             </td>
             <td>
-                <asp:Table ID="Table_Usagers" runat="server"></asp:Table>
+                <asp:Panel ID="Panel_Usagers" runat="server"></asp:Panel>
             </td>
         </tr>
         <tr>

@@ -15,7 +15,7 @@ namespace TP1_ASP.NET
             {
                 Response.Redirect("Login1.aspx");
             }
-
+            LB_Threads.Items.Clear();
             AfficherThreads();
             AfficherUsagers();
         }
@@ -33,7 +33,7 @@ namespace TP1_ASP.NET
         private void AfficherUsagers()
         {
             ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
-            Table_Usagers = t.getUsers();
+            t.getUsers(Panel_Usagers);
         }
 
         protected void BTN_Nouveau_Click(object sender, EventArgs e)
@@ -50,13 +50,15 @@ namespace TP1_ASP.NET
 
         protected void BTN_Modifier_Click(object sender, EventArgs e)
         {
-            if (TB_Titre.Text != "")
+            if (TB_Titre.Text != "" && LB_Threads.SelectedItem != null)
             {
-                ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
-                t.creator = int.Parse(Session["Selected_ID"].ToString());
-                t.Title = TB_Titre.Text;
-                t.Date_of_Creation = DateTime.Now;
-                t.Update();
+                ThreadsTable threads = new ThreadsTable((String)Application["MainDB"], this);
+
+                if (threads.SelectByID(threads.getIDThreads(LB_Threads.SelectedItem.ToString())))
+                {
+                    threads.GetValues();
+                    threads.Update();
+                }
             }
         }
 
