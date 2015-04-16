@@ -9,13 +9,17 @@ namespace TP1_ASP.NET
 {
     public partial class main : System.Web.UI.MasterPage
     {
+       TimeSpan chrono;
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            Response.AppendHeader("Refresh", Convert.ToString(Session.Timeout * 60 + 1) + "; URL=Login1.aspx");
+            Response.AppendHeader("Refresh", Convert.ToString((Session.Timeout * 60) + 10) + "; URL=Login1.aspx");
 
             if (!Page.IsPostBack)
-                Session.Timeout = 1;
+            {
+                //Session.Timeout = 1;
+               chrono = new TimeSpan(0, 0, 10);
+            }
+            
 
             if (Session["Header"] != null)
                 LB_Header.Text = Session["Header"].ToString();
@@ -28,6 +32,13 @@ namespace TP1_ASP.NET
                 Img_Username.ImageUrl = "Avatars/" + personnes.GetAvatar(Session["Selected_ID"].ToString());
             else
                 Img_Username.ImageUrl = "Images/Anonymous.png";
+        }
+
+        protected void Chrono_Tick(object sender, EventArgs e)
+        {
+           chrono.Subtract(new TimeSpan(0, 0, 1));
+           if (chrono == new TimeSpan(0, 0, 0))
+              Session.Abandon();
         }
     }
 }

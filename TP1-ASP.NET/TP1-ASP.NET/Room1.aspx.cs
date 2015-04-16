@@ -16,8 +16,12 @@ namespace TP1_ASP.NET
                 Response.Redirect("Login1.aspx");
             }
 
-            Session["Header"] = "Room...";
-            ListUsers();
+            if(!IsPostBack)
+            {
+               Session["Header"] = "Room...";
+               ListUsers();
+            }
+               
         }
         public void ListUsers()
         {
@@ -31,6 +35,11 @@ namespace TP1_ASP.NET
         protected void BTN_Retour_Click(object sender, EventArgs e)
         {
             Response.Redirect("Index1.aspx");
+        }
+
+        protected void Timer1_Tick(object sender, EventArgs e)
+        {
+           ListUsers();
         }
     }
 }
