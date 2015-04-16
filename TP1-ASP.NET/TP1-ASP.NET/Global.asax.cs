@@ -17,13 +17,13 @@ namespace TP1_ASP.NET
             Application["MainDB"] = @"Data Source=(LocalDB)\v11.0;AttachDbFilename='" + DB_Path + "';Integrated Security=True";
 
             ScriptManager.ScriptResourceMapping.AddDefinition("jquery",
-            new ScriptResourceDefinition
-            {
-                Path = "~/scripts/jquery-1.7.2.min.js",
-                DebugPath = "~/scripts/jquery-1.7.2.min.js",
-                CdnPath = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.4.1.min.js",
-                CdnDebugPath = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.4.1.js"
-            });
+    new ScriptResourceDefinition
+    {
+        Path = "~/scripts/jquery-1.7.2.min.js",
+        DebugPath = "~/scripts/jquery-1.7.2.min.js",
+        CdnPath = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.4.1.min.js",
+        CdnDebugPath = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.4.1.js"
+    });
         }
 
         public void Session_End()
@@ -32,7 +32,7 @@ namespace TP1_ASP.NET
             // Mettre connecter a true
             Session["Users"] = Index1.userOnline;
 
-            if (Session["Selected_ID"] == null || Index1.userOnline.SelectByID((String)Session["Selected_ID"]))
+            if (Index1.userOnline.SelectByID((String)Session["Selected_ID"]))
             {
                 List<string> Fields = Index1.userOnline.LoadFields((String)Session["Selected_ID"]);
 
