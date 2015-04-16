@@ -92,7 +92,7 @@ namespace TP1_ASP.NET
             panel.Controls.Add(table);
         }
 
-        internal string getCreatorUserName(string Thread_id)
+        internal string getCreatorFullName(string Thread_id)
         {
             QuerySQL("SELECT CREATOR FROM THREADS WHERE ID =" + Thread_id);
             if (reader.HasRows)

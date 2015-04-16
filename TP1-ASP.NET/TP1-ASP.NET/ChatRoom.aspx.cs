@@ -57,14 +57,14 @@ namespace TP1_ASP.NET
             tm.ShowMessages(Thread_ID, Chat);
             ThreadsTable tt = new ThreadsTable((string)Application["MainDB"], this);
             Titre.Text = ListBox1.SelectedItem.ToString();
-            Createur.Text = tt.getCreatorUserName(Thread_ID);
+            Createur.Text = tt.getCreatorFullName(Thread_ID);
             Date.Text = tt.getThreadsDate(Thread_ID);        
         }
 
         private void AjouterMessage()
         {
             Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
-            tm.AddMessage(Chat, TB_Text.Text, long.Parse(Session["Selected_ID"].ToString()));
+            tm.AddMessage(Chat, TB_Text.Text, Session["Selected_ID"].ToString(), DateTime.Now.ToString());
         }
     }
 }
