@@ -43,7 +43,7 @@ namespace TP1_ASP.NET
 
             Index1.login.LogoutDate = DateTime.Now;
             Index1.login.Insert();
-
+            
             Application.UnLock();
         }
     }
