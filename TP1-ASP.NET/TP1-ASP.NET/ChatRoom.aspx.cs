@@ -17,6 +17,7 @@ namespace TP1_ASP.NET
             }
             //TEMPORAIRE
             Session["Selected_Thread"] = 1;
+            AfficherDiscussions();
             AfficherMessages();
         }
 
@@ -33,6 +34,11 @@ namespace TP1_ASP.NET
             AjouterMessage();
         }
 
+        private void AfficherDiscussions()
+        {
+            ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
+            t.ShowThreads(Panel1);
+        }
         private void AfficherMessages()
         {
             Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);

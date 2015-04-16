@@ -118,5 +118,23 @@ namespace TP1_ASP.NET
             td.Controls.Add(cb);
             tr.Cells.Add(td);
         }
+
+        internal void ShowThreads(Panel panel)
+        {
+            ListBox lb = new ListBox();
+            lb.Height = 200;
+            lb.Width = 100;
+            QuerySQL("SELECT TITLE FROM THREADS");
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    lb.Items.Add(reader.GetString(0));
+                }
+            }
+            EndQuerySQL();
+
+            panel.Controls.Add(lb);
+        }
     }
 }

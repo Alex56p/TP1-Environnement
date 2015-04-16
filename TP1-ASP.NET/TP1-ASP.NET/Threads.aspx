@@ -19,7 +19,7 @@
             </td>
         </tr>
         <tr>
-            <td>
+            <td  class="TD_BTN">
                 <asp:Button ID="BTN_Nouveau" runat="server" Text="Nouveau" OnClick="BTN_Nouveau_Click"/>
 
             </td>
@@ -28,7 +28,7 @@
             </td>
         </tr>
         <tr>
-            <td>
+            <td class="TD_BTN">
                 <asp:Button ID="BTN_Modifier" runat="server" Text="Modifier" OnClick="BTN_Modifier_Click" Width="70px"/>
             </td>
             <td>
@@ -36,12 +36,12 @@
             </td>
         </tr>
         <tr>
-            <td>
+            <td  class="TD_BTN">
                 <asp:Button ID="BTN_Effacer" runat="server" Text="Effacer" Width="73px" OnClick="BTN_Effacer_Click" />
             </td>
         </tr>
         <tr>
-            <td>
+            <td  class="TD_BTN">
                 <asp:Button ID="BTN_Retour" runat="server" Text="Retour" Width="72px" OnClick="BTN_Retour_Click"/>
             </td>
         </tr>

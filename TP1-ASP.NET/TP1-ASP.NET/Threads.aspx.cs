@@ -15,12 +15,15 @@ namespace TP1_ASP.NET
             {
                 Response.Redirect("Login1.aspx");
             }
-            AfficherThreads();
+            
+            if(!IsPostBack)
+                AfficherThreads();
             AfficherUsagers();
         }
 
         private void AfficherThreads()
         {
+            LB_Threads.Items.Clear();
             ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
             List<String> threads = t.getThreads();
             for(int i = 0; i < threads.Count;i++)
@@ -45,6 +48,7 @@ namespace TP1_ASP.NET
                 t.Date_of_Creation = DateTime.Now;
                 t.Insert();
             }
+            AfficherThreads();
         }
 
         protected void BTN_Modifier_Click(object sender, EventArgs e)
@@ -66,7 +70,12 @@ namespace TP1_ASP.NET
 
         protected void BTN_Effacer_Click(object sender, EventArgs e)
         {
-
+            if(LB_Threads.SelectedItem != null)
+            {
+                ThreadsTable threads = new ThreadsTable((String)Application["MainDB"], this);
+                threads.DeleteRecordByID(threads.getIDThreads(LB_Threads.SelectedItem.ToString()));
+            }
+            AfficherThreads();
         }
 
         protected void BTN_Retour_Click(object sender, EventArgs e)

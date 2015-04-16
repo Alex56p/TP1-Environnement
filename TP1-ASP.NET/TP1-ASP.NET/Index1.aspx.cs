@@ -16,6 +16,7 @@ namespace TP1_ASP.NET
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session["Header"] = "Index...";
             if (Session["Selected_ID"] == null)
             {
                 Response.Redirect("Login1.aspx");
@@ -26,7 +27,6 @@ namespace TP1_ASP.NET
                 login.LoginDate = DateTime.Now;
                 login.UserID = long.Parse(Session["Selected_ID"].ToString());
                 login.IPAdress = GetUserIP();
-                Session["Header"] = "Index...";
 
                 // Mettre connecter a true
                 userOnline = new PersonnesTable((String)Application["MainDB"], this);
