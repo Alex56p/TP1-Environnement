@@ -12,7 +12,7 @@ namespace TP1_ASP.NET
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            Response.AppendHeader("Refresh", Convert.ToString(Session.Timeout * 60) + "; URL=Login1.aspx");
+            Response.AppendHeader("Refresh", Convert.ToString(Session.Timeout * 60 + 1) + "; URL=Login1.aspx");
 
             if (!Page.IsPostBack)
                 Session.Timeout = 1;
