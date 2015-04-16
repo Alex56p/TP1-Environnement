@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="Chat Room..." Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="ChatRoom.aspx.cs" Inherits="TP1_ASP.NET.ChatRoom" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:Panel runat="server" DefaultButton ="BTN_Envoyer">
     <div>
         <table style="width: 849px">
             <tr>
@@ -14,11 +15,9 @@
             </tr>
             <tr>
                <td>
-
                    <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto">
                        <asp:ListBox ID="ListBox1" runat="server"></asp:ListBox>
                    </asp:Panel>
-
                </td>
                 <td style="width: 327px">
                     <%-- <asp:UpdatePanel ID="Panel_Chat"  UpdateMode="Conditional" runat="server"> 
@@ -30,7 +29,6 @@
                         </Triggers>
                     </asp:UpdatePanel>--%>
                 </td>
-               
             </tr>
             <tr>
                 <td></td>
@@ -38,12 +36,11 @@
                     <asp:TextBox ID="TB_Text" runat="server"></asp:TextBox>
                 </td>
                 <td>
-                 <asp:Button ID="BTN_Envoyer" runat="server" Text="Envoyer..." OnClick="BTN_Envoyer_Click" />
-
+                    <asp:Button ID="BTN_Envoyer" runat="server" Text="Envoyer..." OnClick="BTN_Envoyer_Click" />
                 </td>
             </tr>
         </table>
     </div>
-    
+    </asp:Panel>
                 
 </asp:Content>
