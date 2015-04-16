@@ -43,6 +43,7 @@ namespace TP1_ASP.NET
             tm.Insert();
 
             AjouterMessage();
+            TB_Text.Text = "";
         }
 
         private void AfficherDiscussions()
@@ -65,6 +66,15 @@ namespace TP1_ASP.NET
         {
             Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
             tm.AddMessage(Chat, TB_Text.Text, Session["Selected_ID"].ToString(), DateTime.Now.ToString());
+        }
+
+        public static void BTN_Modifier_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        public static void BTN_Supprimer_Click(object sender, ImageClickEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }
