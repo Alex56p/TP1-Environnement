@@ -4,7 +4,6 @@
     <div>
         <asp:UpdatePanel ID="Panel_Chat" UpdateMode="Conditional" runat="server">     
             <ContentTemplate>
-                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                 <asp:Timer ID="Timer1" OnTick="Timer1_Tick" Interval="3000" runat="server"></asp:Timer>
                 <asp:Panel ID="PN_ListUsers" runat="server"></asp:Panel>
 
