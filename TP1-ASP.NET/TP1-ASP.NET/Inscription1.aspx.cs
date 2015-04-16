@@ -15,8 +15,8 @@ namespace TP1_ASP.NET
         bool valid = true;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-                Session["captcha"] = BuildCaptcha();
+           if(!IsPostBack)
+            RegenerateCaptcha();
 
             if (TB_Username.Text != null)
                 Session["Username"] = TB_Username.Text;
@@ -40,7 +40,7 @@ namespace TP1_ASP.NET
                 Personnes.FullName = TB_Nom.Text;
                 Personnes.UserName = TB_Username.Text;
                 Personnes.Password = TB_Password.Text;
-                Personnes.Email = TB_Password.Text;
+                Personnes.Email = TB_Email.Text;
 
                 string Avatar_Path;
                 string avatar_ID;
@@ -150,11 +150,16 @@ namespace TP1_ASP.NET
 
         protected void RegenarateCaptcha_Click(object sender, ImageClickEventArgs e)
         {
-            Session["captcha"] = BuildCaptcha();
-            // + DateTime.Now.ToString() pour forcer le fureteur recharger le fichier
-            IMGCaptcha.ImageUrl = "~/Captcha.png?ID=" + DateTime.Now.ToString();
-            PN_Captcha.Update();
+           RegenerateCaptcha();
         }
+        protected void RegenerateCaptcha()
+        {
+           Session["captcha"] = BuildCaptcha();
+           // + DateTime.Now.ToString() pour forcer le fureteur recharger le fichier
+           IMGCaptcha.ImageUrl = "~/Captcha.png?ID=" + DateTime.Now.ToString();
+           PN_Captcha.Update();
+        }
+
 
         protected void CV_Captcha_ServerValidate(object source, ServerValidateEventArgs args)
         {

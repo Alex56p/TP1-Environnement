@@ -9,10 +9,8 @@ namespace TP1_ASP.NET
 {
     public partial class Index1 : System.Web.UI.Page
     {
-        static public int SessionTime = 1 * 60;
         static public Logins login;
         static public PersonnesTable userOnline;
-        static public bool Connecte = false;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,7 +19,9 @@ namespace TP1_ASP.NET
             {
                 Response.Redirect("Login1.aspx");
             }
-            if (!Connecte)
+            userOnline = new PersonnesTable((String)Application["MainDB"], this);
+
+            if (!userOnline.isOnline(Session["Selected_ID"].ToString()))
             {
                 login = new Logins((string)Application["MainDB"], this);
                 login.LoginDate = DateTime.Now;
@@ -39,8 +39,6 @@ namespace TP1_ASP.NET
 
                     userOnline.Connecter();
                 }
-
-                Connecte = true;
             }
         }
 

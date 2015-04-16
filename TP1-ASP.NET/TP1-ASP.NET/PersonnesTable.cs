@@ -171,7 +171,25 @@ namespace TP1_ASP.NET
             Update();
         }
 
-        
+
+
+        internal bool isOnline(string p)
+        {
+           QuerySQL("Select Connecte FROM " + SQLTableName + " Where ID = " + p);
+           if (reader.Read())
+           {
+              int read = reader.GetInt32(0);
+              EndQuerySQL();
+              QuerySQL("SELECT * FROM " + SQLTableName + " WHERE ID = " + ID);
+              EndQuerySQL();
+              if (read == 1)
+                 return true;
+              else
+                 return false;
+           }
+           EndQuerySQL();
+           return false;
+        }
     }
 
 }

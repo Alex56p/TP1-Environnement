@@ -29,6 +29,14 @@
                         ValidationGroup="VG_Login"
                         OnServerValidate="CV_TB_UserName_ServerValidate"> 
                     </asp:CustomValidator>
+                    <asp:CustomValidator
+                        ID="CustomValidator1"
+                        runat="server"
+                        ErrorMessage="Cet usager est déjà en ligne"
+                        Display="None"
+                        ValidationGroup="VG_Login"
+                        OnServerValidate="CustomValidator1_ServerValidate"> 
+                    </asp:CustomValidator>
                 </td>
             </tr>
             <tr>

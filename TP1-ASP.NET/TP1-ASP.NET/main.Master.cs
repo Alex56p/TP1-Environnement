@@ -20,7 +20,7 @@ namespace TP1_ASP.NET
             if (Session["Header"] != null)
                 LB_Header.Text = Session["Header"].ToString();
             PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"],Page);
-            if (Session["Selected_UserName"].ToString() != "Anonymous")
+            if (Session["Selected_UserName"] != null && Session["Selected_UserName"].ToString() != "Anonymous")
                 LB_HdrUserName.Text = personnes.GetFullName(Session["Selected_UserName"].ToString());
             else
                 LB_HdrUserName.Text = "Anonymous";

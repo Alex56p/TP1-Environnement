@@ -64,6 +64,7 @@
     <Content Include="Login1.aspx" />
     <Content Include="LoginsJournal1.aspx" />
     <Content Include="main.Master" />
+    <None Include="Properties\PublishProfiles\ASP.pubxml" />
     <None Include="Properties\PublishProfiles\coquin.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Properties\PublishProfiles\test.pubxml" />

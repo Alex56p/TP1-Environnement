@@ -21,6 +21,7 @@ namespace TP1_ASP.NET
         }
         public void ListUsers()
         {
+           PN_ListUsers.Controls.Clear();
             // Création d'une nouvelle instance de Users (reliée à la table MainDB.Users)
             PersonnesTable users = new PersonnesTable((String)Application["MainDB"], this);
             //users.SelectByUserID(Session["Selected_ID"].ToString());
@@ -30,6 +31,11 @@ namespace TP1_ASP.NET
         protected void BTN_Retour_Click(object sender, EventArgs e)
         {
             Response.Redirect("Index1.aspx");
+        }
+
+        protected void Unnamed_Tick(object sender, EventArgs e)
+        {
+           ListUsers();
         }
     }
 }

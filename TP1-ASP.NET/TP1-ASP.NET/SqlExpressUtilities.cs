@@ -664,6 +664,7 @@ namespace SqlExpressUtilities
                 AjouterElementHeader(tr, "Avatar");
                 Grid.Rows.Add(tr);
 
+                int i = 0;
                 while (reader.Read())
                 {
                     // Insertion des données
@@ -676,9 +677,10 @@ namespace SqlExpressUtilities
 
                     InsertionUserName(tr, reader.GetString(2));
                     InsertionFullName(tr, reader.GetString(1));
-                    InsertionCourriel(tr, reader.GetString(4));
+                    InsertionCourriel(tr, reader.GetString(4),i);
                     InsertionAvatar(tr, reader.GetString(5));
                     Grid.Rows.Add(tr);
+                    i++;
                 }
             }
             EndQuerySQL();
@@ -717,12 +719,12 @@ namespace SqlExpressUtilities
             tr.Cells.Add(td);
         }
 
-        private void InsertionCourriel(TableRow tr, string p)
+        private void InsertionCourriel(TableRow tr, string p, int i)
         {
             TableCell td = new TableCell();
             td.CssClass = "grid";
             HyperLink hl = new HyperLink();
-            hl.ID = "HyperLink1";
+            hl.ID = "HyperLink" + i;
             hl.Attributes.Add("href", "mailto:" + p);
             hl.NavigateUrl = "mailto:" + p;
             hl.Text = p;
