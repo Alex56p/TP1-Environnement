@@ -12,8 +12,6 @@
     <form id="form1" runat="server">
         <div class="mainHeader">
 
-            <asp:ScriptManager runat="server"></asp:ScriptManager>
-            <asp:Timer ID="Chrono" runat="server" Interval="1000" OnTick="Chrono_Tick"></asp:Timer>
             <table>
                 <tbody>
                     <tr>

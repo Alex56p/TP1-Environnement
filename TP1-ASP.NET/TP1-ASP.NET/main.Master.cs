@@ -12,12 +12,9 @@ namespace TP1_ASP.NET
        TimeSpan chrono;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-            {
-                //Session.Timeout = 1;
-               chrono = new TimeSpan(0, 0, 10);
-            }
+           Response.AppendHeader("Refresh", Convert.ToString(Session.Timeout * 60) + "; URL=Login1.aspx");
 
+            Session.Timeout = 1;
             if (Session["Header"] != null)
                 LB_Header.Text = Session["Header"].ToString();
             PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"],Page);
@@ -29,13 +26,6 @@ namespace TP1_ASP.NET
                 Img_Username.ImageUrl = "Avatars/" + personnes.GetAvatar(Session["Selected_ID"].ToString());
             else
                 Img_Username.ImageUrl = "Images/Anonymous.png";
-        }
-
-        protected void Chrono_Tick(object sender, EventArgs e)
-        {
-           chrono.Subtract(new TimeSpan(0, 0, 1));
-           if (chrono == new TimeSpan(0, 0, 0))
-              Session.Abandon();
         }
     }
 }
