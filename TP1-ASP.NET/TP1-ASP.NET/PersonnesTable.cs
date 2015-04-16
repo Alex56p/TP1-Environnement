@@ -106,8 +106,6 @@ namespace TP1_ASP.NET
             {
                 string read = reader.GetString(0);
                 EndQuerySQL();
-                QuerySQL("SELECT * FROM " + SQLTableName + " WHERE ID = " + ID);
-                EndQuerySQL();
                 return read;
             }
             EndQuerySQL();
@@ -116,12 +114,10 @@ namespace TP1_ASP.NET
 
         internal string GetFullName(string p)
         {
-            QuerySQL("Select FullName FROM " + SQLTableName + " Where UserName = '"+ p + "'");
+            QuerySQL("Select FullName FROM PERSONNES Where UserName = '"+ p + "'");
             if (reader.Read())
             {
                 string read = reader.GetString(0);
-                EndQuerySQL();
-                QuerySQL("SELECT * FROM " + SQLTableName + " WHERE ID = " + ID);
                 EndQuerySQL();
                 return read;
             }
@@ -136,8 +132,6 @@ namespace TP1_ASP.NET
             {
                 string read = reader.GetString(0);
                 EndQuerySQL();
-                QuerySQL("SELECT * FROM " + SQLTableName + " WHERE ID = " + ID);
-                EndQuerySQL();
                 return read;
             }
             EndQuerySQL();
@@ -150,8 +144,6 @@ namespace TP1_ASP.NET
             if (reader.Read())
             {
                 string read = reader.GetString(0);
-                EndQuerySQL();
-                QuerySQL("SELECT * FROM " + SQLTableName + " WHERE ID = " + ID);
                 EndQuerySQL();
                 return read;
             }
@@ -179,8 +171,6 @@ namespace TP1_ASP.NET
            if (reader.Read())
            {
               int read = reader.GetInt32(0);
-              EndQuerySQL();
-              QuerySQL("SELECT * FROM " + SQLTableName + " WHERE ID = " + ID);
               EndQuerySQL();
               if (read == 1)
                  return true;
