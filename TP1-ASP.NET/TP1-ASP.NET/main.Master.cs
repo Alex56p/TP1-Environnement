@@ -13,7 +13,7 @@ namespace TP1_ASP.NET
         {
            Response.AppendHeader("Refresh", Convert.ToString(Session.Timeout * 60) + "; URL=Login1.aspx");
 
-            Session.Timeout = 1;
+            Session.Timeout = 5;
             if (Session["Header"] != null)
                 LB_Header.Text = Session["Header"].ToString();
             PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"],Page);
