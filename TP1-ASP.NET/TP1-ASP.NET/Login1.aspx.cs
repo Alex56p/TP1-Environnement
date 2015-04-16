@@ -40,9 +40,7 @@ namespace TP1_ASP.NET
         {
             Times++;
             PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"], this);
-            if (!personnes.isOnline(personnes.getIDPersonnes(TB_UserName.Text)))
-            {
-               if (Page.IsValid && !personnes.isOnline(personnes.getIDPersonnes(TB_UserName.Text)))
+               if (Page.IsValid)
                {
                   Session["Selected_ID"] = personnes.getIDPersonnes(TB_UserName.Text);
                   Session["Selected_UserName"] = TB_UserName.Text;
@@ -54,12 +52,6 @@ namespace TP1_ASP.NET
                {
                   Session["Bloquer"] = true;
                }
-            }
-            else
-            {
-
-            }
-
         }
 
         protected void BTN_Inscription_Click(object sender, EventArgs e)

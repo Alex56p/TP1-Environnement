@@ -81,7 +81,7 @@ namespace TP1_ASP.NET
             PersonnesTable user = new PersonnesTable((String)Application["MainDB"], this);
             Session["Users"] = user;
 
-            if (user.SelectByID((String)Session["Selected_ID"]))
+            if (Session["Selected_ID"] != null && user.SelectByID((String)Session["Selected_ID"]))
             {
                 List<string> Fields = user.LoadFields((String)Session["Selected_ID"]);
                 TB_Nom.Text = Fields.ElementAt(0);
