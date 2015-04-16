@@ -9,7 +9,6 @@ namespace TP1_ASP.NET
 {
     public partial class main : System.Web.UI.MasterPage
     {
-       TimeSpan chrono;
         protected void Page_Load(object sender, EventArgs e)
         {
            Response.AppendHeader("Refresh", Convert.ToString(Session.Timeout * 60) + "; URL=Login1.aspx");
