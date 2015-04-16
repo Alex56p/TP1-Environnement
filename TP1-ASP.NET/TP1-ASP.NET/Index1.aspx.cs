@@ -31,7 +31,7 @@ namespace TP1_ASP.NET
                 // Mettre connecter a true
                 userOnline = new PersonnesTable((String)Application["MainDB"], this);
 
-                if (userOnline.SelectByID((String)Session["Selected_ID"]))
+                if (Session["Selected_ID"] != null && userOnline.SelectByID((String)Session["Selected_ID"]))
                 {
                     List<string> Fields = userOnline.LoadFields((String)Session["Selected_ID"]);
 

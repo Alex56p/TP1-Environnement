@@ -32,7 +32,7 @@ namespace TP1_ASP.NET
             // Mettre connecter a true
             Session["Users"] = Index1.userOnline;
 
-            if (Index1.userOnline.SelectByID((String)Session["Selected_ID"]))
+            if (Session["Selected_ID"] != null && Index1.userOnline.SelectByID((String)Session["Selected_ID"]))
             {
                 List<string> Fields = Index1.userOnline.LoadFields((String)Session["Selected_ID"]);
 
