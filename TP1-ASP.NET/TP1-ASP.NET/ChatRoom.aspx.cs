@@ -9,6 +9,7 @@ namespace TP1_ASP.NET
 {
     public partial class ChatRoom : System.Web.UI.Page
     {
+        string Thread_ID;
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -16,19 +17,26 @@ namespace TP1_ASP.NET
             {
                 Response.Redirect("Login1.aspx");
             }
-            //TEMPORAIRE
-            Session["Selected_Thread"] = 1;
             AfficherDiscussions();
-            if (ListBox1.SelectedItem == null)
-                ListBox1.SelectedIndex = 0;
-            AfficherMessages();
+            if (ListBox1.Items.Count == 0)
+                BTN_Envoyer.Enabled = false;
+            else
+            {
+                if (ListBox1.SelectedItem == null)
+                {
+                    ListBox1.SelectedIndex = 0;
+                    ThreadsTable tt = new ThreadsTable((string)Application["MainDB"], this);
+                    Thread_ID = tt.getIDThreads(ListBox1.SelectedItem.ToString());
+                    AfficherMessages();
+                }
+            }
+            
         }
 
         protected void BTN_Envoyer_Click(object sender, EventArgs e)
         {
-            //TB_Text.Text = "";
             Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);  
-            tm.Thread_ID = long.Parse(Session["Selected_Thread"].ToString());
+            tm.Thread_ID = long.Parse(Thread_ID);
             tm.User_ID = long.Parse(Session["Selected_ID"].ToString());
             tm.Date_of_Creation = DateTime.Now.ToShortDateString();
             tm.Message = TB_Text.Text;
@@ -39,19 +47,18 @@ namespace TP1_ASP.NET
 
         private void AfficherDiscussions()
         {
+            ListBox1.Items.Clear();
             ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
             t.ShowThreads(ListBox1);
         }
         private void AfficherMessages()
         {
             Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
-            tm.ShowMessages(Session["Selected_Thread"].ToString(), Chat);
+            tm.ShowMessages(Thread_ID, Chat);
             ThreadsTable tt = new ThreadsTable((string)Application["MainDB"], this);
             Titre.Text = ListBox1.SelectedItem.ToString();
-            Createur.Text = tt.getCreatorUserName(tt.getIDThreads(ListBox1.SelectedItem.ToString()));            
-            Date.Text = tt.getThreadsDate(tt.getIDThreads(ListBox1.SelectedItem.ToString()));
-
-            
+            Createur.Text = tt.getCreatorUserName(Thread_ID);
+            Date.Text = tt.getThreadsDate(Thread_ID);        
         }
 
         private void AjouterMessage()
