@@ -40,26 +40,19 @@ namespace TP1_ASP.NET
         {
             Times++;
             PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"], this);
-            if (!personnes.isOnline(personnes.getIDPersonnes(TB_UserName.Text)))
-            {
-               if (Page.IsValid && !personnes.isOnline(personnes.getIDPersonnes(TB_UserName.Text)))
-               {
-                  Session["Selected_ID"] = personnes.getIDPersonnes(TB_UserName.Text);
-                  Session["Selected_UserName"] = TB_UserName.Text;
-                  Session["UserValid"] = true;
-                  Session["Bloquer"] = false;
-                  Response.Redirect("Index1.aspx");
-               }
-               else if (Times >= 3)
-               {
-                  Session["Bloquer"] = true;
-               }
-            }
-            else
-            {
 
+            if (Page.IsValid)
+            {
+                Session["Selected_ID"] = personnes.getIDPersonnes(TB_UserName.Text);
+                Session["Selected_UserName"] = TB_UserName.Text;
+                Session["UserValid"] = true;
+                Session["Bloquer"] = false;
+                Response.Redirect("Index1.aspx");
             }
-
+            else if (Times >= 3)
+            {
+                Session["Bloquer"] = true;
+            }
         }
 
         protected void BTN_Inscription_Click(object sender, EventArgs e)

@@ -32,10 +32,5 @@ namespace TP1_ASP.NET
         {
             Response.Redirect("Index1.aspx");
         }
-
-        protected void Unnamed_Tick(object sender, EventArgs e)
-        {
-           ListUsers();
-        }
     }
 }
