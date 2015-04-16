@@ -92,6 +92,47 @@ namespace TP1_ASP.NET
             panel.Controls.Add(table);
         }
 
+        internal string getCreatorUserName(string Thread_id)
+        {
+            QuerySQL("SELECT CREATOR FROM THREADS WHERE ID =" + Thread_id);
+            if (reader.HasRows)
+            {
+                if (reader.Read())
+                {
+                    long creator = reader.GetInt32(0); 
+                    EndQuerySQL();
+
+                    QuerySQL("SELECT FULLNAME FROM PERSONNES WHERE ID =" + creator);
+
+                    if(reader.HasRows)
+                    {
+                        string FullName = "";
+                        if(reader.Read())
+                            FullName = reader.GetString(0);
+                        EndQuerySQL(); 
+                        return FullName;
+                    }
+                }
+            }
+            EndQuerySQL();
+            return "";
+        }
+
+        internal string getThreadsDate(string thread_id)
+        {
+            QuerySQL("SELECT DATE_OF_CREATION FROM THREADS WHERE ID =" + thread_id);
+            string date = "";
+            if (reader.HasRows)
+            {
+                if (reader.Read())
+                {
+                    date = reader.GetDateTime(0).ToShortDateString();
+                }
+            }
+            EndQuerySQL();
+            return date;
+        }
+
         private void InsertionPhoto(TableRow tr, String Avatar)
         {
             TableCell td = new TableCell();
@@ -119,9 +160,8 @@ namespace TP1_ASP.NET
             tr.Cells.Add(td);
         }
 
-        internal void ShowThreads(Panel panel)
+        internal void ShowThreads(ListBox lb)
         {
-            ListBox lb = new ListBox();
             lb.Height = 200;
             lb.Width = 100;
             QuerySQL("SELECT TITLE FROM THREADS");
@@ -133,8 +173,6 @@ namespace TP1_ASP.NET
                 }
             }
             EndQuerySQL();
-
-            panel.Controls.Add(lb);
         }
     }
 }

@@ -17,6 +17,7 @@
                <td>
 
                    <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto">
+                       <asp:ListBox ID="ListBox1" runat="server"></asp:ListBox>
                    </asp:Panel>
 
                </td>

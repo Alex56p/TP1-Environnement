@@ -11,6 +11,7 @@ namespace TP1_ASP.NET
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if(Session["Selected_ID"] == null)
             {
                 Response.Redirect("Login1.aspx");
@@ -18,6 +19,8 @@ namespace TP1_ASP.NET
             //TEMPORAIRE
             Session["Selected_Thread"] = 1;
             AfficherDiscussions();
+            if (ListBox1.SelectedItem == null)
+                ListBox1.SelectedIndex = 0;
             AfficherMessages();
         }
 
@@ -37,12 +40,18 @@ namespace TP1_ASP.NET
         private void AfficherDiscussions()
         {
             ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
-            t.ShowThreads(Panel1);
+            t.ShowThreads(ListBox1);
         }
         private void AfficherMessages()
         {
             Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
             tm.ShowMessages(Session["Selected_Thread"].ToString(), Chat);
+            ThreadsTable tt = new ThreadsTable((string)Application["MainDB"], this);
+            Titre.Text = ListBox1.SelectedItem.ToString();
+            Createur.Text = tt.getCreatorUserName(tt.getIDThreads(ListBox1.SelectedItem.ToString()));            
+            Date.Text = tt.getThreadsDate(tt.getIDThreads(ListBox1.SelectedItem.ToString()));
+
+            
         }
 
         private void AjouterMessage()
