@@ -152,9 +152,11 @@ namespace TP1_ASP.NET
 
         public void BTN_Supprimer_Click(object sender, ImageClickEventArgs e)
         {
-            throw new NotImplementedException();
-        }
+            ImageButton button = (ImageButton)sender;
+            string Id = button.ID.Remove(0,1);
 
+            DeleteRecordByID(Id);
+        }
 
         internal string GetFullName(string id)
         {

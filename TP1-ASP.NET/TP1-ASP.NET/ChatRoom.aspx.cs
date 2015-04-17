@@ -72,6 +72,9 @@ namespace TP1_ASP.NET
             TB_Text.Text = "";
         }
 
+
+        // SUCE MON POIL
+
         // Afficher les threads
         private void AfficherDiscussions()
         {
@@ -103,6 +106,8 @@ namespace TP1_ASP.NET
         {
             Chat.Controls.Clear();
             AfficherMessages();
+            if (MessageModifier != "")
+                TB_Text.Text = MessageModifier;
         }
     }
 }
