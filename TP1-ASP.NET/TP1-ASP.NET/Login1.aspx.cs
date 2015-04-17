@@ -26,8 +26,6 @@ namespace TP1_ASP.NET
             }
             else
             {
-                Session["Selected_UserName"] = "Anonymous";
-                Session["Selected_ID"] = null;
                 if (Session["Bloquer"] != null && bool.Parse(Session["Bloquer"].ToString()))
                 {
                     Response.Redirect("Bloquer1.aspx");

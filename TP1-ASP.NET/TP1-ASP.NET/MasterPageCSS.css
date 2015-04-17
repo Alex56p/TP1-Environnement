@@ -80,7 +80,6 @@ tbody {
 }
 
 .TD_BTN{
-    width: 85px;
-    height:32px;
+    display:block;
 }
 

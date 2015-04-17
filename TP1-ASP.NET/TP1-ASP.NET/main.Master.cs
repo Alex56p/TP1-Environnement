@@ -54,6 +54,7 @@ namespace TP1_ASP.NET
                 Session["SelectedUserName"] = null;
 
                 Response.Redirect("Login1.aspx");
+                Response.Write("Chrono fini.");
             }
             else
             {

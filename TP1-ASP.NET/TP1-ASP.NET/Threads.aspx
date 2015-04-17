@@ -29,20 +29,12 @@
         </tr>
         <tr>
             <td class="TD_BTN">
-                <asp:Button ID="BTN_Modifier" runat="server" Text="Modifier" OnClick="BTN_Modifier_Click" Width="70px"/>
+                <asp:Button ID="BTN_Modifier" CssClass="TD_BTN" runat="server" Text="Modifier" OnClick="BTN_Modifier_Click" Width="70px"/>
+                <asp:Button ID="BTN_Effacer" CssClass="TD_BTN" runat="server" Text="Effacer" Width="73px" OnClick="BTN_Effacer_Click" />
+                <asp:Button ID="BTN_Retour" CssClass="TD_BTN" runat="server" Text="Retour" Width="72px" OnClick="BTN_Retour_Click"/>
             </td>
             <td>
                 <asp:Panel ID="Panel_Usagers" runat="server"></asp:Panel>
-            </td>
-        </tr>
-        <tr>
-            <td  class="TD_BTN">
-                <asp:Button ID="BTN_Effacer" runat="server" Text="Effacer" Width="73px" OnClick="BTN_Effacer_Click" />
-            </td>
-        </tr>
-        <tr>
-            <td  class="TD_BTN">
-                <asp:Button ID="BTN_Retour" runat="server" Text="Retour" Width="72px" OnClick="BTN_Retour_Click"/>
             </td>
         </tr>
     </table>

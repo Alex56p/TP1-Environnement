@@ -76,15 +76,6 @@ namespace TP1_ASP.NET {
         protected global::System.Web.UI.WebControls.Button BTN_Modifier;
         
         /// <summary>
-        /// Contrôle Panel_Usagers.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel_Usagers;
-        
-        /// <summary>
         /// Contrôle BTN_Effacer.
         /// </summary>
         /// <remarks>
@@ -101,5 +92,14 @@ namespace TP1_ASP.NET {
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BTN_Retour;
+        
+        /// <summary>
+        /// Contrôle Panel_Usagers.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel_Usagers;
     }
 }
