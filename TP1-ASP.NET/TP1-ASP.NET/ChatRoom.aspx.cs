@@ -103,6 +103,8 @@ namespace TP1_ASP.NET
         {
             Chat.Controls.Clear();
             AfficherMessages();
+            if (MessageModifier != "")
+                TB_Text.Text = MessageModifier;
         }
     }
 }
