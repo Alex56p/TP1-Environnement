@@ -11,10 +11,16 @@ namespace TP1_ASP.NET
     {
         string Thread_ID;
         public static string MessageModifier = "";
+        public static string Id_Modifier = "";
 
         // Page Load
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (MessageModifier != "")
+                TB_Text.Text = MessageModifier;
+
+
             if(Session["Selected_ID"] == null)
             {
                 Response.Redirect("Login1.aspx");
@@ -46,11 +52,24 @@ namespace TP1_ASP.NET
         {
             // Ajouter le message dans la BD
             Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);  
-            tm.Thread_ID = long.Parse(Thread_ID);
-            tm.User_ID = long.Parse(Session["Selected_ID"].ToString());
-            tm.Date_of_Creation = DateTime.Now.ToShortDateString();
-            tm.Message = TB_Text.Text;
-            tm.Insert();
+            if(MessageModifier != "")
+            {
+                tm.Thread_ID = long.Parse(Thread_ID);
+                tm.User_ID = long.Parse(Session["Selected_ID"].ToString());
+                tm.Date_of_Creation = DateTime.Now.ToShortDateString();
+                tm.Message = TB_Text.Text;
+                tm.Insert();
+            }
+            else
+            {
+                tm.UpdateMessage(Id_Modifier, TB_Text.Text);
+                MessageModifier = "";
+                Id_Modifier = "";
+            }
+            
+            Chat.Controls.Clear();
+            AfficherMessages();
+            TB_Text.Text = "";
         }
 
         // Afficher les threads
@@ -79,6 +98,7 @@ namespace TP1_ASP.NET
             t.GetUsers_thread(TableUsers, Thread_ID);
         }
 
+        // Updater pour recevoir les messages des autres users
         protected void TimerPanel_Tick(object sender, EventArgs e)
         {
             Chat.Controls.Clear();

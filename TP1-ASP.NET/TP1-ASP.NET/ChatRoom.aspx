@@ -22,7 +22,7 @@
                 <td style="width: 327px">
                      <asp:UpdatePanel ID="UpdatePanel_Chat"  UpdateMode="Conditional" runat="server"> 
                         <ContentTemplate>
-                            <asp:Timer ID="TimerPanel" runat="server" OnTick="TimerPanel_Tick" Interval="1000"></asp:Timer>
+                            <%--<asp:Timer ID="TimerPanel" runat="server" OnTick="TimerPanel_Tick" Interval="1000"></asp:Timer>--%>
                             <asp:Panel ID="Panel_Chat" runat="server">
                                 <asp:Table ID="Chat" runat="server"></asp:Table>
                             </asp:Panel>
