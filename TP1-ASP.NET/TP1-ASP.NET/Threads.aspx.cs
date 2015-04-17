@@ -156,16 +156,21 @@ namespace TP1_ASP.NET
             if (TB_Titre.Text != "")
             {
                 ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
-                t.creator = int.Parse(Session["Selected_ID"].ToString());
-                t.Title = TB_Titre.Text;
-                t.Date_of_Creation = DateTime.Now;
-                t.Insert();
+                if (!t.Exist(TB_Titre.Text))
+                {
+                    t.creator = int.Parse(Session["Selected_ID"].ToString());
+                
+                    t.Title = TB_Titre.Text;
+                
+                    t.Date_of_Creation = DateTime.Now;
+                    t.Insert();
 
-                InsertionUsagers();
-
-
+                    InsertionUsagers();
+                }
             }
             AfficherThreads();
+            AfficherUsagers();
+            CheckUsagers();
         }
 
         private void InsertionUsagers()
@@ -213,6 +218,8 @@ namespace TP1_ASP.NET
                 }
             }
             AfficherThreads();
+            AfficherUsagers();
+            CheckUsagers();
         }
 
         protected void BTN_Effacer_Click(object sender, EventArgs e)
@@ -223,6 +230,8 @@ namespace TP1_ASP.NET
                 threads.DeleteRecordByID(Selected_ThreadID);
             }
             AfficherThreads();
+            AfficherUsagers();
+            CheckUsagers();
         }
 
         protected void BTN_Retour_Click(object sender, EventArgs e)

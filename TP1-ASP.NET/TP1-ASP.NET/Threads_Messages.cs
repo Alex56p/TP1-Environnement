@@ -211,7 +211,7 @@ namespace TP1_ASP.NET
             if(reader.Read())
             {
                 EndQuerySQL();
-                return reader.GetInt32(0);
+                return reader.GetInt64(0);
             }
             EndQuerySQL();
             return 0;

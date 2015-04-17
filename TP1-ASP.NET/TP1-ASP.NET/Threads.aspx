@@ -14,9 +14,7 @@
                 </tr>
                 <tr>
                     <td>
-                        
-                                <asp:Panel ID="PN_Threads" runat="server" ScrollBars="Vertical"></asp:Panel>
-                           
+                        <asp:Panel ID="PN_Threads" runat="server" ScrollBars="Vertical"></asp:Panel>
                     </td>
                     <td>
                         <asp:TextBox ID="TB_Titre" runat="server"></asp:TextBox>
@@ -53,7 +51,6 @@
               </table>
             </ContentTemplate>
         <Triggers>
-
         </Triggers>
     </asp:UpdatePanel>
 </asp:Content>

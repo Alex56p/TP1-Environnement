@@ -97,7 +97,7 @@ namespace TP1_ASP.NET
                 List<string> listUserId = new List<string>();
                 while (reader.Read())
                 {
-                    listUserId.Add(reader.GetInt32(0).ToString());
+                    listUserId.Add(reader.GetInt64(0).ToString());
                      
                 }
                 EndQuerySQL();
@@ -144,7 +144,7 @@ namespace TP1_ASP.NET
             {
                 if (reader.Read())
                 {
-                    long creator = reader.GetInt32(0); 
+                    long creator = reader.GetInt64(0); 
                     EndQuerySQL();
 
                     QuerySQL("SELECT FULLNAME FROM PERSONNES WHERE ID =" + creator);
@@ -220,6 +220,21 @@ namespace TP1_ASP.NET
                 }
             }
             EndQuerySQL();
+        }
+
+        internal bool Exist(string p)
+        {
+            QuerySQL("SELECT * FROM " + SQLTableName + " WHERE TITLE = '" + p + "'");
+            if (reader.HasRows)
+            {
+                EndQuerySQL();
+                return true;
+            }
+            else
+            {
+                EndQuerySQL();
+                return false;
+            }   
         }
     }
 }
