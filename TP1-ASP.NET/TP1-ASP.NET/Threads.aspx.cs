@@ -23,6 +23,7 @@ namespace TP1_ASP.NET
                 Button btn = GetFirstButton();
                 if (btn != null)
                     Selected_ThreadID = btn.ID.Substring(4);
+                TB_Titre.Text = btn.Text;
             }
 
             if(!IsPostBack)
@@ -106,6 +107,7 @@ namespace TP1_ASP.NET
         {
             Button btn = (Button)sender;
             Selected_ThreadID = btn.ID.Substring(4);
+            TB_Titre.Text = btn.Text;
             AfficherThreads();
             AfficherUsagers();
             CheckUsagers();
