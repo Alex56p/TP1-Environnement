@@ -669,7 +669,6 @@ namespace SqlExpressUtilities
                 {
                     // Insertion des données
                     tr = new TableRow();
-                    tr.CssClass = "grid";
                     if (reader.GetInt32(6) == 1)
                         InsertionStatut(tr, "/Images/OnLine.png");
                     else

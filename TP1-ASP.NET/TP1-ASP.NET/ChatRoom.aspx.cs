@@ -29,6 +29,7 @@ namespace TP1_ASP.NET
                     ThreadsTable tt = new ThreadsTable((string)Application["MainDB"], this);
                     Thread_ID = tt.getIDThreads(ListBox1.SelectedItem.ToString());
                     AfficherMessages();
+                    AfficherUsagers();
                 }
             }
             
@@ -109,6 +110,12 @@ namespace TP1_ASP.NET
 
             ModifierMessage = true;
             id_Message = id;
+        }
+
+        private void AfficherUsagers()
+        {
+            ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
+            t.GetUsers_thread(TableUsers, Thread_ID);
         }
     }
 }

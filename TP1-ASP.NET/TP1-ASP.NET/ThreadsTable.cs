@@ -89,6 +89,54 @@ namespace TP1_ASP.NET
             EndQuerySQL();
         }
 
+        internal void GetUsers_thread(Table table, string Thread_id)
+        {
+            QuerySQL("SELECT User_Id FROM Threads_access WHERE THREAD_ID = " + Thread_id);
+            if (reader.HasRows)
+            {
+                List<string> listUserId = new List<string>();
+                while (reader.Read())
+                {
+                    listUserId.Add(reader.GetInt32(0).ToString());
+                     
+                }
+                EndQuerySQL();
+                for (int i = 0; i < listUserId.Count; i++ )
+                {
+                    QuerySQL("SELECT ID,UserName, Avatar, Connecte FROM PERSONNES WHERE id = " + listUserId[i]);
+                    if(reader.HasRows)
+                    {
+                        if(reader.Read())
+                        {
+                            // Insertion des données
+                            TableRow tr = new TableRow();
+                            if (reader.GetInt32(3) == 1)
+                                InsertionStatut(tr, "/Images/OnLine.png");
+                            else
+                                InsertionStatut(tr, "/Images/Busy.png");
+                            InsertionPhoto(tr, reader.GetString(2));
+                            InsertionUserName(tr, reader.GetString(1));
+
+                            table.Rows.Add(tr);
+                        }
+                    }
+                }
+            }
+            EndQuerySQL();
+        }
+
+        private void InsertionStatut(TableRow tr, string p)
+        {
+            TableCell td = new TableCell();
+            Image img = new Image();
+            img.CssClass = "ChatImage";
+            img.ImageUrl = p;
+            td.CssClass = "grid";
+            td.Controls.Add(img);
+
+            tr.Cells.Add(td);
+        }
+
         internal string getCreatorFullName(string Thread_id)
         {
             QuerySQL("SELECT CREATOR FROM THREADS WHERE ID =" + Thread_id);

@@ -29,6 +29,11 @@
                         </Triggers>
                     </asp:UpdatePanel>--%>
                 </td>
+                <td>
+                    <asp:Panel ID="Panel_Users" runat="server" ScrollBars="Auto">
+                        <asp:table id="TableUsers" runat="server"></asp:table>
+                    </asp:Panel>
+                </td>
             </tr>
             <tr>
                 <td></td>
