@@ -13,6 +13,15 @@ namespace TP1_ASP.NET {
     public partial class Threads {
         
         /// <summary>
+        /// Contrôle UPN_Threads.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UPN_Threads;
+        
+        /// <summary>
         /// Contrôle Label1.
         /// </summary>
         /// <remarks>
@@ -31,13 +40,13 @@ namespace TP1_ASP.NET {
         protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
-        /// Contrôle LB_Threads.
+        /// Contrôle PN_Threads.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox LB_Threads;
+        protected global::System.Web.UI.WebControls.Panel PN_Threads;
         
         /// <summary>
         /// Contrôle TB_Titre.
