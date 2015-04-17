@@ -50,12 +50,46 @@ namespace TP1_ASP.NET
             {
                 while(reader.Read())
                 {
-                    AddMessage(t, reader.GetString(4), reader.GetInt64(2).ToString(), reader.GetDateTime(3).ToString());
+                    AddMessage(t, 
+                        reader.GetString(4), 
+                        reader.GetInt64(2).ToString(), 
+                        reader.GetDateTime(3).ToString(), 
+                        GetAvatar1(reader.GetInt64(2).ToString()), 
+                        GetFullName1(reader.GetInt64(2).ToString()), 
+                        reader.GetInt64(0));
                 }
             }
             EndQuerySQL();
         }
-        public void AddMessage(Table t, string Message, string user_id, string Date)
+
+        public string GetAvatar1(string ID)
+        {
+            QuerySQL("Select Avatar FROM PERSONNES Where ID = " + ID);
+            if (reader.Read())
+            {
+                string read = reader.GetString(0);
+                EndQuerySQL();
+                return read;
+            }
+            EndQuerySQL();
+            return "";
+        }
+
+        internal string GetFullName1(string p)
+        {
+            QuerySQL("Select FullName FROM PERSONNES Where ID = " + p);
+            if (reader.Read())
+            {
+                string read = reader.GetString(0);
+                EndQuerySQL();
+                return read;
+            }
+            EndQuerySQL();
+            return "";
+        }
+
+
+        public static void AddMessage(Table t, string Message, string user_id, string Date, string imageurl, string fullname, long Id_Message)
         {
             TableRow tr = new TableRow();
             tr.CssClass = "grid";
@@ -65,12 +99,12 @@ namespace TP1_ASP.NET
             picture.CssClass = "ChatImage";
             Image img = new Image();
             img.CssClass = "ChatImage";
-            img.ImageUrl = "Avatars/" + GetAvatar(user_id.ToString());
+            img.ImageUrl = "Avatars/" + imageurl;
             picture.Controls.Add(img);
 
             //UserName
             TableCell UserName = new TableCell();
-            UserName.Text = GetFullName(user_id);
+            UserName.Text = fullname;
 
             //Date
             TableCell dateMessage = new TableCell();
@@ -87,6 +121,7 @@ namespace TP1_ASP.NET
             BTN_Modifier.ImageUrl = "Images/edit.png";
             BTN_Modifier.Click += ChatRoom.BTN_Modifier_Click;
             Modifier.Controls.Add(BTN_Modifier);
+            BTN_Modifier.ID = "M" + Id_Message.ToString();
 
             //Effacer
             TableCell Supprimer = new TableCell();
@@ -95,6 +130,7 @@ namespace TP1_ASP.NET
             BTN_Supprimer.ImageUrl = "Images/delete.png";
             BTN_Supprimer.Click += ChatRoom.BTN_Supprimer_Click;
             Supprimer.Controls.Add(BTN_Supprimer);
+            BTN_Supprimer.ID = "S" + Id_Message.ToString();
 
             tr.Cells.Add(picture);
             tr.Cells.Add(UserName);
@@ -129,6 +165,39 @@ namespace TP1_ASP.NET
             }
             EndQuerySQL();
             return "";
+        }
+
+        public string RechercherMessage(string id)
+        {
+            QuerySQL("Select Message from THREADS_MESSAGES where Id = " + id);
+
+            if(reader.Read())
+            {
+                string Message = reader.GetString(0);
+                EndQuerySQL();
+                return Message;
+            }
+            EndQuerySQL();
+
+            return "";
+        }
+
+        public void UpdateMessage(string id_Message, string Message)
+        {
+            NonQuerySQL("UPDATE THREADS_MESSAGES SET Message = '" + Message + "' WHERE Id = " + id_Message);
+            EndQuerySQL();
+        }
+
+        public long GetLastIdMessage()
+        {
+            QuerySQL("SELECT Id FROM THREADS_MESSAGES ORDER BY Id DESC");
+            if(reader.Read())
+            {
+                EndQuerySQL();
+                return reader.GetInt64(0);
+            }
+            EndQuerySQL();
+            return 0;
         }
 
     }
