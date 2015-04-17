@@ -20,14 +20,17 @@
                    </asp:Panel>
                </td>
                 <td style="width: 327px">
-                    <%-- <asp:UpdatePanel ID="Panel_Chat"  UpdateMode="Conditional" runat="server"> 
-                        <ContentTemplate>--%>
-                            <asp:Table ID="Chat" runat="server"></asp:Table>
-                        <%--</ContentTemplate>
+                     <asp:UpdatePanel ID="UpdatePanel_Chat"  UpdateMode="Conditional" runat="server"> 
+                        <ContentTemplate>
+                            <asp:Timer ID="TimerPanel" runat="server" OnTick="TimerPanel_Tick" Interval="1000"></asp:Timer>
+                            <asp:Panel ID="Panel_Chat" runat="server">
+                                <asp:Table ID="Chat" runat="server"></asp:Table>
+                            </asp:Panel>
+                        </ContentTemplate>
                         <Triggers>
                             <asp:AsyncPostBackTrigger ControlID="BTN_Envoyer" EventName="Click" />
                         </Triggers>
-                    </asp:UpdatePanel>--%>
+                    </asp:UpdatePanel>
                 </td>
                 <td>
                     <asp:Panel ID="Panel_Users" runat="server" ScrollBars="Auto">

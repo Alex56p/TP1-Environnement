@@ -89,12 +89,12 @@ namespace TP1_ASP.NET
         }
 
 
-        public static void AddMessage(Table t, string Message, string user_id, string Date, string imageurl, string fullname, long Id_Message)
+        public void AddMessage(Table t, string Message, string user_id, string Date, string imageurl, string fullname, long Id_Message)
         {
             TableRow tr = new TableRow();
             tr.CssClass = "grid";
 
-            //Image
+           //Image
             TableCell picture = new TableCell();
             picture.CssClass = "ChatImage";
             Image img = new Image();
@@ -119,7 +119,7 @@ namespace TP1_ASP.NET
             ImageButton BTN_Modifier = new ImageButton();
             BTN_Modifier.CssClass = "ChatImage";
             BTN_Modifier.ImageUrl = "Images/edit.png";
-            BTN_Modifier.Click += ChatRoom.BTN_Modifier_Click;
+            BTN_Modifier.Click += BTN_Modifier_Click;
             Modifier.Controls.Add(BTN_Modifier);
             BTN_Modifier.ID = "M" + Id_Message.ToString();
 
@@ -128,7 +128,7 @@ namespace TP1_ASP.NET
             ImageButton BTN_Supprimer = new ImageButton();
             BTN_Supprimer.CssClass = "ChatImage";
             BTN_Supprimer.ImageUrl = "Images/delete.png";
-            BTN_Supprimer.Click += ChatRoom.BTN_Supprimer_Click;
+            BTN_Supprimer.Click += BTN_Supprimer_Click;
             Supprimer.Controls.Add(BTN_Supprimer);
             BTN_Supprimer.ID = "S" + Id_Message.ToString();
 
@@ -140,6 +140,21 @@ namespace TP1_ASP.NET
             tr.Cells.Add(Supprimer);
             t.Rows.Add(tr);
         }
+
+        public void BTN_Modifier_Click(object sender, EventArgs e)
+        {
+            ImageButton button = (ImageButton)sender;
+            string buttonId = button.ID;
+
+            string Message = RechercherMessage(buttonId.Remove(0,1));
+            ChatRoom.MessageModifier = Message;
+        }
+
+        public void BTN_Supprimer_Click(object sender, ImageClickEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
 
         internal string GetFullName(string id)
         {
@@ -194,7 +209,7 @@ namespace TP1_ASP.NET
             if(reader.Read())
             {
                 EndQuerySQL();
-                return reader.GetInt64(0);
+                return reader.GetInt32(0);
             }
             EndQuerySQL();
             return 0;
