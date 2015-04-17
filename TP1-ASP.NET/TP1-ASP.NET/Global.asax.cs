@@ -29,20 +29,24 @@ namespace TP1_ASP.NET
         public void Session_End()
         {
             Application.Lock();
-            // Mettre connecter a true
-            Session["Users"] = Index1.userOnline;
-
-            if (Session["Selected_ID"] != null && Index1.userOnline.SelectByID((String)Session["Selected_ID"]))
+            if(Index1.login != null)
             {
-                List<string> Fields = Index1.userOnline.LoadFields((String)Session["Selected_ID"]);
+                // Mettre connecter a true
+                Session["Users"] = Index1.userOnline;
 
-                Index1.userOnline.GetValues();
+                if (Session["Selected_ID"] != null && Index1.userOnline.SelectByID((String)Session["Selected_ID"]))
+                {
+                    List<string> Fields = Index1.userOnline.LoadFields((String)Session["Selected_ID"]);
 
-                Index1.userOnline.Deconnecter();
+                    Index1.userOnline.GetValues();
+
+                    Index1.userOnline.Deconnecter();
+                }
+
+                Index1.login.LogoutDate = DateTime.Now;
+                Index1.login.Insert();
             }
-
-            Index1.login.LogoutDate = DateTime.Now;
-            Index1.login.Insert();
+            
             
             Application.UnLock();
         }

@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="Threads.aspx.cs" Inherits="TP1_ASP.NET.Threads" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:UpdatePanel runat="server">
-       <ContentTemplate>
+    <asp:UpdatePanel ID="UPN_Threads" runat="server">
+        <ContentTemplate>        
             <table>
                 <tr>
                     <td>
@@ -14,7 +14,9 @@
                 </tr>
                 <tr>
                     <td>
-                        <asp:ListBox ID="LB_Threads" runat="server" Height="190px" Width="150px" OnSelectedIndexChanged="LB_Threads_SelectedIndexChanged"></asp:ListBox>
+                        
+                                <asp:Panel ID="PN_Threads" runat="server" ScrollBars="Vertical"></asp:Panel>
+                           
                     </td>
                     <td>
                         <asp:TextBox ID="TB_Titre" runat="server"></asp:TextBox>
@@ -48,10 +50,10 @@
                         </asp:Panel>
                     </td>
                 </tr>
-            </table>
-       </ContentTemplate>
-       <Triggers>
-           <asp:AsyncPostBackTrigger ControlID="LB_Threads" EventName="SelectedIndexChanged" />
-       </Triggers>
+              </table>
+            </ContentTemplate>
+        <Triggers>
+
+        </Triggers>
     </asp:UpdatePanel>
 </asp:Content>
