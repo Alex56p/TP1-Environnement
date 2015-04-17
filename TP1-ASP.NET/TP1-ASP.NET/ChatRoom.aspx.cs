@@ -72,6 +72,9 @@ namespace TP1_ASP.NET
             TB_Text.Text = "";
         }
 
+
+        // SUCE MON POIL
+
         // Afficher les threads
         private void AfficherDiscussions()
         {
