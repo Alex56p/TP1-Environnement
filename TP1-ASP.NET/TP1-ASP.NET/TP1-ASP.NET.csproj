@@ -170,6 +170,7 @@
     </Compile>
     <Compile Include="ThreadsTable.cs" />
     <Compile Include="Threads_Messages.cs" />
+    <Compile Include="Threads_Access.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

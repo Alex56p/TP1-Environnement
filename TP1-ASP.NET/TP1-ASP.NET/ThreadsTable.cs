@@ -70,26 +70,23 @@ namespace TP1_ASP.NET
             return threads;
         }
 
-        internal void getUsers(Panel panel)
+        internal void getUsers(Table table)
         {
-            Table table = new Table();
-
-            QuerySQL("SELECT UserName, Avatar FROM PERSONNES");
+            QuerySQL("SELECT ID,UserName, Avatar FROM PERSONNES");
             if (reader.HasRows)
             {
                 while (reader.Read())
                 {
                     // Insertion des données
                     TableRow tr = new TableRow();
-                    InsertionUserName(tr, reader.GetString(0));
-                    InsertionPhoto(tr, reader.GetString(1));
-                    InsertionCheckBox(tr);
+                    InsertionCheckBox(tr, reader.GetInt64(0));
+                    InsertionPhoto(tr, reader.GetString(2));
+                    InsertionUserName(tr, reader.GetString(1));
+                    
                     table.Rows.Add(tr);
                 }
             }
             EndQuerySQL();
-
-            panel.Controls.Add(table);
         }
 
         internal string getCreatorFullName(string Thread_id)
@@ -151,14 +148,16 @@ namespace TP1_ASP.NET
             tr.Cells.Add(td);
         }
 
-        private void InsertionCheckBox(TableRow tr)
+        private void InsertionCheckBox(TableRow tr, long id)
         {
             TableCell td = new TableCell();
             CheckBox cb = new CheckBox();
+            cb.ID = id.ToString();
 
             td.Controls.Add(cb);
             tr.Cells.Add(td);
         }
+
 
         internal void ShowThreads(ListBox lb)
         {
