@@ -114,31 +114,49 @@ namespace TP1_ASP.NET
             TableCell TextMessage = new TableCell();
             TextMessage.Text = Message;
 
-            //Modifier
-            TableCell Modifier = new TableCell();
-            ImageButton BTN_Modifier = new ImageButton();
-            BTN_Modifier.CssClass = "ChatImage";
-            BTN_Modifier.ImageUrl = "Images/edit.png";
-            BTN_Modifier.Click += BTN_Modifier_Click;
-            Modifier.Controls.Add(BTN_Modifier);
-            BTN_Modifier.ID = "M" + Id_Message.ToString();
+            if(GetUserName(User_ID) == "Admin" || User_ID == long.Parse(user_id.ToString()))
+            {
+                //Modifier
+                TableCell Modifier = new TableCell();
+                ImageButton BTN_Modifier = new ImageButton();
+                BTN_Modifier.CssClass = "ChatImage";
+                BTN_Modifier.ImageUrl = "Images/edit.png";
+                BTN_Modifier.Click += BTN_Modifier_Click;
+                Modifier.Controls.Add(BTN_Modifier);
+                BTN_Modifier.ID = "M" + Id_Message.ToString();
 
-            //Effacer
-            TableCell Supprimer = new TableCell();
-            ImageButton BTN_Supprimer = new ImageButton();
-            BTN_Supprimer.CssClass = "ChatImage";
-            BTN_Supprimer.ImageUrl = "Images/delete.png";
-            BTN_Supprimer.Click += BTN_Supprimer_Click;
-            Supprimer.Controls.Add(BTN_Supprimer);
-            BTN_Supprimer.ID = "S" + Id_Message.ToString();
+                //Effacer
+                TableCell Supprimer = new TableCell();
+                ImageButton BTN_Supprimer = new ImageButton();
+                BTN_Supprimer.CssClass = "ChatImage";
+                BTN_Supprimer.ImageUrl = "Images/delete.png";
+                BTN_Supprimer.Click += BTN_Supprimer_Click;
+                Supprimer.Controls.Add(BTN_Supprimer);
+                BTN_Supprimer.ID = "S" + Id_Message.ToString();
 
+                tr.Cells.Add(Modifier);
+                tr.Cells.Add(Supprimer);
+            }
+            
             tr.Cells.Add(picture);
             tr.Cells.Add(UserName);
             tr.Cells.Add(dateMessage);
             tr.Cells.Add(TextMessage);
-            tr.Cells.Add(Modifier);
-            tr.Cells.Add(Supprimer);
             t.Rows.Add(tr);
+        }
+
+        public string GetUserName(long user_id)
+        {
+            QuerySQL("Select UserName FROM PERSONNES Where ID = " + user_id);
+
+            if (reader.Read())
+            {
+                string read = reader.GetString(0);
+                EndQuerySQL();
+                return read;
+            }
+            EndQuerySQL();
+            return "";
         }
 
         public void BTN_Modifier_Click(object sender, EventArgs e)

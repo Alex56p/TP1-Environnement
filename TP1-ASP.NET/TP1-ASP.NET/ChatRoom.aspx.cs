@@ -87,6 +87,7 @@ namespace TP1_ASP.NET
         private void AfficherMessages()
         {
             Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
+            tm.User_ID = long.Parse(Session["Selected_ID"].ToString());
             tm.ShowMessages(Thread_ID, Chat);
             ThreadsTable tt = new ThreadsTable((string)Application["MainDB"], this);
             Titre.Text = ListBox1.SelectedItem.ToString();
