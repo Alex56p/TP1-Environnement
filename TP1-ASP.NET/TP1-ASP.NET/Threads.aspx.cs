@@ -165,7 +165,12 @@ namespace TP1_ASP.NET
                     t.Date_of_Creation = DateTime.Now;
                     t.Insert();
 
+                    AfficherThreads();
+                    AfficherUsagers();
+                    CheckUsagers();
+
                     InsertionUsagers();
+
                 }
             }
             AfficherThreads();
@@ -229,6 +234,7 @@ namespace TP1_ASP.NET
                 ThreadsTable threads = new ThreadsTable((String)Application["MainDB"], this);
                 threads.DeleteRecordByID(Selected_ThreadID);
             }
+            TB_Titre.Text = "";
             AfficherThreads();
             AfficherUsagers();
             CheckUsagers();

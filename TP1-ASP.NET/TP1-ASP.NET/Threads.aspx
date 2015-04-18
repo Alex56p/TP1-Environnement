@@ -51,6 +51,7 @@
               </table>
             </ContentTemplate>
         <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="BTN_Nouveau" EventName="Click" />
         </Triggers>
     </asp:UpdatePanel>
 </asp:Content>
