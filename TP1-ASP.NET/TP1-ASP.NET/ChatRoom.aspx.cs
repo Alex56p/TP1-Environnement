@@ -9,7 +9,7 @@ namespace TP1_ASP.NET
 {
     public partial class ChatRoom : System.Web.UI.Page
     {
-        string Thread_ID;
+        static string Selected_ThreadID = "";
         public static string MessageModifier = "";
         public static string Id_Modifier = "";
 
@@ -21,40 +21,69 @@ namespace TP1_ASP.NET
                 TB_Text.Text = MessageModifier;
 
 
-            if(Session["Selected_ID"] == null)
+            if (Session["Selected_ID"] == null)
             {
                 Response.Redirect("Login1.aspx");
             }
-            
+
             // Afficher les threads
             AfficherDiscussions();
 
             // S'il n'y a pas de discussions
-            if (ListBox1.Items.Count == 0)
-                BTN_Envoyer.Enabled = false;
-            else
+            if (Selected_ThreadID == "")
             {
-                // S'il n'y a pas de discussion sélectionné
-                if (ListBox1.SelectedItem == null)
+                Button btn = GetFirstButton();
+                if (btn != null)
+                    Selected_ThreadID = btn.ID.Substring(4);
+            }
+
+            if (!IsPostBack)
+            {
+                AfficherMessages();
+                AfficherUsagers();
+            }
+
+        }
+
+        private Button GetFirstButton()
+        {
+            foreach (Control c in PN_Threads.Controls)
+            {
+                if (c.GetType().ToString().Equals("System.Web.UI.WebControls.Table"))
                 {
-                    ListBox1.SelectedIndex = 0;
-                    ThreadsTable tt = new ThreadsTable((string)Application["MainDB"], this);
-                    Thread_ID = tt.getIDThreads(ListBox1.SelectedItem.ToString());
-                    AfficherMessages();
-                    AfficherUsagers();
+                    foreach (Control c2 in c.Controls)
+                    {
+                        if (c2.GetType().ToString().Equals("System.Web.UI.WebControls.TableRow"))
+                        {
+                            foreach (Control c3 in c2.Controls)
+                            {
+                                if (c3.GetType().ToString().Equals("System.Web.UI.WebControls.TableCell"))
+                                {
+                                    foreach (Control c4 in c3.Controls)
+                                    {
+                                        if (c4.GetType().ToString().Equals("System.Web.UI.WebControls.Button"))
+                                        {
+                                            return (Button)c4;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                 }
             }
-            
+            return null;
         }
 
         // Ajouter un message dans le thread
         protected void BTN_Envoyer_Click(object sender, EventArgs e)
         {
             // Ajouter le message dans la BD
-            Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);  
-            if(MessageModifier != "")
+            Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
+            if (MessageModifier != "")
             {
-                tm.Thread_ID = long.Parse(Thread_ID);
+                tm.Thread_ID = long.Parse(Selected_ThreadID);
                 tm.User_ID = long.Parse(Session["Selected_ID"].ToString());
                 tm.Date_of_Creation = DateTime.Now.ToShortDateString();
                 tm.Message = TB_Text.Text;
@@ -66,40 +95,81 @@ namespace TP1_ASP.NET
                 MessageModifier = "";
                 Id_Modifier = "";
             }
-            
+
             Chat.Controls.Clear();
             AfficherMessages();
             TB_Text.Text = "";
         }
 
 
-        // SUCE MON POIL
-
         // Afficher les threads
         private void AfficherDiscussions()
         {
-            ListBox1.Items.Clear();
+            PN_Threads.Controls.Clear();
             ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
-            t.ShowThreads(ListBox1);
+            Table table = new Table();
+            PN_Threads.Controls.Add(table);
+            TableRow tr;
+            TableCell td;
+
+            List<String> threads = t.getThreads();
+            for (int i = 0; i < threads.Count; i++)
+            {
+                tr = new TableRow();
+                td = new TableCell();
+                td.CssClass = "ThreadButton";
+                Button btn = new Button();
+
+                btn.Text = threads[i];
+                btn.ClientIDMode = ClientIDMode.Static;
+                string thread_id = t.getIDThreads(btn.Text);
+                btn.ID = "BTN_" + thread_id;
+                if (thread_id == Selected_ThreadID)
+                    btn.BackColor = System.Drawing.Color.LightBlue;
+                else
+                    btn.BackColor = System.Drawing.Color.LightGray;
+                btn.Click += btn_Click;
+                btn.CssClass = "ThreadButton";
+                td.Controls.Add(btn);
+                tr.Controls.Add(td);
+                table.Controls.Add(tr);
+
+                AsyncPostBackTrigger trigger = new AsyncPostBackTrigger();
+                trigger.ControlID = btn.ID;
+                trigger.EventName = "Click";
+                UPN_Threads.Triggers.Add(trigger);
+                UPN_Users.Triggers.Add(trigger);
+            }
+        }
+
+        private void btn_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            Selected_ThreadID = btn.ID.Substring(4);
+            Titre.Text = btn.Text;
+            AfficherDiscussions();
+            AfficherUsagers();
+            AfficherMessages();
         }
 
         // Afficher les messages du thread
         private void AfficherMessages()
         {
+            Button btn = (Button)FindControl(Selected_ThreadID);
             Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
             tm.User_ID = long.Parse(Session["Selected_ID"].ToString());
-            tm.ShowMessages(Thread_ID, Chat);
+            tm.ShowMessages(Selected_ThreadID, Chat);
             ThreadsTable tt = new ThreadsTable((string)Application["MainDB"], this);
-            Titre.Text = ListBox1.SelectedItem.ToString();
-            Createur.Text = tt.getCreatorFullName(Thread_ID);
-            Date.Text = tt.getThreadsDate(Thread_ID);        
+            //Titre.Text = ListBox1.SelectedItem.ToString(); *****************************************
+            Createur.Text = tt.getCreatorFullName(Selected_ThreadID);
+            Date.Text = tt.getThreadsDate(Selected_ThreadID);  
         }
-        
+
         // Afficher les usagers du thread
         private void AfficherUsagers()
         {
             ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
-            t.GetUsers_thread(TableUsers, Thread_ID);
+            t.GetUsers_thread(TableUsers, Selected_ThreadID);
         }
 
         // Updater pour recevoir les messages des autres users
@@ -107,8 +177,13 @@ namespace TP1_ASP.NET
         {
             Chat.Controls.Clear();
             AfficherMessages();
+            AfficherUsagers();
             if (MessageModifier != "")
                 TB_Text.Text = MessageModifier;
+        }
+        protected void BTN_Retour_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Index1.aspx");
         }
     }
 }

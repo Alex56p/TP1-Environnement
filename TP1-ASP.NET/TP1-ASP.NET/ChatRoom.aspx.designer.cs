@@ -40,31 +40,31 @@ namespace TP1_ASP.NET {
         protected global::System.Web.UI.WebControls.Label Date;
         
         /// <summary>
-        /// Contrôle Panel1.
+        /// Contrôle UPN_Threads.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel1;
+        protected global::System.Web.UI.UpdatePanel UPN_Threads;
         
         /// <summary>
-        /// Contrôle ListBox1.
+        /// Contrôle PN_Threads.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox ListBox1;
+        protected global::System.Web.UI.WebControls.Panel PN_Threads;
         
         /// <summary>
-        /// Contrôle UpdatePanel_Chat.
+        /// Contrôle UPN_Chat.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel_Chat;
+        protected global::System.Web.UI.UpdatePanel UPN_Chat;
         
         /// <summary>
         /// Contrôle TimerPanel.
@@ -92,6 +92,15 @@ namespace TP1_ASP.NET {
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table Chat;
+        
+        /// <summary>
+        /// Contrôle UPN_Users.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UPN_Users;
         
         /// <summary>
         /// Contrôle Panel_Users.
@@ -128,5 +137,14 @@ namespace TP1_ASP.NET {
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BTN_Envoyer;
+        
+        /// <summary>
+        /// Contrôle BTN_Retour.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BTN_Retour;
     }
 }
