@@ -40,13 +40,22 @@ namespace TP1_ASP.NET {
         protected global::System.Web.UI.WebControls.Label Date;
         
         /// <summary>
-        /// Contrôle PN_Threads.
+        /// Contrôle Panel1.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PN_Threads;
+        protected global::System.Web.UI.WebControls.Panel Panel1;
+        
+        /// <summary>
+        /// Contrôle ListBox1.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox ListBox1;
         
         /// <summary>
         /// Contrôle UpdatePanel_Chat.
@@ -119,14 +128,5 @@ namespace TP1_ASP.NET {
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BTN_Envoyer;
-        
-        /// <summary>
-        /// Contrôle BTN_Retour.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BTN_Retour;
     }
 }
