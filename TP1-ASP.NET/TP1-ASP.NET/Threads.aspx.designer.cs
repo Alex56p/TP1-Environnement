@@ -13,15 +13,6 @@ namespace TP1_ASP.NET {
     public partial class Threads {
         
         /// <summary>
-        /// Contrôle UPN_Threads.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UPN_Threads;
-        
-        /// <summary>
         /// Contrôle Label1.
         /// </summary>
         /// <remarks>
@@ -38,6 +29,15 @@ namespace TP1_ASP.NET {
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label2;
+        
+        /// <summary>
+        /// Contrôle UPN_Threads.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UPN_Threads;
         
         /// <summary>
         /// Contrôle PN_Threads.
@@ -119,6 +119,15 @@ namespace TP1_ASP.NET {
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label4;
+        
+        /// <summary>
+        /// Contrôle UPN_Usagers.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UPN_Usagers;
         
         /// <summary>
         /// Contrôle Panel_Usagers.

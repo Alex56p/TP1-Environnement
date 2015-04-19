@@ -22,15 +22,14 @@ namespace TP1_ASP.NET
             {
                 Button btn = GetFirstButton();
                 if (btn != null)
+                {
                     Selected_ThreadID = btn.ID.Substring(4);
-                TB_Titre.Text = btn.Text;
+                    TB_Titre.Text = btn.Text;
+                }
+                   
             }
-
-            if(!IsPostBack)
-            {
-                AfficherUsagers();
-                CheckUsagers();   
-            }
+            AfficherUsagers();
+            CheckUsagers();   
         }
 
         private Button GetFirstButton()
@@ -100,6 +99,7 @@ namespace TP1_ASP.NET
                 trigger.ControlID = btn.ID;
                 trigger.EventName = "Click";
                 UPN_Threads.Triggers.Add(trigger);
+                UPN_Usagers.Triggers.Add(trigger);
             }
         }
 
@@ -115,33 +115,37 @@ namespace TP1_ASP.NET
 
         private void AfficherUsagers()
         {
+            Table_Usagers.Controls.Clear();
             ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
             t.getUsers(Table_Usagers);
         }
 
         private void CheckUsagers()
         {
-            Threads_Access ta = new Threads_Access((string)Application["MainDB"], this);
-            foreach (Control c in Table_Usagers.Controls)
+            if(Selected_ThreadID != "")
             {
-                if (c.GetType().ToString().Equals("System.Web.UI.WebControls.TableRow"))
+                Threads_Access ta = new Threads_Access((string)Application["MainDB"], this);
+                foreach (Control c in Table_Usagers.Controls)
                 {
-                    foreach (Control c2 in c.Controls)
+                    if (c.GetType().ToString().Equals("System.Web.UI.WebControls.TableRow"))
                     {
-                        if (c2.GetType().ToString().Equals("System.Web.UI.WebControls.TableCell"))
+                        foreach (Control c2 in c.Controls)
                         {
-                            foreach (Control c3 in c2.Controls)
+                            if (c2.GetType().ToString().Equals("System.Web.UI.WebControls.TableCell"))
                             {
-                                if (c3.GetType().ToString().Equals("System.Web.UI.WebControls.CheckBox"))
+                                foreach (Control c3 in c2.Controls)
                                 {
-                                    CheckBox cb = (CheckBox)c3;
-                                    if (ta.isInvited(cb.ID, Selected_ThreadID))
+                                    if (c3.GetType().ToString().Equals("System.Web.UI.WebControls.CheckBox"))
                                     {
-                                        cb.Checked = true;
-                                    }
-                                    else
-                                    {
-                                        cb.Checked = false;
+                                        CheckBox cb = (CheckBox)c3;
+                                        if (ta.isInvited(cb.ID, Selected_ThreadID))
+                                        {
+                                            cb.Checked = true;
+                                        }
+                                        else
+                                        {
+                                            cb.Checked = false;
+                                        }
                                     }
                                 }
                             }
@@ -149,6 +153,7 @@ namespace TP1_ASP.NET
                     }
                 }
             }
+            
         }
 
         protected void BTN_Nouveau_Click(object sender, EventArgs e)
@@ -164,18 +169,14 @@ namespace TP1_ASP.NET
                 
                     t.Date_of_Creation = DateTime.Now;
                     t.Insert();
+                    Selected_ThreadID = t.getIDThreads(TB_Titre.Text);
 
+                    InsertionUsagers();
                     AfficherThreads();
                     AfficherUsagers();
                     CheckUsagers();
-
-                    InsertionUsagers();
-
                 }
             }
-            AfficherThreads();
-            AfficherUsagers();
-            CheckUsagers();
         }
 
         private void InsertionUsagers()
@@ -220,11 +221,11 @@ namespace TP1_ASP.NET
                     threads.GetValues();
                     threads.Title = TB_Titre.Text;
                     threads.Update();
+                    AfficherThreads();
+                    AfficherUsagers();
+                    CheckUsagers();
                 }
             }
-            AfficherThreads();
-            AfficherUsagers();
-            CheckUsagers();
         }
 
         protected void BTN_Effacer_Click(object sender, EventArgs e)
@@ -235,6 +236,7 @@ namespace TP1_ASP.NET
                 threads.DeleteRecordByID(Selected_ThreadID);
             }
             TB_Titre.Text = "";
+            Selected_ThreadID = "";
             AfficherThreads();
             AfficherUsagers();
             CheckUsagers();
