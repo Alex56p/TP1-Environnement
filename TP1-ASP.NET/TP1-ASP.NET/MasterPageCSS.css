@@ -83,3 +83,6 @@ tbody {
     display:block;
 }
 
+#ThreadButton{
+    width: 70px;
+}
