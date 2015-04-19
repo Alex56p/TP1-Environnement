@@ -165,10 +165,6 @@ namespace TP1_ASP.NET
                     t.Date_of_Creation = DateTime.Now;
                     t.Insert();
 
-                    AfficherThreads();
-                    AfficherUsagers();
-                    CheckUsagers();
-
                     InsertionUsagers();
 
                 }
