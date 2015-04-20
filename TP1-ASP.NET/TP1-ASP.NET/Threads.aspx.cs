@@ -228,6 +228,7 @@ namespace TP1_ASP.NET
                     threads.GetValues();
                     threads.Title = TB_Titre.Text;
                     threads.Update();
+                    InsertionUsagers();
                     AfficherThreads();
                     AfficherUsagers();
                     CheckUsagers();
