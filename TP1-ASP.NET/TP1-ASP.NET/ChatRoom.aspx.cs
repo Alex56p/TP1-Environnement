@@ -37,11 +37,7 @@ namespace TP1_ASP.NET
                     Selected_ThreadID = btn.ID.Substring(4);
             }
 
-            if (!IsPostBack)
-            {
-                AfficherMessages();
-                AfficherUsagers();
-            }
+            AfficherMessages();
 
         }
 
@@ -81,7 +77,7 @@ namespace TP1_ASP.NET
         {
             // Ajouter le message dans la BD
             Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
-            if (MessageModifier != "")
+            if (MessageModifier == "")
             {
                 tm.Thread_ID = long.Parse(Selected_ThreadID);
                 tm.User_ID = long.Parse(Session["Selected_ID"].ToString());
@@ -112,7 +108,7 @@ namespace TP1_ASP.NET
             TableRow tr;
             TableCell td;
 
-            List<String> threads = t.getThreads();
+            List<String> threads = t.getThreadsById(Session["Selected_ID"].ToString());
             for (int i = 0; i < threads.Count; i++)
             {
                 tr = new TableRow();

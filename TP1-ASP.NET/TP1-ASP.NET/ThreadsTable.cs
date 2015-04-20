@@ -236,5 +236,41 @@ namespace TP1_ASP.NET
                 return false;
             }   
         }
+
+        internal List<string> getThreadsById(string id)
+        {
+            List<string> threads = new List<string>();
+
+            if(GetUserName(id) == "Admin")
+            {
+                QuerySQL("SELECT TITLE FROM THREADS");
+            }
+            else
+            {
+                QuerySQL("SELECT TITLE FROM THREADS WHERE ID = (SELECT THREAD_ID FROM THREADS_ACCESS WHERE USER_ID = " + id + ")");
+            }
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    threads.Add(reader.GetString(0));
+                }
+            }
+            EndQuerySQL();
+            return threads;
+        }
+
+        public string GetUserName(string ID)
+        {
+            QuerySQL("Select UserName FROM PERSONNES Where ID = " + ID);
+            if (reader.Read())
+            {
+                string read = reader.GetString(0);
+                EndQuerySQL();
+                return read;
+            }
+            EndQuerySQL();
+            return "";
+        }
     }
 }
