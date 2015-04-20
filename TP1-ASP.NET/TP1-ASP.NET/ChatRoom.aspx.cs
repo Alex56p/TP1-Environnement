@@ -10,15 +10,12 @@ namespace TP1_ASP.NET
     public partial class ChatRoom : System.Web.UI.Page
     {
         static string Selected_ThreadID = "";
-        public static string MessageModifier = "";
         public static string Id_Modifier = "";
 
         // Page Load
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            if (MessageModifier != "")
-                TB_Text.Text = MessageModifier;
+            Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
 
 
             if (Session["Selected_ID"] == null)
@@ -39,6 +36,95 @@ namespace TP1_ASP.NET
 
             AfficherMessages();
 
+        }
+
+        public void AddMessage(string Id_Message, string thread_id, string User_id, string Date, string Message)
+        {
+
+            Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
+
+
+            TableRow tr = new TableRow();
+            tr.CssClass = "grid";
+
+            //Image
+            TableCell picture = new TableCell();
+            picture.CssClass = "ChatImage";
+            Image img = new Image();
+            img.CssClass = "ChatImage";
+            img.ImageUrl = "Avatars/" + tm.GetAvatar(User_id);
+            picture.Controls.Add(img);
+
+            //UserName
+            TableCell UserName = new TableCell();
+            UserName.Text = tm.GetFullName(User_id);
+
+            //Date
+            TableCell dateMessage = new TableCell();
+            dateMessage.Text = Date;
+
+            //Text
+            TableCell TextMessage = new TableCell();
+            TextMessage.Text = Message;
+
+
+            if (tm.GetUserName(long.Parse(Session["Selected_ID"].ToString())) == "Admin" || User_id == Session["Selected_ID"].ToString())
+            {
+                //Modifier
+                TableCell Modifier = new TableCell();
+                ImageButton BTN_Modifier = new ImageButton();
+                BTN_Modifier.CssClass = "ChatImage";
+                BTN_Modifier.ImageUrl = "Images/edit.png";
+                BTN_Modifier.Click += BTN_Modifier_Click;
+                Modifier.Controls.Add(BTN_Modifier);
+                BTN_Modifier.ID = "M" + Id_Message.ToString();
+
+                //Effacer
+                TableCell Supprimer = new TableCell();
+                ImageButton BTN_Supprimer = new ImageButton();
+                BTN_Supprimer.CssClass = "ChatImage";
+                BTN_Supprimer.ImageUrl = "Images/delete.png";
+                BTN_Supprimer.Click += BTN_Supprimer_Click;
+                Supprimer.Controls.Add(BTN_Supprimer);
+                BTN_Supprimer.ID = "S" + Id_Message.ToString();
+
+                //AsyncPostBackTrigger trigger = new AsyncPostBackTrigger();
+                //trigger.ControlID = BTN_Supprimer.ID;
+                //trigger.EventName = "Click";
+                //UPN_Chat.Triggers.Add(trigger);
+
+                tr.Cells.Add(Modifier);
+                tr.Cells.Add(Supprimer);
+            }
+
+            tr.Cells.Add(picture);
+            tr.Cells.Add(UserName);
+            tr.Cells.Add(dateMessage);
+            tr.Cells.Add(TextMessage);
+            Chat.Rows.Add(tr);
+
+        }
+
+        public void BTN_Modifier_Click(object sender, EventArgs e)
+        {
+            ImageButton button = (ImageButton)sender;
+            string buttonId = button.ID;
+
+            Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
+
+            string Message = tm.RechercherMessage(buttonId.Remove(0, 1));
+            Session["Message_Modifier_id"] = buttonId.Remove(0,1);
+            TB_Text.Text = Message;
+        }
+
+        public void BTN_Supprimer_Click(object sender, ImageClickEventArgs e)
+        {
+            ImageButton button = (ImageButton)sender;
+            string Id = button.ID.Remove(0, 1);
+
+            Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
+
+            tm.DeleteRecordByID(Id);
         }
 
         private Button GetFirstButton()
@@ -77,7 +163,7 @@ namespace TP1_ASP.NET
         {
             // Ajouter le message dans la BD
             Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
-            if (MessageModifier == "")
+            if (Session["Message_Modifier_id"].ToString() == null)
             {
                 tm.Thread_ID = long.Parse(Selected_ThreadID);
                 tm.User_ID = long.Parse(Session["Selected_ID"].ToString());
@@ -87,9 +173,8 @@ namespace TP1_ASP.NET
             }
             else
             {
-                tm.UpdateMessage(Id_Modifier, TB_Text.Text);
-                MessageModifier = "";
-                Id_Modifier = "";
+                tm.UpdateMessage(Session["Message_Modifier_id"].ToString(), TB_Text.Text);
+                Session["Message_Modifier_id"] = null;
             }
 
             Chat.Controls.Clear();
@@ -157,7 +242,14 @@ namespace TP1_ASP.NET
                 Button btn = (Button)FindControl(Selected_ThreadID);
                 Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
                 tm.User_ID = long.Parse(Session["Selected_ID"].ToString());
-                tm.ShowMessages(Selected_ThreadID, Chat, UPN_Chat);
+                List<String> threads = tm.ShowMessages(Selected_ThreadID, Chat, UPN_Chat);
+
+                // Afficher les messages
+                for(int i = 0; i < threads.Count; i += 5)
+                {
+                    AddMessage(threads[i], threads[i + 1], threads[i + 2], threads[i + 3], threads[i + 4]);
+                }
+
                 ThreadsTable tt = new ThreadsTable((string)Application["MainDB"], this);
                 //Titre.Text = ListBox1.SelectedItem.ToString(); *****************************************
                 Createur.Text = tt.getCreatorFullName(Selected_ThreadID);
@@ -176,11 +268,12 @@ namespace TP1_ASP.NET
         // Updater pour recevoir les messages des autres users
         protected void TimerPanel_Tick(object sender, EventArgs e)
         {
+            Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
             Chat.Controls.Clear();
             AfficherMessages();
             AfficherUsagers();
-            if (MessageModifier != "")
-                TB_Text.Text = MessageModifier;
+            if (Session["Message_Modifier_id"].ToString() != null)
+                TB_Text.Text = tm.RechercherMessage(Session["Message_Modifier_id"].ToString());
         }
         protected void BTN_Retour_Click(object sender, EventArgs e)
         {
