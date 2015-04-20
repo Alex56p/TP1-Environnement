@@ -45,6 +45,10 @@ tbody {
     text-align: right;
 }
 
+.textcenter{
+    text-align: center;
+}
+
 #RegenarateCaptcha {
     width: 25px;
     height: 25px;
