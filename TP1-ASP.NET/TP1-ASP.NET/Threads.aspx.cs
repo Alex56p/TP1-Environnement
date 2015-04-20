@@ -10,7 +10,7 @@ namespace TP1_ASP.NET
     public partial class Threads : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
+       {
             if (Session["Selected_ID"] == null)
             {
                 Response.Redirect("Login1.aspx");
@@ -69,10 +69,6 @@ namespace TP1_ASP.NET
                 td.CssClass = "ThreadButton";
                 Button btn = new Button();
                 
-                ////////////////////////
-                if (Session["Selected_ThreadID"].ToString() != "")
-                    td.CssClass = "ThreadButton";
-                /////////////////////////
                 btn.Text = threads[i];
                 btn.ClientIDMode = ClientIDMode.Static;
                 string thread_id = t.getIDThreads(btn.Text);
@@ -354,6 +350,25 @@ namespace TP1_ASP.NET
                     }
                 }
             }
+        }
+
+        protected void CV_Titre_Validator(object source, ServerValidateEventArgs args)
+        {
+            TB_Titre.BackColor = System.Drawing.Color.Empty;
+            ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
+            args.IsValid = !t.Exist(TB_Titre.Text);
+            if (!args.IsValid)
+                TB_Titre.BackColor = System.Drawing.Color.Red;
+        }
+
+
+        protected void CV_Checkbox_Validator(object source, ServerValidateEventArgs args)
+        {
+            Panel_Usagers.BackColor = System.Drawing.Color.Empty;
+            ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
+            args.IsValid = AtLeastOne();
+            if (!args.IsValid)
+                Panel_Usagers.BackColor = System.Drawing.Color.Red;
         }
     }
 }

@@ -67,6 +67,15 @@ namespace TP1_ASP.NET {
         protected global::System.Web.UI.WebControls.TextBox TB_Titre;
         
         /// <summary>
+        /// Contrôle RFV_TB_Username.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RFV_TB_Username;
+        
+        /// <summary>
         /// Contrôle BTN_Nouveau.
         /// </summary>
         /// <remarks>
@@ -101,6 +110,24 @@ namespace TP1_ASP.NET {
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BTN_Creer;
+        
+        /// <summary>
+        /// Contrôle CV_Titre.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CV_Titre;
+        
+        /// <summary>
+        /// Contrôle CV_Checkbox.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CV_Checkbox;
         
         /// <summary>
         /// Contrôle BTN_Effacer.
@@ -173,5 +200,14 @@ namespace TP1_ASP.NET {
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table Table_Usagers;
+        
+        /// <summary>
+        /// Contrôle VGS_Logi.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary VGS_Logi;
     }
 }
