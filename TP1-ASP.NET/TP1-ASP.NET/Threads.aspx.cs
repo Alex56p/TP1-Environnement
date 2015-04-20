@@ -225,13 +225,11 @@ namespace TP1_ASP.NET
                     threads.GetValues();
                     threads.Title = TB_Titre.Text;
                     threads.Update();
+                    InsertionUsagers();
                     AfficherThreads();
                     AfficherUsagers();
                     CheckUsagers();
                 }
-
-                Threads_Access ta = new Threads_Access((String)Application["MainDB"], this);
-
             }
         }
 
