@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Chat Room..." Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="ChatRoom.aspx.cs" Inherits="TP1_ASP.NET.ChatRoom" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div style="margin: auto; width:45%; background-color: lightgray; padding-left: 10px; padding-top: 10px; border: 1px solid black;">
+    <div style="margin: auto; width: 45%; background-color: lightgray; padding-left: 10px; padding-top: 10px; border: 1px solid black;">
         <asp:Panel runat="server" DefaultButton="BTN_Envoyer">
             <div class="">
                 <table style="width: 849px">
@@ -17,28 +17,34 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:UpdatePanel ID="UPN_Threads" runat="server">
-                                <ContentTemplate>
-                                    <asp:Panel ID="PN_Threads" runat="server" ScrollBars="Vertical"></asp:Panel>
-                                </ContentTemplate>
-                                <Triggers>
-                                </Triggers>
-                            </asp:UpdatePanel>
+                            <div style="margin: auto; background-color: white;">
+
+                                <asp:UpdatePanel ID="UPN_Threads" runat="server">
+                                    <ContentTemplate>
+                                        <asp:Panel ID="PN_Threads" runat="server" ScrollBars="Vertical"></asp:Panel>
+                                    </ContentTemplate>
+                                    <Triggers>
+                                    </Triggers>
+                                </asp:UpdatePanel>
+                            </div>
                         </td>
-                        <td style="width: 327px">
-                            <asp:UpdatePanel ID="UPN_Chat" runat="server">
-                                <ContentTemplate>
-                                    <asp:Timer ID="TimerPanel" runat="server" OnTick="TimerPanel_Tick" Interval="1000"></asp:Timer>
-                                    <asp:Panel ID="Panel_Chat" runat="server" ScrollBars="Vertical">
-                                        <asp:Table ID="Chat" runat="server"></asp:Table>
-                                    </asp:Panel>
-                                </ContentTemplate>
-                                <Triggers>
-                                </Triggers>
-                            </asp:UpdatePanel>
+                        <td style="width: 325px">
+                            <div style="margin: auto; background-color: white;">
+                                <asp:UpdatePanel ID="UPN_Chat" runat="server">
+                                    <ContentTemplate>
+                                        <asp:Timer ID="TimerPanel" runat="server" OnTick="TimerPanel_Tick" Interval="1000"></asp:Timer>
+                                        <asp:Panel ID="Panel_Chat" runat="server" ScrollBars="Vertical">
+                                            <asp:Table ID="Chat" runat="server"></asp:Table>
+                                        </asp:Panel>
+                                    </ContentTemplate>
+                                    <Triggers>
+                                    </Triggers>
+                                </asp:UpdatePanel>
+                            </div>
+
                         </td>
                         <td>
-                            <div style="float:right">
+                            <div style="margin: auto; background-color: white;">
                                 <asp:UpdatePanel ID="UPN_Users" runat="server">
                                     <ContentTemplate>
                                         <asp:Panel ID="Panel_Users" runat="server" ScrollBars="Vertical">
@@ -49,7 +55,7 @@
                                     </Triggers>
                                 </asp:UpdatePanel>
                             </div>
-                            
+
                         </td>
                     </tr>
                     <tr>
