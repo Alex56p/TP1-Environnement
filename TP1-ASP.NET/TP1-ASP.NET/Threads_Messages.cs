@@ -235,5 +235,20 @@ namespace TP1_ASP.NET
             return 0;
         }
 
+        internal List<string> getIdByThreads(string Selected_ThreadID)
+        {
+            List<string> Messages = new List<string>();
+
+            QuerySQL("SELECT ID FROM Threads_Messages WHERE Thread_Id =" + Selected_ThreadID);
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    Messages.Add(reader.GetInt64(0).ToString());
+                }
+            }
+            EndQuerySQL();
+            return Messages;
+        }
     }
 }
