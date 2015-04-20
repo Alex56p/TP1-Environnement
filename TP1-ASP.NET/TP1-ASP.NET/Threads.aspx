@@ -22,7 +22,11 @@
                 </asp:UpdatePanel>
             </td>
             <td>
-                <asp:TextBox ID="TB_Titre" runat="server"></asp:TextBox>
+                <asp:UpdatePanel ID="UPN_Titre" runat="server">
+                    <ContentTemplate>
+                        <asp:TextBox ID="TB_Titre" runat="server"></asp:TextBox>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </td>
         </tr>
         <tr>
@@ -36,7 +40,11 @@
         </tr>
         <tr>
             <td class="TD_BTN">
-                <asp:Button ID="BTN_Modifier" CssClass="TD_BTN" runat="server" Text="Modifier" OnClick="BTN_Modifier_Click" Width="70px" />
+                <asp:UpdatePanel ID="UPN_Bouton" runat="server">
+                    <ContentTemplate>
+                        <asp:Button ID="BTN_Creer" CssClass="TD_BTN" runat="server" Text="Créer" OnClick="BTN_Modifier_Click" Width="70px" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>
                 <asp:Button ID="BTN_Effacer" CssClass="TD_BTN" runat="server" Text="Effacer" Width="70px" OnClick="BTN_Effacer_Click" />
                 <asp:Button ID="BTN_Retour" CssClass="TD_BTN" runat="server" Text="Retour" Width="70px" OnClick="BTN_Retour_Click" />
             </td>

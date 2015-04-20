@@ -52,5 +52,10 @@ namespace TP1_ASP.NET
             EndQuerySQL();
             return false;
         }
+
+        internal List<string> getMessagesByThread(string Selected_ThreadID)
+        {
+
+        }
     }
 }

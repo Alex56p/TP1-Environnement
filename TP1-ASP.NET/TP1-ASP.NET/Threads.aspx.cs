@@ -17,17 +17,6 @@ namespace TP1_ASP.NET
                 Response.Redirect("Login1.aspx");
             }
             AfficherThreads(); 
-
-            if (Selected_ThreadID == "")
-            {
-                Button btn = GetFirstButton();
-                if (btn != null)
-                {
-                    Selected_ThreadID = btn.ID.Substring(4);
-                    TB_Titre.Text = btn.Text;
-                }
-                   
-            }
             AfficherUsagers();
             CheckUsagers();   
         }
@@ -57,9 +46,7 @@ namespace TP1_ASP.NET
                             }
                         }
                     }
-                        
                 }
-                
             }
             return null;
         }
@@ -98,6 +85,9 @@ namespace TP1_ASP.NET
                 AsyncPostBackTrigger trigger = new AsyncPostBackTrigger();
                 trigger.ControlID = btn.ID;
                 trigger.EventName = "Click";
+
+                UPN_Titre.Triggers.Add(trigger);
+                UPN_Bouton.Triggers.Add(trigger);
                 UPN_Threads.Triggers.Add(trigger);
                 UPN_Usagers.Triggers.Add(trigger);
             }
@@ -108,6 +98,16 @@ namespace TP1_ASP.NET
             Button btn = (Button)sender;
             Selected_ThreadID = btn.ID.Substring(4);
             TB_Titre.Text = btn.Text;
+
+            if (Selected_ThreadID == "")
+            {
+                BTN_Creer.Text = "Créer";
+            }
+            else
+            {
+                BTN_Creer.Text = "Modifier";
+            }
+
             AfficherThreads();
             AfficherUsagers();
             CheckUsagers();
@@ -158,25 +158,11 @@ namespace TP1_ASP.NET
 
         protected void BTN_Nouveau_Click(object sender, EventArgs e)
         {
-            if (TB_Titre.Text != "")
-            {
-                ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
-                if (!t.Exist(TB_Titre.Text))
-                {
-                    t.creator = int.Parse(Session["Selected_ID"].ToString());
-                
-                    t.Title = TB_Titre.Text;
-                
-                    t.Date_of_Creation = DateTime.Now;
-                    t.Insert();
-                    Selected_ThreadID = t.getIDThreads(TB_Titre.Text);
-
-                    InsertionUsagers();
-                    AfficherThreads();
-                    AfficherUsagers();
-                    CheckUsagers();
-                }
-            }
+            TB_Titre.Text = "";
+            Selected_ThreadID = "";
+            BTN_Creer.Text = "Créer";
+            AfficherThreads();
+            AfficherUsagers();
         }
 
         private void InsertionUsagers()
@@ -212,7 +198,28 @@ namespace TP1_ASP.NET
 
         protected void BTN_Modifier_Click(object sender, EventArgs e)
         {
-            if (TB_Titre.Text != "" && Selected_ThreadID != "")
+            //CRÉER
+            if (TB_Titre.Text != "" && Selected_ThreadID == "")
+            {
+                ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
+                if (!t.Exist(TB_Titre.Text))
+                {
+                    t.creator = int.Parse(Session["Selected_ID"].ToString());
+
+                    t.Title = TB_Titre.Text;
+
+                    t.Date_of_Creation = DateTime.Now;
+                    t.Insert();
+                    Selected_ThreadID = t.getIDThreads(TB_Titre.Text);
+                    BTN_Creer.Text = "Modifier";
+                    InsertionUsagers();
+                    AfficherThreads();
+                    AfficherUsagers();
+                    CheckUsagers();
+                }
+            }
+            //MODIFIER
+            else if (TB_Titre.Text != "" && Selected_ThreadID != "")
             {
                 ThreadsTable threads = new ThreadsTable((String)Application["MainDB"], this);
 
@@ -234,9 +241,13 @@ namespace TP1_ASP.NET
             {
                 ThreadsTable threads = new ThreadsTable((String)Application["MainDB"], this);
                 threads.DeleteRecordByID(Selected_ThreadID);
+                Threads_Access ta = new Threads_Access((String)Application["MainDB"], this);
+                List<string> Messages = ta.getMessagesByThread(Selected_ThreadID);
+                ta.DeleteRecordByID()
             }
             TB_Titre.Text = "";
             Selected_ThreadID = "";
+            BTN_Creer.Text = "Creer";
             AfficherThreads();
             AfficherUsagers();
             CheckUsagers();
@@ -245,32 +256,6 @@ namespace TP1_ASP.NET
         protected void BTN_Retour_Click(object sender, EventArgs e)
         {
             Response.Redirect("Index1.aspx");
-        }
-
-        protected void LB_Threads_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Threads_Access ta = new Threads_Access((string)Application["MainDB"], this);
-            string thread_id = ta.getIDThreads(TB_Titre.Text);
-            foreach (Control c in Table_Usagers.Controls)
-            {
-                if (c.GetType().ToString().Equals("System.Web.UI.WebControls.TableRow"))
-                {
-                    foreach (Control c2 in c.Controls)
-                    {
-                        if (c2.GetType().ToString().Equals("System.Web.UI.WebControls.TableCell"))
-                        {
-                            foreach (Control c3 in c2.Controls)
-                            {
-                                if (c3.GetType().ToString().Equals("System.Web.UI.WebControls.CheckBox"))
-                                {
-                                    CheckBox cb = (CheckBox)c3;
-                                    cb.Checked = ta.isInvited(cb.ID, thread_id);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         }
     }
 }
