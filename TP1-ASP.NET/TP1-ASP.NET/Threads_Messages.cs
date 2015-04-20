@@ -42,25 +42,25 @@ namespace TP1_ASP.NET
            UpdateRecord(Thread_ID, User_ID, Date_of_Creation, Message);
         }
 
-        public void ShowMessages(String Thread, Table t, UpdatePanel p)
+        public List<String> ShowMessages(String Thread, Table t, UpdatePanel p)
         {
             SqlDataReader reader = FillReaderChat(Thread.ToString());
+            List<String> list = new List<string>();
 
             if(reader.HasRows)
             {
                 while(reader.Read())
                 {
-                    AddMessage(t, 
-                        reader.GetString(4), 
-                        reader.GetInt64(2).ToString(), 
-                        reader.GetDateTime(3).ToString(), 
-                        GetAvatar1(reader.GetInt64(2).ToString()), 
-                        GetFullName1(reader.GetInt64(2).ToString()), 
-                        reader.GetInt64(0),
-                        p);
+                    list.Add(reader.GetInt64(0).ToString());
+                    list.Add(reader.GetInt64(1).ToString());
+                    list.Add(reader.GetInt64(2).ToString());
+                    list.Add(reader.GetDateTime(3).ToShortDateString());
+                    list.Add(reader.GetString(4));
                 }
             }
             EndQuerySQL();
+
+            return list;
         }
 
         public string GetAvatar1(string ID)
@@ -90,68 +90,6 @@ namespace TP1_ASP.NET
         }
 
 
-        public void AddMessage(Table t, string Message, string user_id, string Date, string imageurl, string fullname, long Id_Message, UpdatePanel p)
-        {
-            TableRow tr = new TableRow();
-            tr.CssClass = "grid";
-
-           //Image
-            TableCell picture = new TableCell();
-            picture.CssClass = "ChatImage";
-            Image img = new Image();
-            img.CssClass = "ChatImage";
-            img.ImageUrl = "Avatars/" + imageurl;
-            picture.Controls.Add(img);
-
-            //UserName
-            TableCell UserName = new TableCell();
-            UserName.Text = fullname;
-
-            //Date
-            TableCell dateMessage = new TableCell();
-            dateMessage.Text = Date;
-
-            //Text
-            TableCell TextMessage = new TableCell();
-            TextMessage.Text = Message;
-
-            if(GetUserName(User_ID) == "Admin" || User_ID == long.Parse(user_id.ToString()))
-            {
-                //Modifier
-                TableCell Modifier = new TableCell();
-                ImageButton BTN_Modifier = new ImageButton();
-                BTN_Modifier.CssClass = "ChatImage";
-                BTN_Modifier.ImageUrl = "Images/edit.png";
-                BTN_Modifier.Click += BTN_Modifier_Click;
-                Modifier.Controls.Add(BTN_Modifier);
-                BTN_Modifier.ID = "M" + Id_Message.ToString();
-
-                //Effacer
-                TableCell Supprimer = new TableCell();
-                ImageButton BTN_Supprimer = new ImageButton();
-                BTN_Supprimer.CssClass = "ChatImage";
-                BTN_Supprimer.ImageUrl = "Images/delete.png";
-                BTN_Supprimer.Click += BTN_Supprimer_Click;
-                Supprimer.Controls.Add(BTN_Supprimer);
-                BTN_Supprimer.ID = "S" + Id_Message.ToString();
-
-                AsyncPostBackTrigger trigger = new AsyncPostBackTrigger();
-                trigger.ControlID = BTN_Supprimer.ID;
-                trigger.EventName = "Click";
-                p.Triggers.Add(trigger);
-
-                tr.Cells.Add(Modifier);
-                tr.Cells.Add(Supprimer);
-            }
-            
-            tr.Cells.Add(picture);
-            tr.Cells.Add(UserName);
-            tr.Cells.Add(dateMessage);
-            tr.Cells.Add(TextMessage);
-            t.Rows.Add(tr);
-
-        }
-
         public string GetUserName(long user_id)
         {
             QuerySQL("Select UserName FROM PERSONNES Where ID = " + user_id);
@@ -164,23 +102,6 @@ namespace TP1_ASP.NET
             }
             EndQuerySQL();
             return "";
-        }
-
-        public void BTN_Modifier_Click(object sender, EventArgs e)
-        {
-            ImageButton button = (ImageButton)sender;
-            string buttonId = button.ID;
-
-            string Message = RechercherMessage(buttonId.Remove(0,1));
-            ChatRoom.MessageModifier = Message;
-        }
-
-        public void BTN_Supprimer_Click(object sender, ImageClickEventArgs e)
-        {
-            ImageButton button = (ImageButton)sender;
-            string Id = button.ID.Remove(0,1);
-
-            DeleteRecordByID(Id);
         }
 
         internal string GetFullName(string id)
