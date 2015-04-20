@@ -20,7 +20,6 @@ namespace TP1_ASP.NET
             AfficherUsagers();
             CheckUsagers();   
         }
-
         private Button GetFirstButton()
         {
             foreach (Control c in PN_Threads.Controls)
@@ -50,7 +49,6 @@ namespace TP1_ASP.NET
             }
             return null;
         }
-
         private void AfficherThreads()
         {
             PN_Threads.Controls.Clear();
@@ -153,7 +151,6 @@ namespace TP1_ASP.NET
                     }
                 }
             }
-            
         }
 
         protected void BTN_Nouveau_Click(object sender, EventArgs e)
@@ -232,6 +229,9 @@ namespace TP1_ASP.NET
                     AfficherUsagers();
                     CheckUsagers();
                 }
+
+                Threads_Access ta = new Threads_Access((String)Application["MainDB"], this);
+
             }
         }
 
@@ -239,18 +239,30 @@ namespace TP1_ASP.NET
         {
             if (Selected_ThreadID != "")
             {
+                //DELETE THREADS
                 ThreadsTable threads = new ThreadsTable((String)Application["MainDB"], this);
                 threads.DeleteRecordByID(Selected_ThreadID);
+                //DELETE THREADS_ACCESS
                 Threads_Access ta = new Threads_Access((String)Application["MainDB"], this);
-                List<string> Messages = ta.getMessagesByThread(Selected_ThreadID);
-                ta.DeleteRecordByID()
+                List<string> T_Access = ta.getIDByThread(Selected_ThreadID);
+                for (int i = 0; i < T_Access.Count; i++)
+                {
+                    ta.DeleteRecordByID(T_Access[i]);
+                }
+                //DELETE THREADS_MESSAGES
+                Threads_Messages tm = new Threads_Messages((String)Application["MainDB"], this);
+                List<string> Messages = tm.getIdByThreads(Selected_ThreadID);
+                for (int i = 0; i < Messages.Count; i++)
+                {
+                    ta.DeleteRecordByID(Messages[i]);
+                }
+                TB_Titre.Text = "";
+                Selected_ThreadID = "";
+                BTN_Creer.Text = "Creer";
+                AfficherThreads();
+                AfficherUsagers();
+                CheckUsagers();
             }
-            TB_Titre.Text = "";
-            Selected_ThreadID = "";
-            BTN_Creer.Text = "Creer";
-            AfficherThreads();
-            AfficherUsagers();
-            CheckUsagers();
         }
 
         protected void BTN_Retour_Click(object sender, EventArgs e)
