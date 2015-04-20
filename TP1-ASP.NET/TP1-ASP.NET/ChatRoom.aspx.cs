@@ -112,7 +112,7 @@ namespace TP1_ASP.NET
             TableRow tr;
             TableCell td;
 
-            List<String> threads = t.getThreads();
+            List<String> threads = t.getThreadsById(Session["Selected_ID"].ToString());
             for (int i = 0; i < threads.Count; i++)
             {
                 tr = new TableRow();
