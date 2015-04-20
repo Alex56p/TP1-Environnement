@@ -17,6 +17,11 @@ namespace TP1_ASP.NET
                 Session.Timeout = 1;
                 Timer = 1 * 60;
             }
+            if(Page.IsAsync)
+            {
+                Session.Timeout = 1;
+                Timer = 1 * 60;
+            }
             
             if (Session["Header"] != null)
                 LB_Header.Text = Session["Header"].ToString();
