@@ -267,7 +267,7 @@ namespace SqlExpressUtilities
 
         public SqlDataReader FillReaderChat(string UserID)
         {
-            string sqlCommand = "SELECT * FROM " + SQLTableName + " WHERE THREAD_ID = " + UserID + " ORDER BY ID";
+            string sqlCommand = "SELECT * FROM " + SQLTableName + " WHERE THREAD_ID = " + UserID + " ORDER BY ID DESC";
 
             // instancier l'objet de collection
             connection = new SqlConnection(connexionString);
