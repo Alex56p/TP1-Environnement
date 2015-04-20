@@ -41,6 +41,9 @@ namespace TP1_ASP.NET
                     Index1.userOnline.GetValues();
 
                     Index1.userOnline.Deconnecter();
+
+                    Session["Selected_ID"] = null;
+                    Session["SelectedUserName"] = null;
                 }
 
                 Index1.login.LogoutDate = DateTime.Now;
