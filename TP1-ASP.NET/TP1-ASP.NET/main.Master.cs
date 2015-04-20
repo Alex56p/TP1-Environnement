@@ -14,7 +14,7 @@ namespace TP1_ASP.NET
         {
             if(!Page.IsPostBack)
             {
-                Session.Timeout = 5;
+                Session.Timeout = 1;
                 Timer = 1 * 60;
             }
             
