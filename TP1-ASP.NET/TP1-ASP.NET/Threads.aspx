@@ -26,6 +26,9 @@
                     <ContentTemplate>
                         <asp:TextBox ID="TB_Titre" runat="server"></asp:TextBox>
                     </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="BTN_Nouveau" EventName="Click" />
+                    </Triggers>
                 </asp:UpdatePanel>
             </td>
         </tr>

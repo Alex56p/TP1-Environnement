@@ -9,13 +9,14 @@ namespace TP1_ASP.NET
 {
     public partial class Threads : System.Web.UI.Page
     {
-        static string Selected_ThreadID = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["Selected_ID"] == null)
             {
                 Response.Redirect("Login1.aspx");
             }
+            if (Session["Selected_ThreadID"] == null)
+                Session["Selected_ThreadID"] = "";
             AfficherThreads(); 
             AfficherUsagers();
             CheckUsagers();   
@@ -72,7 +73,7 @@ namespace TP1_ASP.NET
                 btn.ClientIDMode = ClientIDMode.Static;
                 string thread_id = t.getIDThreads(btn.Text);
                 btn.ID = "BTN_" + thread_id;
-                if (thread_id == Selected_ThreadID)
+                if (thread_id == Session["Selected_ThreadID"])
                     btn.BackColor = System.Drawing.Color.LightBlue;
                 else
                     btn.BackColor = System.Drawing.Color.LightGray;
@@ -96,10 +97,10 @@ namespace TP1_ASP.NET
         void btn_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            Selected_ThreadID = btn.ID.Substring(4);
+            Session["Selected_ThreadID"] = btn.ID.Substring(4);
             TB_Titre.Text = btn.Text;
 
-            if (Selected_ThreadID == "")
+            if (Session["Selected_ThreadID"] == "")
             {
                 BTN_Creer.Text = "Créer";
             }
@@ -122,7 +123,7 @@ namespace TP1_ASP.NET
 
         private void CheckUsagers()
         {
-            if(Selected_ThreadID != "")
+            if(Session["Selected_ThreadID"] != "")
             {
                 Threads_Access ta = new Threads_Access((string)Application["MainDB"], this);
                 foreach (Control c in Table_Usagers.Controls)
@@ -138,7 +139,7 @@ namespace TP1_ASP.NET
                                     if (c3.GetType().ToString().Equals("System.Web.UI.WebControls.CheckBox"))
                                     {
                                         CheckBox cb = (CheckBox)c3;
-                                        if (ta.isInvited(cb.ID, Selected_ThreadID))
+                                        if (ta.isInvited(cb.ID, Session["Selected_ThreadID"].ToString()))
                                         {
                                             cb.Checked = true;
                                         }
@@ -159,7 +160,7 @@ namespace TP1_ASP.NET
         protected void BTN_Nouveau_Click(object sender, EventArgs e)
         {
             TB_Titre.Text = "";
-            Selected_ThreadID = "";
+            Session["Selected_ThreadID"] = "";
             BTN_Creer.Text = "Créer";
             AfficherThreads();
             AfficherUsagers();
@@ -203,7 +204,7 @@ namespace TP1_ASP.NET
         protected void BTN_Modifier_Click(object sender, EventArgs e)
         {
             //CRÉER
-            if (TB_Titre.Text != "" && Selected_ThreadID == "")
+            if (TB_Titre.Text != "" && Session["Selected_ThreadID"] == "")
             {
                 ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
                 if (!t.Exist(TB_Titre.Text) && AtLeastOne())
@@ -212,7 +213,7 @@ namespace TP1_ASP.NET
                     t.Title = TB_Titre.Text;
                     t.Date_of_Creation = DateTime.Now;
                     t.Insert();
-                    Selected_ThreadID = t.getIDThreads(TB_Titre.Text);
+                    Session["Selected_ThreadID"] = t.getIDThreads(TB_Titre.Text);
                     BTN_Creer.Text = "Modifier";
                     InsertionUsagers();
                     AfficherThreads();
@@ -221,11 +222,11 @@ namespace TP1_ASP.NET
                 }
             }
             //MODIFIER
-            else if (TB_Titre.Text != "" && Selected_ThreadID != "")
+            else if (TB_Titre.Text != "" && Session["Selected_ThreadID"] != "")
             {
                 ThreadsTable threads = new ThreadsTable((String)Application["MainDB"], this);
 
-                if (threads.SelectByID(Selected_ThreadID) && AtLeastOne())
+                if (threads.SelectByID(Session["Selected_ThreadID"].ToString()) && AtLeastOne())
                 {
                     //Modifier Thread
                     threads.GetValues();
@@ -234,7 +235,7 @@ namespace TP1_ASP.NET
 
                     //Modifier Thread_Access
                     Threads_Access ta = new Threads_Access((String)Application["MainDB"], this);
-                    List<string> T_Access = ta.getIDByThread(Selected_ThreadID);
+                    List<string> T_Access = ta.getIDByThread(Session["Selected_ThreadID"].ToString());
                     for (int i = 0; i < T_Access.Count; i++)
                     {
                         ta.DeleteRecordByID(T_Access[i]);
@@ -279,28 +280,28 @@ namespace TP1_ASP.NET
         protected void BTN_Effacer_Click(object sender, EventArgs e)
         {
            
-            if (Selected_ThreadID != "")
+            if (Session["Selected_ThreadID"] != "")
             {
                 //DELETE THREADS
                 ThreadsTable threads = new ThreadsTable((String)Application["MainDB"], this);
-                threads.DeleteRecordByID(Selected_ThreadID);
+                threads.DeleteRecordByID(Session["Selected_ThreadID"].ToString());
                 //DELETE THREADS_ACCESS
                 Threads_Access ta = new Threads_Access((String)Application["MainDB"], this);
                 
-                List<string> T_Access = ta.getIDByThread(Selected_ThreadID);
+                List<string> T_Access = ta.getIDByThread(Session["Selected_ThreadID"].ToString());
                 for (int i = 0; i < T_Access.Count; i++)
                 {
                     ta.DeleteRecordByID(T_Access[i]);
                 }
                 //DELETE THREADS_MESSAGES
                 Threads_Messages tm = new Threads_Messages((String)Application["MainDB"], this);
-                List<string> Messages = tm.getIdByThreads(Selected_ThreadID);
+                List<string> Messages = tm.getIdByThreads(Session["Selected_ThreadID"].ToString());
                 for (int i = 0; i < Messages.Count; i++)
                 {
                     ta.DeleteRecordByID(Messages[i]);
                 }
                 TB_Titre.Text = "";
-                Selected_ThreadID = "";
+                Session["Selected_ThreadID"] = "";
                 BTN_Creer.Text = "Creer";
                 AfficherThreads();
                 AfficherUsagers();
