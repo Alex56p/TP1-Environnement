@@ -12,11 +12,11 @@ namespace TP1_ASP.NET
         static string Selected_ThreadID = "";
         public static string Id_Modifier = "";
 
+
         // Page Load
         protected void Page_Load(object sender, EventArgs e)
         {
-            Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
-
+            Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);            
 
             if (Session["Selected_ID"] == null)
             {
@@ -34,8 +34,11 @@ namespace TP1_ASP.NET
                     Selected_ThreadID = btn.ID.Substring(4);
             }
 
-            AfficherMessages();
+            if (Session["Message_Modifier_id"] == null)
+               Session["Message_Modifier_id"] = "";
 
+            AfficherMessages();
+            AfficherUsagers();
         }
 
         public void AddMessage(string Id_Message, string thread_id, string User_id, string Date, string Message)
@@ -88,10 +91,7 @@ namespace TP1_ASP.NET
                 Supprimer.Controls.Add(BTN_Supprimer);
                 BTN_Supprimer.ID = "S" + Id_Message.ToString();
 
-                //AsyncPostBackTrigger trigger = new AsyncPostBackTrigger();
-                //trigger.ControlID = BTN_Supprimer.ID;
-                //trigger.EventName = "Click";
-                //UPN_Chat.Triggers.Add(trigger);
+
 
                 tr.Cells.Add(Modifier);
                 tr.Cells.Add(Supprimer);
@@ -115,6 +115,7 @@ namespace TP1_ASP.NET
             string Message = tm.RechercherMessage(buttonId.Remove(0, 1));
             Session["Message_Modifier_id"] = buttonId.Remove(0,1);
             TB_Text.Text = Message;
+            LB_Modifier.Visible = true;
         }
 
         public void BTN_Supprimer_Click(object sender, ImageClickEventArgs e)
@@ -163,7 +164,7 @@ namespace TP1_ASP.NET
         {
             // Ajouter le message dans la BD
             Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
-            if (Session["Message_Modifier_id"].ToString() == null)
+            if (Session["Message_Modifier_id"].ToString() == "")
             {
                 tm.Thread_ID = long.Parse(Selected_ThreadID);
                 tm.User_ID = long.Parse(Session["Selected_ID"].ToString());
@@ -174,7 +175,8 @@ namespace TP1_ASP.NET
             else
             {
                 tm.UpdateMessage(Session["Message_Modifier_id"].ToString(), TB_Text.Text);
-                Session["Message_Modifier_id"] = null;
+                Session["Message_Modifier_id"] = "";
+                LB_Modifier.Visible = false;
             }
 
             Chat.Controls.Clear();
@@ -261,6 +263,7 @@ namespace TP1_ASP.NET
         // Afficher les usagers du thread
         private void AfficherUsagers()
         {
+           TableUsers.Controls.Clear();
             ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
             t.GetUsers_thread(TableUsers, Selected_ThreadID);
         }
@@ -272,8 +275,12 @@ namespace TP1_ASP.NET
             Chat.Controls.Clear();
             AfficherMessages();
             AfficherUsagers();
+
             if (Session["Message_Modifier_id"].ToString() != null)
-                TB_Text.Text = tm.RechercherMessage(Session["Message_Modifier_id"].ToString());
+            {
+               if(TB_Text.Text != tm.RechercherMessage(Session["Message_Modifier_id"].ToString()))
+                   TB_Text.Text = tm.RechercherMessage(Session["Message_Modifier_id"].ToString());
+            }
         }
         protected void BTN_Retour_Click(object sender, EventArgs e)
         {

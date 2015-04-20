@@ -121,6 +121,15 @@ namespace TP1_ASP.NET {
         protected global::System.Web.UI.WebControls.Table TableUsers;
         
         /// <summary>
+        /// Contrôle Panel_TB.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel Panel_TB;
+        
+        /// <summary>
         /// Contrôle TB_Text.
         /// </summary>
         /// <remarks>
@@ -137,6 +146,24 @@ namespace TP1_ASP.NET {
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BTN_Envoyer;
+        
+        /// <summary>
+        /// Contrôle UP_LB.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UP_LB;
+        
+        /// <summary>
+        /// Contrôle LB_Modifier.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LB_Modifier;
         
         /// <summary>
         /// Contrôle BTN_Retour.

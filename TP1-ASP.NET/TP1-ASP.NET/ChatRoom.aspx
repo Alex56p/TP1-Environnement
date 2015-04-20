@@ -51,10 +51,25 @@
                 <tr>
                     <td></td>
                     <td style="width: 327px">
-                        <asp:TextBox ID="TB_Text" runat="server"></asp:TextBox>
+                        <asp:UpdatePanel ID="Panel_TB" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <asp:TextBox ID="TB_Text" runat="server" AutoPostBack="true"></asp:TextBox>
+
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
                     </td>
                     <td>
                         <asp:Button ID="BTN_Envoyer" runat="server" Text="Envoyer..." OnClick="BTN_Envoyer_Click" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <asp:UpdatePanel ID="UP_LB" runat="server">
+                            <ContentTemplate>
+                                <asp:Label ID="LB_Modifier" runat="server" Text="veuillez entrer le nouveau texte" Visible="false"></asp:Label>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
                     </td>
                 </tr>
                 <tr>
