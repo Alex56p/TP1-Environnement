@@ -17,7 +17,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <div style="margin: auto; background-color: white;">
+                            <div style="height:200px;margin: auto; background-color: white;">
 
                                 <asp:UpdatePanel ID="UPN_Threads" runat="server">
                                     <ContentTemplate>
@@ -29,7 +29,7 @@
                             </div>
                         </td>
                         <td style="width: 325px">
-                            <div style="margin: auto; background-color: white;">
+                            <div style="height:200px;margin: auto; background-color: white;">
                                 <asp:UpdatePanel ID="UPN_Chat" runat="server">
                                     <ContentTemplate>
                                         <asp:Timer ID="TimerPanel" runat="server" OnTick="TimerPanel_Tick" Interval="1000"></asp:Timer>
