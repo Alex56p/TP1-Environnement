@@ -49,6 +49,15 @@ namespace TP1_ASP.NET {
         protected global::System.Web.UI.WebControls.Panel PN_Threads;
         
         /// <summary>
+        /// Contrôle UPN_Titre.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UPN_Titre;
+        
+        /// <summary>
         /// Contrôle TB_Titre.
         /// </summary>
         /// <remarks>
@@ -76,13 +85,22 @@ namespace TP1_ASP.NET {
         protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
-        /// Contrôle BTN_Modifier.
+        /// Contrôle UPN_Bouton.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BTN_Modifier;
+        protected global::System.Web.UI.UpdatePanel UPN_Bouton;
+        
+        /// <summary>
+        /// Contrôle BTN_Creer.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BTN_Creer;
         
         /// <summary>
         /// Contrôle BTN_Effacer.
