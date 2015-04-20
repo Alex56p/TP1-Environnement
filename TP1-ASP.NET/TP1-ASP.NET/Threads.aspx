@@ -2,6 +2,31 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+    <asp:UpdatePanel ID="UPN_Erreur" UpdateMode="Conditional" runat="server">
+        <ContentTemplate>
+            <table>
+                <tr>
+                    <td>
+                        <asp:Label ID="LB_Titre_Check" runat="server"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="LB_Empty_Check" runat="server"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="LB_Usagers_Check" runat="server"></asp:Label>
+                    </td>
+                </tr>
+            </table>
+        </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="BTN_Nouveau" EventName="Click" />
+            <asp:AsyncPostBackTrigger ControlID="BTN_Creer" EventName="Click" />
+        </Triggers>
+    </asp:UpdatePanel>
     <table>
         <tr>
             <td>
@@ -17,27 +42,18 @@
                     <ContentTemplate>
                         <asp:Panel ID="PN_Threads" runat="server" ScrollBars="Vertical"></asp:Panel>
                     </ContentTemplate>
-                    <Triggers>
-                    </Triggers>
                 </asp:UpdatePanel>
             </td>
-            <td>
-                <asp:UpdatePanel ID="UPN_Titre" UpdateMode="Conditional" runat="server">
-                    <ContentTemplate>
-                        <asp:TextBox ID="TB_Titre" runat="server" CausesValidation="true" ValidationGroup="VG_Create"></asp:TextBox>
-                        <asp:RequiredFieldValidator
-                        ID="RFV_TB_Username"
-                        runat="server"
-                        ErrorMessage="Le titre est vide!"
-                        ControlToValidate="TB_Titre"
-                        ValidationGroup="VG_Create"> 
-                     </asp:RequiredFieldValidator>
-                    </ContentTemplate>
-                    <Triggers>
-                        <asp:AsyncPostBackTrigger ControlID="BTN_Nouveau" EventName="Click" />
-                    </Triggers>
-                </asp:UpdatePanel>
-            </td>
+            <asp:UpdatePanel ID="UPN_Titre" UpdateMode="Conditional" runat="server">
+                <ContentTemplate>
+                    <td>
+                        <asp:TextBox ID="TB_Titre" runat="server"></asp:TextBox>
+                    </td>
+                </ContentTemplate>
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="BTN_Nouveau" EventName="Click" />
+                </Triggers>
+            </asp:UpdatePanel>
         </tr>
         <tr>
             <td class="TD_BTN">
@@ -51,26 +67,7 @@
             <td class="TD_BTN">
                 <asp:UpdatePanel ID="UPN_Bouton" runat="server">
                     <ContentTemplate>
-                        <asp:Button ID="BTN_Creer" CssClass="TD_BTN" runat="server" CausesValidation="true" ValidationGroup="VG_Create"  Text="Créer" OnClick="BTN_Modifier_Click" Width="70px" />
-                        <asp:CustomValidator
-                            ID="CV_Titre"
-                            runat="server"
-                            CssClass="label"
-                            ErrorMessage="Ce titre existe déjà!"
-                            ValidationGroup="VG_Create"
-                            ControlToValidate="TB_Titre"
-                            OnServerValidate="CV_Titre_Validator"
-                            ForeColor="Red"> 
-                        </asp:CustomValidator>
-                        <asp:CustomValidator
-                            ID="CV_Checkbox"
-                            runat="server"
-                            CssClass="label"
-                            ErrorMessage="Il faut cocher au moins un utilisateur."
-                            ValidationGroup="VG_Create"
-                            OnServerValidate="CV_Checkbox_Validator"
-                            ForeColor="Red"> 
-                        </asp:CustomValidator>
+                        <asp:Button ID="BTN_Creer" CssClass="TD_BTN" runat="server" Text="Créer" OnClick="BTN_Modifier_Click" Width="70px" />
                     </ContentTemplate>
                 </asp:UpdatePanel>
                 <asp:Button ID="BTN_Effacer" CssClass="TD_BTN" runat="server" Text="Effacer" Width="70px" OnClick="BTN_Effacer_Click" />
@@ -79,12 +76,12 @@
             <td>
                 <asp:UpdatePanel ID="UPN_CheckBox" runat="server">
                     <ContentTemplate>
-                        <asp:CheckBox ID="CB_Tous" runat="server" OnCheckedChanged="CB_Tous_CheckedChanged"/>
+                        <asp:CheckBox ID="CB_Tous" runat="server" OnCheckedChanged="CB_Tous_CheckedChanged" />
                     </ContentTemplate>
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="BTN_Nouveau" EventName="Click" />
                     </Triggers>
-                </asp:UpdatePanel>                
+                </asp:UpdatePanel>
                 <asp:Label ID="Label4" runat="server" Text="Tous les usagers"></asp:Label>
             </td>
         </tr>
@@ -105,10 +102,4 @@
             </td>
         </tr>
     </table>
-    <asp:ValidationSummary
-    ID="VGS_Logi"
-    runat="server"
-    ValidationGroup="VG_Create"
-    HeaderText="Résumé des erreurs: &lt;hr/&gt;" />
-
 </asp:Content>

@@ -17,7 +17,6 @@ namespace TP1_ASP.NET
             if (!Page.IsPostBack)
             {
                 Times = 0;
-                Session["Bloquer"] = false;
                 Session["CurrentUser"] = new PersonnesTable((string)Application["MainDB"], this);
                 Session["UserValid"] = false;
                 Session["Selected_UserName"] = "Anonymous";
@@ -26,29 +25,19 @@ namespace TP1_ASP.NET
             }
             else
             {
-                if (Session["Bloquer"] != null && bool.Parse(Session["Bloquer"].ToString()))
-                {
-                    Response.Redirect("Bloquer1.aspx");
-                }
             }
 
         }
 
         protected void BTN_Login_Click(object sender, EventArgs e)
         {
-            Times++;
             PersonnesTable personnes = new PersonnesTable((string)Application["MainDB"], this);
                if (Page.IsValid)
                {
                   Session["Selected_ID"] = personnes.getIDPersonnes(TB_UserName.Text);
                   Session["Selected_UserName"] = TB_UserName.Text;
                   Session["UserValid"] = true;
-                  Session["Bloquer"] = false;
                   Response.Redirect("Index1.aspx");
-               }
-               else if (Times >= 3)
-               {
-                  Session["Bloquer"] = true;
                }
         }
 

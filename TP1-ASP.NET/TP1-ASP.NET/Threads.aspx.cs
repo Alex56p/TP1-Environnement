@@ -165,6 +165,8 @@ namespace TP1_ASP.NET
             Session["Selected_ThreadID"] = "";
             BTN_Creer.Text = "Créer";
             CB_Tous.Checked = false;
+           LB_Titre_Check.Text ="";
+            LB_Usagers_Check.Text = "";
             AfficherThreads();
             AfficherUsagers();
         }
@@ -207,6 +209,7 @@ namespace TP1_ASP.NET
         protected void BTN_Modifier_Click(object sender, EventArgs e)
         {
             //CRÉER
+           IsPageValid();
             if (TB_Titre.Text != "" && Session["Selected_ThreadID"] == "")
             {
                 ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
@@ -250,6 +253,43 @@ namespace TP1_ASP.NET
                     CheckUsagers();
                 }
             }
+        }
+
+        private void IsPageValid()
+        {
+
+           if (TB_Titre.Text == "")
+           {
+              LB_Titre_Check.Text = "Le titre est vide.";
+              LB_Titre_Check.ForeColor = System.Drawing.Color.Red;
+           }
+           else
+           {
+              LB_Titre_Check.Text = "";
+           }
+
+           ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
+           if (t.Exist(TB_Titre.Text))
+           {
+              LB_Empty_Check.Text = "Le titre existe déjà.";
+             LB_Empty_Check.ForeColor =System.Drawing.Color.Red;
+           }
+           else
+           {
+              LB_Empty_Check.Text = "";
+           }
+
+           if(!AtLeastOne())
+           {
+              LB_Usagers_Check.Text = "Il faut au moins un usager.";
+              LB_Usagers_Check.ForeColor = System.Drawing.Color.Red;
+           }
+           else
+           {
+              LB_Usagers_Check.Text = "";
+           }
+
+           UPN_Erreur.Update();
         }
 
         private bool AtLeastOne()
@@ -350,25 +390,6 @@ namespace TP1_ASP.NET
                     }
                 }
             }
-        }
-
-        protected void CV_Titre_Validator(object source, ServerValidateEventArgs args)
-        {
-            TB_Titre.BackColor = System.Drawing.Color.Empty;
-            ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
-            args.IsValid = !t.Exist(TB_Titre.Text);
-            if (!args.IsValid)
-                TB_Titre.BackColor = System.Drawing.Color.Red;
-        }
-
-
-        protected void CV_Checkbox_Validator(object source, ServerValidateEventArgs args)
-        {
-            Panel_Usagers.BackColor = System.Drawing.Color.Empty;
-            ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
-            args.IsValid = AtLeastOne();
-            if (!args.IsValid)
-                Panel_Usagers.BackColor = System.Drawing.Color.Red;
         }
     }
 }
