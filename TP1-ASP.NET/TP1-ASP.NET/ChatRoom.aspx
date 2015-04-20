@@ -21,12 +21,11 @@
                                 <asp:Panel ID="PN_Threads" runat="server" ScrollBars="Vertical"></asp:Panel>
                             </ContentTemplate>
                             <Triggers>
-                                <asp:AsyncPostBackTrigger ControlID="PN_Threads" EventName="IndexChange" />
                             </Triggers>
                         </asp:UpdatePanel>
                     </td>
                     <td style="width: 327px">
-                        <asp:UpdatePanel ID="UPN_Chat" UpdateMode="Conditional" runat="server">
+                        <asp:UpdatePanel ID="UPN_Chat" runat="server">
                             <ContentTemplate>
                                 <asp:Timer ID="TimerPanel" runat="server" OnTick="TimerPanel_Tick" Interval="1000"></asp:Timer>
                                 <asp:Panel ID="Panel_Chat" runat="server" ScrollBars="Vertical">
@@ -38,14 +37,13 @@
                         </asp:UpdatePanel>
                     </td>
                     <td>
-                        <asp:UpdatePanel ID="UPN_Users" runat="server" UpdateMode="Always">
+                        <asp:UpdatePanel ID="UPN_Users" runat="server">
                             <ContentTemplate>
                                 <asp:Panel ID="Panel_Users" runat="server" ScrollBars="Vertical">
                                     <asp:Table ID="TableUsers" runat="server"></asp:Table>
                                 </asp:Panel>
                             </ContentTemplate>
                             <Triggers>
-                                <asp:AsyncPostBackTrigger ControlID="Panel_Users" />
                             </Triggers>
                         </asp:UpdatePanel>
                     </td>

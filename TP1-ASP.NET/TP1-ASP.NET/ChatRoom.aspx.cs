@@ -10,7 +10,7 @@ namespace TP1_ASP.NET
     public partial class ChatRoom : System.Web.UI.Page
     {
         static string Selected_ThreadID = "";
-        public static string MessageModifier = "";
+        public string MessageModifier = "";
         public static string Id_Modifier = "";
 
         // Page Load
@@ -143,6 +143,7 @@ namespace TP1_ASP.NET
             Button btn = (Button)sender;
             Selected_ThreadID = btn.ID.Substring(4);
             Titre.Text = btn.Text;
+            Panel_Chat.Controls.Clear();
             AfficherDiscussions();
             AfficherUsagers();
             AfficherMessages();
@@ -156,7 +157,7 @@ namespace TP1_ASP.NET
                 Button btn = (Button)FindControl(Selected_ThreadID);
                 Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
                 tm.User_ID = long.Parse(Session["Selected_ID"].ToString());
-                tm.ShowMessages(Selected_ThreadID, Chat);
+                tm.ShowMessages(Selected_ThreadID, Chat, UPN_Chat);
                 ThreadsTable tt = new ThreadsTable((string)Application["MainDB"], this);
                 //Titre.Text = ListBox1.SelectedItem.ToString(); *****************************************
                 Createur.Text = tt.getCreatorFullName(Selected_ThreadID);

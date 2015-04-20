@@ -42,7 +42,7 @@ namespace TP1_ASP.NET
            UpdateRecord(Thread_ID, User_ID, Date_of_Creation, Message);
         }
 
-        public void ShowMessages(String Thread, Table t)
+        public void ShowMessages(String Thread, Table t, UpdatePanel p)
         {
             SqlDataReader reader = FillReaderChat(Thread.ToString());
 
@@ -56,7 +56,8 @@ namespace TP1_ASP.NET
                         reader.GetDateTime(3).ToString(), 
                         GetAvatar1(reader.GetInt64(2).ToString()), 
                         GetFullName1(reader.GetInt64(2).ToString()), 
-                        reader.GetInt64(0));
+                        reader.GetInt64(0),
+                        p);
                 }
             }
             EndQuerySQL();
@@ -89,7 +90,7 @@ namespace TP1_ASP.NET
         }
 
 
-        public void AddMessage(Table t, string Message, string user_id, string Date, string imageurl, string fullname, long Id_Message)
+        public void AddMessage(Table t, string Message, string user_id, string Date, string imageurl, string fullname, long Id_Message, UpdatePanel p)
         {
             TableRow tr = new TableRow();
             tr.CssClass = "grid";
@@ -134,6 +135,11 @@ namespace TP1_ASP.NET
                 Supprimer.Controls.Add(BTN_Supprimer);
                 BTN_Supprimer.ID = "S" + Id_Message.ToString();
 
+                AsyncPostBackTrigger trigger = new AsyncPostBackTrigger();
+                trigger.ControlID = BTN_Supprimer.ID;
+                trigger.EventName = "Click";
+                p.Triggers.Add(trigger);
+
                 tr.Cells.Add(Modifier);
                 tr.Cells.Add(Supprimer);
             }
@@ -143,6 +149,7 @@ namespace TP1_ASP.NET
             tr.Cells.Add(dateMessage);
             tr.Cells.Add(TextMessage);
             t.Rows.Add(tr);
+
         }
 
         public string GetUserName(long user_id)
