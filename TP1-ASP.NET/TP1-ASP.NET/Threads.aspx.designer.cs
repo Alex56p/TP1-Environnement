@@ -121,6 +121,15 @@ namespace TP1_ASP.NET {
         protected global::System.Web.UI.WebControls.Button BTN_Retour;
         
         /// <summary>
+        /// Contrôle UPN_CheckBox.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UPN_CheckBox;
+        
+        /// <summary>
         /// Contrôle CB_Tous.
         /// </summary>
         /// <remarks>

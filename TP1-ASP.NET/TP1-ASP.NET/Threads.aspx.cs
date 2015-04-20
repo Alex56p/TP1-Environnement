@@ -69,11 +69,15 @@ namespace TP1_ASP.NET
                 td.CssClass = "ThreadButton";
                 Button btn = new Button();
                 
+                ////////////////////////
+                if (Session["Selected_ThreadID"].ToString() != "")
+                    td.CssClass = "ThreadButton";
+                /////////////////////////
                 btn.Text = threads[i];
                 btn.ClientIDMode = ClientIDMode.Static;
                 string thread_id = t.getIDThreads(btn.Text);
                 btn.ID = "BTN_" + thread_id;
-                if (thread_id == Session["Selected_ThreadID"])
+                if (thread_id == Session["Selected_ThreadID"].ToString())
                     btn.BackColor = System.Drawing.Color.LightBlue;
                 else
                     btn.BackColor = System.Drawing.Color.LightGray;
@@ -98,7 +102,8 @@ namespace TP1_ASP.NET
         {
             Button btn = (Button)sender;
             Session["Selected_ThreadID"] = btn.ID.Substring(4);
-            TB_Titre.Text = btn.Text;
+            TB_Titre.Text = btn.Text;            
+            btn.BackColor = System.Drawing.Color.LightBlue;
 
             if (Session["Selected_ThreadID"] == "")
             {
@@ -111,7 +116,8 @@ namespace TP1_ASP.NET
 
             AfficherThreads();
             AfficherUsagers();
-            CheckUsagers();
+            CheckUsagers();           
+
         }
 
         private void AfficherUsagers()
@@ -123,7 +129,7 @@ namespace TP1_ASP.NET
 
         private void CheckUsagers()
         {
-            if(Session["Selected_ThreadID"] != "")
+            if(Session["Selected_ThreadID"].ToString() != "")
             {
                 Threads_Access ta = new Threads_Access((string)Application["MainDB"], this);
                 foreach (Control c in Table_Usagers.Controls)
@@ -162,6 +168,7 @@ namespace TP1_ASP.NET
             TB_Titre.Text = "";
             Session["Selected_ThreadID"] = "";
             BTN_Creer.Text = "Créer";
+            CB_Tous.Checked = false;
             AfficherThreads();
             AfficherUsagers();
         }
@@ -312,6 +319,41 @@ namespace TP1_ASP.NET
         protected void BTN_Retour_Click(object sender, EventArgs e)
         {
             Response.Redirect("Index1.aspx");
+        }
+
+        protected void CB_Tous_CheckedChanged(object sender, EventArgs e)
+        {
+            bool Check;
+            if(CB_Tous.Checked)
+            {
+                Check = true;
+            }
+            else
+            {
+                Check = false;
+            }
+
+            Threads_Access ta = new Threads_Access((string)Application["MainDB"], this);
+            foreach (Control c in Table_Usagers.Controls)
+            {
+                if (c.GetType().ToString().Equals("System.Web.UI.WebControls.TableRow"))
+                {
+                    foreach (Control c2 in c.Controls)
+                    {
+                        if (c2.GetType().ToString().Equals("System.Web.UI.WebControls.TableCell"))
+                        {
+                            foreach (Control c3 in c2.Controls)
+                            {
+                                if (c3.GetType().ToString().Equals("System.Web.UI.WebControls.CheckBox"))
+                                {
+                                    CheckBox cb = (CheckBox)c3;
+                                    cb.Checked = Check;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
