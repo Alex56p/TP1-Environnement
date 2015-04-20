@@ -10,7 +10,7 @@ namespace TP1_ASP.NET
     public partial class ChatRoom : System.Web.UI.Page
     {
         static string Selected_ThreadID = "";
-        public string MessageModifier = "";
+        public static string MessageModifier = "";
         public static string Id_Modifier = "";
 
         // Page Load
