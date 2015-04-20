@@ -70,9 +70,9 @@ namespace TP1_ASP.NET
             return threads;
         }
 
-        internal void getUsers(Table table)
+        internal void getUsers(Table table, string User_ID)
         {
-            QuerySQL("SELECT ID,UserName, Avatar FROM PERSONNES");
+            QuerySQL("SELECT ID,UserName, Avatar FROM PERSONNES WHERE ID !=" + User_ID);
             if (reader.HasRows)
             {
                 while (reader.Read())
@@ -244,20 +244,45 @@ namespace TP1_ASP.NET
             if(GetUserName(id) == "Admin")
             {
                 QuerySQL("SELECT TITLE FROM THREADS");
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        threads.Add(reader.GetString(0));
+                    }
+                }
+                EndQuerySQL();
+                return threads;
             }
             else
             {
-                QuerySQL("SELECT TITLE FROM THREADS WHERE ID = (SELECT THREAD_ID FROM THREADS_ACCESS WHERE USER_ID = " + id + ")");
-            }
-            if (reader.HasRows)
-            {
-                while (reader.Read())
+                QuerySQL("SELECT THREAD_ID FROM THREADS_ACCESS WHERE USER_ID = " + id);
+                List<string> thread_id = new List<string>();
+                if(reader.HasRows)
                 {
-                    threads.Add(reader.GetString(0));
+                    while(reader.Read())
+                    {
+                        thread_id.Add(reader.GetInt64(0).ToString());
+                    }
                 }
+                EndQuerySQL();
+
+                for(int i = 0; i < thread_id.Count; i++)
+                {
+                    QuerySQL("SELECT TITLE FROM THREADS WHERE ID = " + thread_id[i]);
+                    if (reader.HasRows)
+                    {
+                        if(reader.Read())
+                        {
+                            threads.Add(reader.GetString(0));
+                        }
+                    }
+                    EndQuerySQL();
+                }
+                    
+                return threads;
             }
-            EndQuerySQL();
-            return threads;
+            
         }
 
         public string GetUserName(string ID)
@@ -271,6 +296,29 @@ namespace TP1_ASP.NET
             }
             EndQuerySQL();
             return "";
+        }
+
+        internal List<string> getThreadsByCreator(string id)
+        {
+            List<string> threads = new List<string>();
+
+            if (GetUserName(id) == "Admin")
+            {
+                QuerySQL("SELECT TITLE FROM THREADS");
+            }
+            else
+            {
+                QuerySQL("SELECT TITLE FROM THREADS WHERE CREATOR = " + id);
+            }
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    threads.Add(reader.GetString(0));
+                }
+            }
+            EndQuerySQL();
+            return threads;
         }
     }
 }

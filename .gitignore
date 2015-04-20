@@ -154,3 +154,7 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+*.mdf
+TP1-ASP.NET/TP1-ASP.NET/App_Data/MainDB.mdf
+*.mdf
+*.ldf

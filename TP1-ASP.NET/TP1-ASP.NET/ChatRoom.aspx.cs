@@ -151,14 +151,18 @@ namespace TP1_ASP.NET
         // Afficher les messages du thread
         private void AfficherMessages()
         {
-            Button btn = (Button)FindControl(Selected_ThreadID);
-            Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
-            tm.User_ID = long.Parse(Session["Selected_ID"].ToString());
-            tm.ShowMessages(Selected_ThreadID, Chat);
-            ThreadsTable tt = new ThreadsTable((string)Application["MainDB"], this);
-            //Titre.Text = ListBox1.SelectedItem.ToString(); *****************************************
-            Createur.Text = tt.getCreatorFullName(Selected_ThreadID);
-            Date.Text = tt.getThreadsDate(Selected_ThreadID);  
+            if(Selected_ThreadID != "")
+            {
+                Button btn = (Button)FindControl(Selected_ThreadID);
+                Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
+                tm.User_ID = long.Parse(Session["Selected_ID"].ToString());
+                tm.ShowMessages(Selected_ThreadID, Chat);
+                ThreadsTable tt = new ThreadsTable((string)Application["MainDB"], this);
+                //Titre.Text = ListBox1.SelectedItem.ToString(); *****************************************
+                Createur.Text = tt.getCreatorFullName(Selected_ThreadID);
+                Date.Text = tt.getThreadsDate(Selected_ThreadID);
+            }
+             
         }
 
         // Afficher les usagers du thread

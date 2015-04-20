@@ -60,7 +60,7 @@ namespace TP1_ASP.NET
             TableRow tr;
             TableCell td;
 
-            List<String> threads = t.getThreads();
+            List<String> threads = t.getThreadsByCreator(Session["Selected_ID"].ToString());
             for (int i = 0; i < threads.Count; i++)
             {
                 tr = new TableRow();
@@ -117,7 +117,7 @@ namespace TP1_ASP.NET
         {
             Table_Usagers.Controls.Clear();
             ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
-            t.getUsers(Table_Usagers);
+            t.getUsers(Table_Usagers,Session["Selected_ID"].ToString());
         }
 
         private void CheckUsagers()
@@ -194,6 +194,10 @@ namespace TP1_ASP.NET
                     }
                 }
             }
+
+            ta.User_ID = long.Parse(Session["Selected_ID"].ToString());
+            ta.Thread_ID = long.Parse(thread_id);
+            ta.Insert();
         }
 
         protected void BTN_Modifier_Click(object sender, EventArgs e)
@@ -202,12 +206,10 @@ namespace TP1_ASP.NET
             if (TB_Titre.Text != "" && Selected_ThreadID == "")
             {
                 ThreadsTable t = new ThreadsTable((string)Application["MainDB"], this);
-                if (!t.Exist(TB_Titre.Text))
+                if (!t.Exist(TB_Titre.Text) && AtLeastOne())
                 {
                     t.creator = int.Parse(Session["Selected_ID"].ToString());
-
                     t.Title = TB_Titre.Text;
-
                     t.Date_of_Creation = DateTime.Now;
                     t.Insert();
                     Selected_ThreadID = t.getIDThreads(TB_Titre.Text);
@@ -223,17 +225,55 @@ namespace TP1_ASP.NET
             {
                 ThreadsTable threads = new ThreadsTable((String)Application["MainDB"], this);
 
-                if (threads.SelectByID(Selected_ThreadID))
+                if (threads.SelectByID(Selected_ThreadID) && AtLeastOne())
                 {
+                    //Modifier Thread
                     threads.GetValues();
                     threads.Title = TB_Titre.Text;
                     threads.Update();
+
+                    //Modifier Thread_Access
+                    Threads_Access ta = new Threads_Access((String)Application["MainDB"], this);
+                    List<string> T_Access = ta.getIDByThread(Selected_ThreadID);
+                    for (int i = 0; i < T_Access.Count; i++)
+                    {
+                        ta.DeleteRecordByID(T_Access[i]);
+                    }
                     InsertionUsagers();
+
                     AfficherThreads();
                     AfficherUsagers();
                     CheckUsagers();
                 }
             }
+        }
+
+        private bool AtLeastOne()
+        {
+            foreach (Control c in Table_Usagers.Controls)
+            {
+                if (c.GetType().ToString().Equals("System.Web.UI.WebControls.TableRow"))
+                {
+                    foreach (Control c2 in c.Controls)
+                    {
+                        if (c2.GetType().ToString().Equals("System.Web.UI.WebControls.TableCell"))
+                        {
+                            foreach (Control c3 in c2.Controls)
+                            {
+                                if (c3.GetType().ToString().Equals("System.Web.UI.WebControls.CheckBox"))
+                                {
+                                    CheckBox cb = (CheckBox)c3;
+                                    if (cb.Checked)
+                                    {
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
         }
 
         protected void BTN_Effacer_Click(object sender, EventArgs e)

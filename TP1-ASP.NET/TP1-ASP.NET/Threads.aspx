@@ -22,7 +22,7 @@
                 </asp:UpdatePanel>
             </td>
             <td>
-                <asp:UpdatePanel ID="UPN_Titre" runat="server">
+                <asp:UpdatePanel ID="UPN_Titre" UpdateMode="Conditional" runat="server">
                     <ContentTemplate>
                         <asp:TextBox ID="TB_Titre" runat="server"></asp:TextBox>
                     </ContentTemplate>
@@ -56,7 +56,7 @@
         <tr>
             <td></td>
             <td>
-                <asp:UpdatePanel ID="UPN_Usagers" runat="server">
+                <asp:UpdatePanel ID="UPN_Usagers" UpdateMode="Conditional" runat="server">
                     <ContentTemplate>
                         <asp:Panel ID="Panel_Usagers" runat="server" ScrollBars="Auto" Height="200px">
                             <asp:Table ID="Table_Usagers" runat="server"></asp:Table>
