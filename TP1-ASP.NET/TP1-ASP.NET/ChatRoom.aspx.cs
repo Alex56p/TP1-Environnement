@@ -164,20 +164,24 @@ namespace TP1_ASP.NET
         {
             // Ajouter le message dans la BD
             Threads_Messages tm = new Threads_Messages((string)Application["MainDB"], this);
-            if (Session["Message_Modifier_id"].ToString() == "")
-            {
-                tm.Thread_ID = long.Parse(Selected_ThreadID);
-                tm.User_ID = long.Parse(Session["Selected_ID"].ToString());
-                tm.Date_of_Creation = DateTime.Now.ToShortDateString();
-                tm.Message = TB_Text.Text;
-                tm.Insert();
-            }
-            else
-            {
-                tm.UpdateMessage(Session["Message_Modifier_id"].ToString(), TB_Text.Text);
-                Session["Message_Modifier_id"] = "";
-                LB_Modifier.Visible = false;
-            }
+           if(!string.IsNullOrWhiteSpace(TB_Text.Text) && TB_Text.Text.Length != 0)
+           {
+               if (Session["Message_Modifier_id"].ToString() == ""  )
+               {
+                   tm.Thread_ID = long.Parse(Selected_ThreadID);
+                   tm.User_ID = long.Parse(Session["Selected_ID"].ToString());
+                   tm.Date_of_Creation = DateTime.Now.ToShortDateString();
+                   tm.Message = TB_Text.Text;
+                   tm.Insert();
+               }
+               else
+               {
+                   tm.UpdateMessage(Session["Message_Modifier_id"].ToString(), TB_Text.Text);
+                   Session["Message_Modifier_id"] = "";
+                   LB_Modifier.Visible = false;
+               }
+           }
+            
 
             Chat.Controls.Clear();
             AfficherMessages();
